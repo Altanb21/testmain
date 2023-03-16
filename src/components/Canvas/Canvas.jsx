@@ -170,11 +170,11 @@ const Canvas = () => {
 
       const area = new PIXI.Graphics();
       area.beginFill(0x0e0e0e);
-      area.moveTo(25, 425);
+      area.moveTo(10, 220);
       area.quadraticCurveTo(80, 425, image.x, image.y + 55);
-      area.lineTo(image.x, 450);
-      area.lineTo(25, 450);
-      area.lineTo(25, 425);
+      area.lineTo(image.x, 100);
+      area.lineTo(5,220);
+      area.lineTo(5, 220);
       area.endFill();
       app.stage.addChild(area);
 
@@ -271,7 +271,7 @@ const Canvas = () => {
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
-    xline.alpha = 0;
+    //xline.alpha = 0;
     gsap.to(xline, { duration: 0, alpha: 1, delay: 4 });
 
     const yline = new PIXI.Graphics();
