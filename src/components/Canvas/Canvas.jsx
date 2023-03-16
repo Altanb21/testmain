@@ -215,7 +215,7 @@ const Canvas = () => {
         area.lineTo(25, 370);
         area.endFill();
 
-        if (value >= main) {
+        if (value >= point) {
           image.x -= xVel;
           angle -= frequency;
 
@@ -280,13 +280,15 @@ const Canvas = () => {
       const intervalId = setInterval(() => {
         value += 0.01; // increment the timer by 0.01
         num.text = value.toFixed(2) + "x"; // update the text with the new timer value
-    
+
         if (value >= point) {
           clearInterval(intervalId); // stop the interval when time reaches 1.09
         }
       }, 50); // run the interval every 100 milliseconds
-    }, 5000); 
-    let main = point + 0.001;
+    }, 5000);
+    num.alpha = 0;
+    gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
+
 
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
