@@ -268,7 +268,31 @@ input:checked + .slider-button .off {
      width: 100%;
    }
    .divide{
-     background: #fff;
      margin: auto;
+   }
+   .betx{
+     width: 300px;
+   }
+   .buttons{
+     width: 300px;
+     display: flex;
+     align-items: center;
+   }
+   .wrapper{
+     width: 240px;
+     display: flex;
+   }
+   .multiplier{
+     width: 170px;
+     font-size: 20px;
+   }
+   .button-container{
+     width: 240px;
+     display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   .dollar{
+     margin: 0 10px;
    }
 }
