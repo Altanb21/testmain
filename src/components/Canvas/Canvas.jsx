@@ -171,7 +171,7 @@ const Canvas = () => {
       const area = new PIXI.Graphics();
       area.beginFill(0x0e0e0e);
       area.moveTo(0, 270);
-      area.quadraticCurveTo(0, 220, image.x, image.y - 55);
+      area.quadraticCurveTo(0, 220, 5, image.y - 55);
       area.lineTo(image.x, 100);
       area.lineTo(0,220);
       area.lineTo(0, 220);
