@@ -7,6 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Navbar = () => {
   const [click, setclick] = useState(false);
   const handleClick = () => setclick(!click);
+  const handleRefresh = () =>{
+    window.Location.reload()
+  }
   return (
     <div className="header">
       <Link to="/">
@@ -24,6 +27,9 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/">Tops</Link>
+        </li>
+        <li>
+          <Link onClick={handleRefresh} to="/play">Refresh</Link>
         </li>
       </ul>
       <div className="hamburger" onClick={handleClick}>

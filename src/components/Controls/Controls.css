@@ -188,6 +188,7 @@ input:checked + .slider-button .off {
   background-color: #282828;
   cursor: pointer;
   overflow: hidden;
+  z-index: 1;
 }
 
 .flip-front,
