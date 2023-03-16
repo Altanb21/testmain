@@ -96,33 +96,33 @@ const Canvas = () => {
 
     // updateLoadingProgress();
 
-    const emitter = new PIXI.utils.EventEmitter();
-    let counter = 1;
-    emitter.on("tick", () => {
-      if (counter <= 100) {
-        timerText.text = counter.toString() + '%';
-        counter++;
-      } else {
-        emitter.emit("complete");
-      }
-    });
-    emitter.on("complete", () => {
-      gsap.to(timerText, { duration: 0, delay: 1, alpha: 0 });
-    });
-    app.ticker.add(() => {
-      emitter.emit("tick");
-    });
+    // const emitter = new PIXI.utils.EventEmitter();
+    // let counter = 1;
+    // emitter.on("tick", () => {
+    //   if (counter <= 100) {
+    //     timerText.text = counter.toString() + '%';
+    //     counter++;
+    //   } else {
+    //     emitter.emit("complete");
+    //   }
+    // });
+    // emitter.on("complete", () => {
+    //   gsap.to(timerText, { duration: 0, delay: 1, alpha: 0 });
+    // });
+    // app.ticker.add(() => {
+    //   emitter.emit("tick");
+    // });
 
-    const timerText = new PIXI.Text("1%", {
-      fontFamily: "Arial",
-      fontSize: 18,
-      fill: 0xffffff,
-      align: "center",
-    });
+    // const timerText = new PIXI.Text("1%", {
+    //   fontFamily: "Arial",
+    //   fontSize: 18,
+    //   fill: 0xffffff,
+    //   align: "center",
+    // });
 
-    timerText.x = app.screen.width / 2.11;
-    timerText.y = app.screen.height / 1.95;
-    app.stage.addChild(timerText);
+    // timerText.x = app.screen.width / 2.11;
+    // timerText.y = app.screen.height / 1.95;
+    // app.stage.addChild(timerText);
 
     const loadingText = new PIXI.Text("Loading...", {
       fontFamily: "Arial",
@@ -150,7 +150,7 @@ const Canvas = () => {
     });
     gsap.to([loaderContainer, loadingText], {
       duration: 0,
-      delay: 4,
+      delay: 5,
       alpha: 0,
     });
 
@@ -170,11 +170,11 @@ const Canvas = () => {
 
       const area = new PIXI.Graphics();
       area.beginFill(0x0e0e0e);
-      area.moveTo(10, 220);
-      area.quadraticCurveTo(80, 425, image.x, image.y + 55);
+      area.moveTo(0, 270);
+      area.quadraticCurveTo(0, 220, image.x, image.y - 55);
       area.lineTo(image.x, 100);
-      area.lineTo(5,220);
-      area.lineTo(5, 220);
+      area.lineTo(0,220);
+      area.lineTo(0, 220);
       area.endFill();
       app.stage.addChild(area);
 
@@ -240,7 +240,7 @@ const Canvas = () => {
         }
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 4000));
+      await new Promise((resolve) => setTimeout(resolve, 5000));
 
       const num = new PIXI.Text("1.00x", {
         fontFamily: "Arial",
@@ -271,7 +271,7 @@ const Canvas = () => {
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
-    //xline.alpha = 0;
+    xline.alpha = 0;
     gsap.to(xline, { duration: 0, alpha: 1, delay: 4 });
 
     const yline = new PIXI.Graphics();

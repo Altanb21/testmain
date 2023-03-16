@@ -37,7 +37,7 @@ const Controls = () => {
       }, 16.67);
 
       return () => clearInterval(intervalId);
-    }, 6000);
+    }, 5000);
 
     return () => clearTimeout(timerId);
   }, []);
@@ -56,7 +56,7 @@ const Controls = () => {
       }, 16.67);
 
       return () => clearInterval(intervalId2);
-    }, 6000);
+    }, 5000);
 
     return () => clearTimeout(timerId2);
   }, []);
