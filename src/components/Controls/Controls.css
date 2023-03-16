@@ -274,13 +274,12 @@ input:checked + .slider-button .off {
 @media screen and (max-width: 480px) {
   .cont{
     margin: 13em auto;
-    max-width: 80%;
+    max-width: 100%;
     display: block;
   }
   .divide{
     max-width: 100%;
   }
-
   .flip-button {
     width: 12em;
     height: 6em;
