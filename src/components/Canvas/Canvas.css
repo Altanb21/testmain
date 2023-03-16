@@ -1,0 +1,10 @@
+canvas{
+    display: block;
+    margin: 0 auto;
+    z-index: 1;
+}
+@media screen and (max-width: 740px) {
+    canvas{
+        width: 600px;
+    }
+}
