@@ -44,7 +44,7 @@ const Controls = () => {
           }
           return newNumber;
         });
-      }, 33.3);
+      }, 50);
 
       return () => clearInterval(intervalId);
     }, 5000);
@@ -63,7 +63,7 @@ const Controls = () => {
           }
           return newNumber2;
         });
-      }, 33.3);
+      }, 50);
 
       return () => clearInterval(intervalId2);
     }, 5000);

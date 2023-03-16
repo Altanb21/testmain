@@ -18,7 +18,6 @@ const Canvas = () => {
     });
     appRef.current = app;
     document.body.appendChild(app.view);
-    let value = 1.0;
 
     // const blackRect = new PIXI.Graphics();
     // blackRect.beginFill(0x00000);
@@ -173,7 +172,7 @@ const Canvas = () => {
       area.moveTo(0, 270);
       area.quadraticCurveTo(0, 220, 5, image.y - 55);
       area.lineTo(image.x, 100);
-      area.lineTo(0,220);
+      area.lineTo(0, 220);
       area.lineTo(0, 220);
       area.endFill();
       app.stage.addChild(area);
@@ -242,30 +241,51 @@ const Canvas = () => {
 
       await new Promise((resolve) => setTimeout(resolve, 5000));
 
-      const num = new PIXI.Text("1.00x", {
-        fontFamily: "Arial",
-        fontSize: 50,
-        fill: 0x00ced1,
-      });
+      // const num = new PIXI.Text("1.00x", {
+      //   fontFamily: "Arial",
+      //   fontSize: 50,
+      //   fill: 0x00ced1,
+      // });
 
-      num.anchor.set(0.5);
-      num.position.set(110, 50);
-      app.stage.addChild(num);
+      // num.anchor.set(0.5);
+      // num.position.set(110, 50);
+      // app.stage.addChild(num);
 
       const ticker = app.ticker.add((delta) => {
         update();
 
-        if (value >= main) {
-          //ticker.destroy();
-        } else {
-          num.text = value.toFixed(2) + "x";
-          value += 0.01;
-        }
+        // if (value >= main) {
+        //   //ticker.destroy();
+        // } else {
+        //   num.text = value.toFixed(2) + "x";
+        //   value += 0.01;
+        // }
       });
     }
 
     animatePlane();
 
+    const num = new PIXI.Text("1.00x", {
+      fontFamily: "Arial",
+      fontSize: 50,
+      fill: 0x00ced1,
+    });
+
+    num.anchor.set(0.5);
+    num.position.set(110, 50);
+    app.stage.addChild(num);
+    let value = 1; // initialize the timer to 1.00
+
+    setTimeout(() => {
+      const intervalId = setInterval(() => {
+        value += 0.01; // increment the timer by 0.01
+        num.text = value.toFixed(2) + "x"; // update the text with the new timer value
+    
+        if (value >= point) {
+          clearInterval(intervalId); // stop the interval when time reaches 1.09
+        }
+      }, 50); // run the interval every 100 milliseconds
+    }, 5000); 
     let main = point + 0.001;
 
     const xline = new PIXI.Graphics();
