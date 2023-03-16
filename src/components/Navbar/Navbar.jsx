@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link to="/play">Play</Link>
         </li>
         <li>
-          <Link to="/">All Bets</Link>
+          <Link to="/results">All Bets</Link>
         </li>
         <li>
           <Link to="/">Top Bets</Link>

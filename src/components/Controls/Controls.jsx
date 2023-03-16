@@ -5,6 +5,16 @@ import "react-toastify/dist/ReactToastify.css";
 import { point } from "../Canvas/Canvas";
 import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  updateDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { db } from '../../firebase'
 
 const Controls = () => {
   const [value, setValue] = useState(1.0);
@@ -34,7 +44,7 @@ const Controls = () => {
           }
           return newNumber;
         });
-      }, 16.67);
+      }, 33.3);
 
       return () => clearInterval(intervalId);
     }, 5000);
@@ -53,7 +63,7 @@ const Controls = () => {
           }
           return newNumber2;
         });
-      }, 16.67);
+      }, 33.3);
 
       return () => clearInterval(intervalId2);
     }, 5000);
@@ -120,168 +130,211 @@ const Controls = () => {
   const handleToggleChange2 = () => {
     setToggle2(!toggle2);
   };
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const data = { value, value2, point, cash, cash2 };
+      console.log(data)
+
+      try {
+        const postsRef = collection(db, "posts");
+        const q = query(
+          postsRef,
+          where("value", "==", value),
+          // where("value2", "==", value2),
+          where("point", "==", point)
+        );
+        const querySnapshot = await getDocs(q);
+
+        if (querySnapshot.docs.length > 0) {
+          const existingData = querySnapshot.docs[0];
+          await updateDoc(existingData.ref, {
+            cash,
+            cash2,
+            value2
+          });
+          console.log("Data updated successfully");
+        } else {
+          await addDoc(postsRef, {
+            ...data,
+            timestamp: serverTimestamp(),
+          });
+          console.log("Data saved successfully");
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
+    };
+  
   return (
     <>
       <div className="cont">
         <div className="control">
-          <div className="toggle-container">
-            <div className="slider-container">
-              <label className="slider">
-                <div className="slider-label left">Off</div>
-                <input
-                  type="checkbox"
-                  onClick={handleToggleChange}
-                  checked={toggle}
-                />
-                <div className="slider-button">
-                  <div className="slider-button-label on">Bet</div>
-                  <div className="slider-button-label off">Auto</div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div className="divide">
-            <div className="betx">
-              <button
-                className={`flip-button ${flipped ? "flipped" : ""}`}
-                onClick={handleClick}
-              >
-                <div className="flip-front">Bet</div>
-                <div className="flip-back">
-                  Cashout <br />
-                  {cash + "x"}
-                </div>
-              </button>
-            </div>
-            <div className="buttons">
-              <div className="wrapper">
-                <FontAwesomeIcon
-                  onClick={handleIncrement}
-                  className="inc"
-                  icon={faPlusCircle}
-                />
-                <div className="multiplier">{value.toFixed(2)}</div>
-                <FontAwesomeIcon
-                  onClick={handleDecrement}
-                  className="inc"
-                  icon={faMinusCircle}
-                />
-              </div>
-              <div className="money">
-                <div className="button-container">
-                  <div className="button-row">
-                    <button
-                      onClick={() => handleValueButton(1)}
-                      className="dollar"
-                    >
-                      1$
-                    </button>
-                    <button
-                      onClick={() => handleValueButton(2)}
-                      className="dollar"
-                    >
-                      2$
-                    </button>
+            <div className="toggle-container">
+              <div className="slider-container">
+                <label className="slider">
+                  <div className="slider-label left">Off</div>
+                  <input
+                    type="checkbox"
+                    onClick={handleToggleChange}
+                    checked={toggle}
+                  />
+                  <div className="slider-button">
+                    <div className="slider-button-label on">Bet</div>
+                    <div className="slider-button-label off">Auto</div>
                   </div>
+                </label>
+              </div>
+            </div>
+            <div className="divide">
+            <form onClick={handleSubmit}>
+              <div className="betx">
+                <button
+                  className={`flip-button ${flipped ? "flipped" : ""}`}
+                  onClick={handleClick}
+                >
+                  <div className="flip-front">Bet</div>
+                  <div className="flip-back">
+                    Cashout <br />
+                    {cash + "x"}
+                  </div>
+                </button>
+              </div>
+              <ToastContainer />
+              </form>
+              <div className="buttons">
+                <div className="wrapper">
+                  <FontAwesomeIcon
+                    onClick={handleIncrement}
+                    className="inc"
+                    icon={faPlusCircle}
+                  />
+                  <div className="multiplier">{value.toFixed(2)}</div>
+                  <FontAwesomeIcon
+                    onClick={handleDecrement}
+                    className="inc"
+                    icon={faMinusCircle}
+                  />
+                </div>
 
-                  <div class="button-row">
-                    <button
-                      onClick={() => handleValueButton(5)}
-                      className="dollar"
-                    >
-                      5$
-                    </button>
-                    <button
-                      onClick={() => handleValueButton(10)}
-                      className="dollar"
-                    >
-                      10$
-                    </button>
+                <div className="money">
+                  <div className="button-container">
+                    <div className="button-row">
+                      <button
+                        onClick={() => handleValueButton(1)}
+                        className="dollar"
+                      >
+                        1$
+                      </button>
+                      <button
+                        onClick={() => handleValueButton(2)}
+                        className="dollar"
+                      >
+                        2$
+                      </button>
+                    </div>
+
+                    <div class="button-row">
+                      <button
+                        onClick={() => handleValueButton(5)}
+                        className="dollar"
+                      >
+                        5$
+                      </button>
+                      <button
+                        onClick={() => handleValueButton(10)}
+                        className="dollar"
+                      >
+                        10$
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
         <div className="control">
-          <div className="toggle-container">
-            <div className="slider-container">
-              <label className="slider">
-                <div className="slider-label left">Off</div>
-                <input
-                  type="checkbox"
-                  onClick={handleToggleChange}
-                  checked={toggle}
-                />
-                <div className="slider-button">
-                  <div className="slider-button-label on">Bet</div>
-                  <div className="slider-button-label off">Auto</div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div className="divide">
-            <div className="betx">
-              <button
-                className={`flip-button ${fliped ? "fliped" : ""}`}
-                onClick={clicked}
-              >
-                <div className="flip-front">Bet</div>
-                <div className="flip-back">
-                  Cashout <br />
-                  {cash2 + "x"}
-                </div>
-              </button>
-            </div>
-            <div className="buttons">
-              <div className="wrapper">
-                <FontAwesomeIcon
-                  onClick={handleIncrement2}
-                  className="inc"
-                  icon={faPlusCircle}
-                />
-                <div className="multiplier">{value2.toFixed(2)}</div>
-                <FontAwesomeIcon
-                  onClick={handleDecrement2}
-                  className="inc"
-                  icon={faMinusCircle}
-                />
-              </div>
-              <div className="money">
-                <div class="button-container">
-                  <div class="button-row">
-                    <button
-                      onClick={() => handleValueButton2(1)}
-                      class="dollar"
-                    >
-                      1$
-                    </button>
-                    <button
-                      onClick={() => handleValueButton2(2)}
-                      class="dollar"
-                    >
-                      2$
-                    </button>
+            <div className="toggle-container">
+              <div className="slider-container">
+                <label className="slider">
+                  <div className="slider-label left">Off</div>
+                  <input
+                    type="checkbox"
+                    onClick={handleToggleChange}
+                    checked={toggle}
+                  />
+                  <div className="slider-button">
+                    <div className="slider-button-label on">Bet</div>
+                    <div className="slider-button-label off">Auto</div>
                   </div>
+                </label>
+              </div>
+            </div>
+            <div className="divide">
+            <form onClick={handleSubmit}>
+              <div className="betx">
+                <button
+                  className={`flip-button ${fliped ? "fliped" : ""}`}
+                  onClick={clicked}
+                >
+                  <div className="flip-front">Bet</div>
+                  <div className="flip-back">
+                    Cashout <br />
+                    {cash2 + "x"}
+                  </div>
+                </button>
+              </div>
+              <ToastContainer />
+              </form>
+              <div className="buttons">
+                <div className="wrapper">
+                  <FontAwesomeIcon
+                    onClick={handleIncrement2}
+                    className="inc"
+                    icon={faPlusCircle}
+                  />
+                  <div className="multiplier">{value2.toFixed(2)}</div>
+                  <FontAwesomeIcon
+                    onClick={handleDecrement2}
+                    className="inc"
+                    icon={faMinusCircle}
+                  />
+                </div>
+                <div className="money">
+                  <div class="button-container">
+                    <div class="button-row">
+                      <button
+                        onClick={() => handleValueButton2(1)}
+                        class="dollar"
+                      >
+                        1$
+                      </button>
+                      <button
+                        onClick={() => handleValueButton2(2)}
+                        class="dollar"
+                      >
+                        2$
+                      </button>
+                    </div>
 
-                  <div class="button-row">
-                    <button
-                      onClick={() => handleValueButton2(5)}
-                      className="dollar"
-                    >
-                      5$
-                    </button>
-                    <button
-                      onClick={() => handleValueButton2(10)}
-                      class="dollar"
-                    >
-                      10$
-                    </button>
+                    <div class="button-row">
+                      <button
+                        onClick={() => handleValueButton2(5)}
+                        className="dollar"
+                      >
+                        5$
+                      </button>
+                      <button
+                        onClick={() => handleValueButton2(10)}
+                        class="dollar"
+                      >
+                        10$
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </>

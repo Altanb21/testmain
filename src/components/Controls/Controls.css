@@ -287,3 +287,11 @@ input:checked + .slider-button .off {
     border: none;
   }
 }
+@media screen and (max-width: 375px) {
+  .betx
+  {
+    padding-left: 0px;
+  }
+}
+
+
