@@ -120,7 +120,7 @@ const Canvas = () => {
       align: "center",
     });
 
-    timerText.x = app.screen.width / 2.07;
+    timerText.x = app.screen.width / 2.11;
     timerText.y = app.screen.height / 1.95;
     app.stage.addChild(timerText);
 
