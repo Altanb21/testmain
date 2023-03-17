@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useMemo } from "react";
 import * as PIXI from "pixi.js";
-import { Timer } from "eventemitter3-timer";
 import "@pixi/gif";
 import { Assets } from "pixi.js";
 import { gsap } from "gsap";

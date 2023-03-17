@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const [click, setclick] = useState(false);
   const handleClick = () => setclick(!click);
   const handleRefresh = () =>{

@@ -1,0 +1,23 @@
+.forget{
+    display: flex;
+    margin-top: 5px 0;
+}
+p:first-child {
+    margin-top: 10px;
+}
+
+.forget a{
+    color: #00ced1 !important;
+}
+.err{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.err b{
+    color: red!important;
+    font-weight: 500;
+}
+button:disabled{
+    background-color: gray!important;
+}

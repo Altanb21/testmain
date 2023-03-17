@@ -1,39 +1,109 @@
-import React from 'react'
-import Navbar from '../Navbar/Navbar'
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState } from "react";
+import Navbar from "../Navbar/Navbar";
+import { useNavigate, Link } from "react-router-dom";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import "./Signup.css";
+import { auth } from "../../firebase";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
-    const navigate = useNavigate();
-    const handleSubmit = () =>{
-        navigate('/login');
+  const [values, setValues] = useState({
+    name: "",
+    email: "",
+    pass: "",
+  });
+  const [errorMsg, setErrorMsg] = useState("");
+  const [submitButtonDisabled, setSubmitButtonDisabled] = useState(false);
+  const navigate = useNavigate();
+  const handleSubmit = () => {
+    if (!values.name || !values.email || !values.pass) {
+      setErrorMsg("All fields are required");
+      return;
     }
+    setErrorMsg("");
+    setSubmitButtonDisabled(true);
+    createUserWithEmailAndPassword(auth, values.email, values.pass)
+      .then(async(res) => {
+        toast("Signup Successful")
+        setSubmitButtonDisabled(false);
+        const user = res.user
+        console.log(user)
+        await updateProfile(user,{
+          displayName:values.name
+        })
+        navigate('/login')
+      })
+      .catch((err) => {
+        setSubmitButtonDisabled(false)
+        setErrorMsg(err.message)
+      })
+  };
   return (
     <div>
-     <Navbar />
-     <div className="container">
-        <form onClick={handleSubmit}>
+      <Navbar />
+      <div className="container">
+        <div className="cover">
           <h1 className="log">Signup</h1>
           <div className="ui divider"></div>
           <div className="ui form">
             <div className="field">
               <label>Email</label>
-              <input type="text" name="email" placeholder="Email" />
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, email: event.target.value }))
+                }
+              />
             </div>
             <div className="field">
               <label>Username</label>
-              <input type="text" name="username" placeholder="Username" />
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, name: event.target.value }))
+                }
+              />
             </div>
             <div className="field">
               <label>Password</label>
-              <input type="password" name="password" placeholder="Password" />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, pass: event.target.value }))
+                }
+              />
             </div>
-            <button className="fluid ui button blue">Submit</button>
+            <div className="err">
+              <b>{errorMsg}</b>
+            </div>
+            <button
+              onClick={handleSubmit}
+              disabled={submitButtonDisabled}
+              className="fluid ui button blue"
+            >
+              Submit
+            </button>
+            <div className="forget">
+              <p>
+                Already have an account?{" "}
+                <span>
+                  <Link to="/login">Sign up</Link>
+                </span>
+              </p>
+            </div>
           </div>
-        </form>
+        </div>
+        <ToastContainer />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

@@ -1,6 +1,6 @@
 .cont {
   position: absolute;
-  margin: 30em auto;
+  margin: 30em 1em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   max-width: 850px;
