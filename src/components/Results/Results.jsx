@@ -3,9 +3,19 @@ import "./Results.css";
 import { DataGrid } from "@mui/x-data-grid";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
+import { auth } from "../../firebase";
 
-const Results = () => {
+const Results = (props) => {
   const [data, setData] = useState([]);
+  const [username, setUsername] = useState("");
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUsername(user.displayName);
+      } else setUsername("");
+    });
+  }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       const postsRef = collection(db, "posts");
@@ -21,12 +31,29 @@ const Results = () => {
     fetchData();
   }, []);
   const columns = [
-    // { field: 'name', headerName: 'Username', width: 250 },
+    {
+      field: "name",
+      headerName: "Username",
+      width: 250,
+      valueGetter: (params) => {
+        return props.name ? ` ${props.name}` : "guest";
+      },
+      cellClassName: (params) => {
+        return props.name ? "welcome-cell" : "";
+      },
+      renderCell: (params) => {
+        return props.name ? (
+          <div className="welcome-message">{` ${props.name}`}</div>
+        ) : (
+          <div className="login-message">Login please</div>
+        );
+      },
+    },
     { field: "value", headerName: "First Bet", width: 250 },
-    { field: "value2", headerName: "Second Bet", width: 250 },
-    { field: "point", headerName: "Multiplier", width: 250 },
-    { field: "cash", headerName: "Cashout", width: 250 },
-    { field: "cash2", headerName: "Cashout2", width: 250 },
+    { field: "value2", headerName: "Second Bet", width: 200 },
+    { field: "point", headerName: "Multiplier", width: 200 },
+    { field: "cash", headerName: "Cashout", width: 200 },
+    { field: "cash2", headerName: "Cashout2", width: 200 },
   ];
   return (
     <div className="results">

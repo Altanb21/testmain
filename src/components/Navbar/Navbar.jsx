@@ -23,7 +23,7 @@ const Navbar = (props) => {
           <Link to="/results">All Bets</Link>
         </li>
         <li>
-          <Link to="/">Top Bets</Link>
+          <Link to="/">Home</Link>
         </li>
         <li>
           <Link to="/login">Login</Link>
