@@ -103,7 +103,7 @@ const animationInterval = setInterval(animate, 10);
     // // Start the animation ticker
     // app.ticker.add(animate);
 
-    gsap.to(blackRect, { duration: 0, delay: 6, alpha: 0 });
+    gsap.to(blackRect, { duration: 0, delay: 4, alpha: 0 });
 
     // const loadingText = new PIXI.Text("Loading...", {
     //   fill: "white",
