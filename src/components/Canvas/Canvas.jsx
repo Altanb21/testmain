@@ -174,11 +174,14 @@ const Canvas = () => {
         }
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 5000));
+      // await new Promise((resolve) => setTimeout(resolve, 5000));
       
 
        app.ticker.add(() => {
+        setTimeout(() => {
         update();
+      }, 5000);
+
       });
     }
 

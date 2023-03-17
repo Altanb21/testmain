@@ -6,6 +6,8 @@ canvas{
 @media screen and (max-width: 1380px) {
     canvas{
         position: fixed;
+        display: block;
+    margin: 0 0em;
     }
 }
 
