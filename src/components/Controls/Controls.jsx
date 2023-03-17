@@ -16,7 +16,7 @@ import {
 } from "firebase/firestore";
 import { db } from '../../firebase'
 
-const Controls = () => {
+const Controls = (props) => {
   const [value, setValue] = useState(1.0);
   const [value2, setValue2] = useState(1.0);
   const [toggle, setToggle] = useState(false);
@@ -133,7 +133,7 @@ const Controls = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const data = { value, value2, point, cash, cash2 };
+      const data = { name:props.name,value, value2, point, cash, cash2 };
       console.log(data)
 
       try {
@@ -179,7 +179,7 @@ const Controls = () => {
                     onClick={handleToggleChange}
                     checked={toggle}
                   />
-                  <div className="slider-button">
+                  <div className="slider-button" style={{borderRadius:'15px'}}>
                     <div className="slider-button-label on">Bet</div>
                     <div className="slider-button-label off">Auto</div>
                   </div>
@@ -263,7 +263,7 @@ const Controls = () => {
                     onClick={handleToggleChange}
                     checked={toggle}
                   />
-                  <div className="slider-button">
+                  <div className="slider-button" style={{borderRadius:'15px'}}>
                     <div className="slider-button-label on">Bet</div>
                     <div className="slider-button-label off">Auto</div>
                   </div>

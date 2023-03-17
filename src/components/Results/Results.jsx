@@ -35,19 +35,6 @@ const Results = (props) => {
       field: "name",
       headerName: "Username",
       width: 250,
-      valueGetter: (params) => {
-        return props.name ? ` ${props.name}` : "guest";
-      },
-      cellClassName: (params) => {
-        return props.name ? "welcome-cell" : "";
-      },
-      renderCell: (params) => {
-        return props.name ? (
-          <div className="welcome-message">{` ${props.name}`}</div>
-        ) : (
-          <div className="login-message">Login please</div>
-        );
-      },
     },
     { field: "value", headerName: "First Bet", width: 250 },
     { field: "value2", headerName: "Second Bet", width: 200 },

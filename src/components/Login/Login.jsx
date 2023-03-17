@@ -40,7 +40,7 @@ const Login = (props) => {
         <div className='cover'>
           <h1 className="log">Login</h1>
           <div className="uix">
-          <h5>{props.name ? `Welcome - ${props.name}` : "Login please"}</h5>
+          <h5></h5>
 
           </div>
           <div className="ui form">

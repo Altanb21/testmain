@@ -17,19 +17,25 @@ function App() {
       }else setUsername("")
     })
   },[])
+
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    auth.signOut();
+    setUsername("");
+  };
   return (
     <>
     <Routes>
       <Route path="/" element={<Signup />} />
       <Route path="/login" element={<Login name={username} />} />
-      <Route path="/results" element={<Results  name={username} />} />
+      <Route path="/results" element={<Results />} />
       <Route
         path="/play"
         element={
           <>
-            <Navbar />
+            <Navbar handleSignOut={handleSignOut} name={username} />
             <Canvas />
-            <Controls />
+            <Controls name={username} />
           </>
         }
       />
