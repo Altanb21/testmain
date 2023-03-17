@@ -56,7 +56,7 @@ const Canvas = () => {
       } else {
         clearInterval(animationInterval);
       }
-    }, 11);
+    }, 9);
 
     gsap.to(blackRect, { duration: 0, delay: 4, alpha: 0 });
     const loadingText = new PIXI.Text("Loading...", {
@@ -83,7 +83,7 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText], {
+    gsap.to([loaderContainer, loadingText,rect], {
       duration: 0,
       delay: 4.5,
       alpha: 0,

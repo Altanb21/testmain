@@ -278,6 +278,8 @@ input:checked + .slider-button .off {
     margin: 13em auto;
     max-width: 100%;
     display: block;
+    box-shadow: none;
+
   }
   .divide{
     max-width: 100%;
