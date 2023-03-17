@@ -5,6 +5,7 @@ import Controls from "./components/Controls/Controls";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Results from "./components/Results/Results";
+import Sidetable from "./components/Sidetable/Sidetable";
 import { Routes, Route } from "react-router-dom";
 import { auth } from "./firebase"
 import { useEffect, useState } from "react";
@@ -35,6 +36,7 @@ function App() {
           <>
             <Navbar handleSignOut={handleSignOut} name={username} />
             <Canvas />
+            <Sidetable />
             <Controls name={username} />
           </>
         }

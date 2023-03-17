@@ -3,6 +3,12 @@ canvas{
     margin: 0 1em;
     z-index: 1;
 }
+@media screen and (max-width: 1380px) {
+    canvas{
+        position: fixed;
+    }
+}
+
 @media screen and (max-width: 740px) {
     canvas{
         width: 600px;
