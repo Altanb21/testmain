@@ -64,7 +64,7 @@ function animate() {
 }
 
 // Start the animation interval
-const animationInterval = setInterval(animate, 12);
+const animationInterval = setInterval(animate, 10);
 
     
     // const rect = new PIXI.Graphics();
@@ -103,7 +103,7 @@ const animationInterval = setInterval(animate, 12);
     // // Start the animation ticker
     // app.ticker.add(animate);
 
-    // gsap.to(blackRect, { duration: 0, delay: 6, alpha: 0 });
+    gsap.to(blackRect, { duration: 0, delay: 6, alpha: 0 });
 
     // const loadingText = new PIXI.Text("Loading...", {
     //   fill: "white",
