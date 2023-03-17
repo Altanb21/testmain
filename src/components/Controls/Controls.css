@@ -9,6 +9,7 @@
   left: 0;
   right: 0;
   background-color: #0e0e0e;
+  box-shadow: 0px 0px 5px 5px   #00ced1;
 }
 .control {
   max-width: 410px;

@@ -21,37 +21,34 @@ const Canvas = () => {
 
     const blackRect = new PIXI.Graphics();
     blackRect.beginFill(0x00000);
-    blackRect.drawRoundedRect(0, 0, 250, 5, 1);
+    blackRect.drawRoundedRect(0, 0, 250, 6, 3);
     blackRect.endFill();
     blackRect.position.set(
       app.screen.width / 2 - blackRect.width / 2,
       app.screen.height / 2 - blackRect.height / 2
     );
     app.stage.addChild(blackRect);
-
     const rect = new PIXI.Graphics();
     rect.beginFill(0x00ced1);
-    rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
+    rect.drawRoundedRect(0, 0, 250, 6, 3);
     rect.endFill();
-
+    
     rect.position.set(
       app.screen.width / 2 - rect.width / 2,
       app.screen.height / 2 - rect.height / 2
     );
     rect.scale.x = 0;
-
-    // Add the rectangle to the stage
+    
     app.stage.addChild(rect);
-
-    // Create the animation
-    const dur = 5800; // 5.8 seconds
+    
+    const dur = 5800;
     const endScale = 1;
     const fps = 60;
     const frames = (dur / 1000) * fps;
     let currentFrame = 0;
     let currentScale = 0;
-
-    function animate() {
+    
+    const animationInterval = setInterval(() => {
       currentFrame++;
       if (currentFrame <= frames) {
         currentScale = endScale - (endScale / frames) * currentFrame;
@@ -59,9 +56,7 @@ const Canvas = () => {
       } else {
         clearInterval(animationInterval);
       }
-    }
-
-    const animationInterval = setInterval(animate, 10);
+    }, 11);
 
     gsap.to(blackRect, { duration: 0, delay: 4, alpha: 0 });
     const loadingText = new PIXI.Text("Loading...", {
