@@ -85,7 +85,7 @@ const Canvas = () => {
     });
     gsap.to([loaderContainer, loadingText,rect], {
       duration: 0,
-      delay: 4.5,
+      delay: 4.3,
       alpha: 0,
     });
 
