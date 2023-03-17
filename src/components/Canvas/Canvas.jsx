@@ -19,6 +19,42 @@ const Canvas = () => {
     appRef.current = app;
     document.body.appendChild(app.view);
 
+    const rect = new PIXI.Graphics();
+rect.beginFill(0x00ced1);
+rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
+rect.endFill();
+
+rect.position.set(
+  app.screen.width / 2 - rect.width / 2,
+  app.screen.height / 2 - rect.height / 2
+);
+rect.scale.x = 0;
+
+// Add the rectangle to the stage
+app.stage.addChild(rect);
+
+// Create the animation
+const dur = 5800; // 5.8 seconds
+const endScale = 1;
+const fps = 60;
+const frames = dur / 1000 * fps;
+let currentFrame = 0;
+let currentScale = 0;
+
+// Define the animation function
+function animate() {
+  currentFrame++;
+  if (currentFrame <= frames) {
+    currentScale = endScale - (endScale / frames) * currentFrame;
+    rect.scale.x = currentScale;
+  } else {
+    clearInterval(animationInterval);
+  }
+}
+
+// Start the animation interval
+const animationInterval = setInterval(animate, 13);
+
     // const blackRect = new PIXI.Graphics();
     // blackRect.beginFill(0x00000);
     // blackRect.drawRoundedRect(0, 0, 250, 5, 1);
@@ -284,7 +320,7 @@ const Canvas = () => {
         if (value >= point) {
           clearInterval(intervalId); // stop the interval when time reaches 1.09
         }
-      }, 50); // run the interval every 100 milliseconds
+      }, 33.3); // run the interval every 100 milliseconds
     }, 5000);
     num.alpha = 0;
     gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
