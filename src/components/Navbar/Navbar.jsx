@@ -26,7 +26,7 @@ const Navbar = () => {
           <Link to="/">Top Bets</Link>
         </li>
         <li>
-          <Link to="/">Tops</Link>
+          <Link to="/login">Login</Link>
         </li>
         <li>
           <Link onClick={handleRefresh} to="/play">Refresh</Link>
