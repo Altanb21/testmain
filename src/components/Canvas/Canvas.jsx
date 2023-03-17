@@ -125,12 +125,12 @@ const Canvas = () => {
 
       function update() {
         image.x += xVel;
-        image.y = 180 + Math.cos(angle) * amplitude;
+        image.y = 195 + Math.cos(angle) * amplitude;
         angle += frequency;
 
         if (image.x >= 700) {
           image.x -= xVel;
-          image.y = 180 + Math.cos(angle) * amplitude;
+          image.y = 195 + Math.cos(angle) * amplitude;
           uiy.y += 0.7;
           ui.x -= 0.7;
         }
@@ -182,25 +182,8 @@ const Canvas = () => {
 
       await new Promise((resolve) => setTimeout(resolve, 5000));
 
-      // const num = new PIXI.Text("1.00x", {
-      //   fontFamily: "Arial",
-      //   fontSize: 50,
-      //   fill: 0x00ced1,
-      // });
-
-      // num.anchor.set(0.5);
-      // num.position.set(110, 50);
-      // app.stage.addChild(num);
-
       const ticker = app.ticker.add((delta) => {
         update();
-
-        // if (value >= main) {
-        //   //ticker.destroy();
-        // } else {
-        //   num.text = value.toFixed(2) + "x";
-        //   value += 0.01;
-        // }
       });
     }
 
