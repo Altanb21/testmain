@@ -67,11 +67,11 @@ const Canvas = () => {
     });
 
     loadingText.x = app.screen.width / 2.17;
-    loadingText.y = app.screen.height / 3.2;
+    loadingText.y = app.screen.height / 3.4;
     app.stage.addChild(loadingText);
 
     const loaderContainer = new PIXI.Container();
-    loaderContainer.position.set(app.screen.width / 2, app.screen.height / 3);
+    loaderContainer.position.set(app.screen.width / 2, app.screen.height / 3.2);
     app.stage.addChild(loaderContainer);
 
     const loader = new PIXI.Graphics();
