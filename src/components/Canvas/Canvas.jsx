@@ -175,8 +175,29 @@ const Canvas = () => {
       }
 
       await new Promise((resolve) => setTimeout(resolve, 5000));
+      const num = new PIXI.Text("1.00x", {
+        fontFamily: "Arial",
+        fontSize: 50,
+        fill: 0x00ced1,
+      });
+  
+      num.anchor.set(0.5);
+      num.position.set(110, 50);
+      app.stage.addChild(num);
+      let value = 1; // initialize the timer to 1.00
+  
+        const intervalId = setInterval(() => {
+          value += 0.01; // increment the timer by 0.01
+          num.text = value.toFixed(2) + "x"; // update the text with the new timer value
+  
+          if (value >= main) {
+            clearInterval(intervalId); // stop the interval when time reaches 1.09
+          }
+        }, 33.3); // run the interval every 100 milliseconds
+      num.alpha = 0;
+      gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
 
-      const ticker = app.ticker.add((delta) => {
+       app.ticker.add(() => {
         update();
       });
     }
