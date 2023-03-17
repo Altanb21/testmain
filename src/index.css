@@ -9,6 +9,9 @@ h1,h4,p,a{
   color: #fff;
   text-decoration: none;
 }
+a:hover{
+  color:#00ced1 !important;
+}
 ul{
   list-style-type: none;
 }

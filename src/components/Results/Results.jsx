@@ -1,12 +1,47 @@
-import React from 'react'
-import './Results.css'
+import React, { useEffect, useState } from "react";
+import "./Results.css";
+import { DataGrid } from "@mui/x-data-grid";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Results = () => {
-  return (
-    <div className='results'>
-      hello
-    </div>
-  )
-}
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const postsRef = collection(db, "posts");
+      const querySnapshot = await getDocs(postsRef);
+      const documents = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        data.id = doc.id;
+        return data;
+      });
+      setData(documents);
+    };
 
-export default Results
+    fetchData();
+  }, []);
+  const columns = [
+    // { field: 'name', headerName: 'Username', width: 250 },
+    { field: "value", headerName: "First Bet", width: 250 },
+    { field: "value2", headerName: "Second Bet", width: 250 },
+    { field: "point", headerName: "Multiplier", width: 250 },
+    { field: "cash", headerName: "Cashout", width: 250 },
+    { field: "cash2", headerName: "Cashout2", width: 250 },
+  ];
+  return (
+    <div className="results">
+      <div className="card-body">
+        <div style={{ height: 700, width: "100%" }}>
+          <DataGrid
+            rows={data}
+            columns={columns}
+            style={{ color: "black", backgroundColor: "white" }}
+            checkboxSelection
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Results;
