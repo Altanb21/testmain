@@ -29,138 +29,41 @@ const Canvas = () => {
     );
     app.stage.addChild(blackRect);
 
-
     const rect = new PIXI.Graphics();
-rect.beginFill(0x00ced1);
-rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
-rect.endFill();
+    rect.beginFill(0x00ced1);
+    rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
+    rect.endFill();
 
-rect.position.set(
-  app.screen.width / 2 - rect.width / 2,
-  app.screen.height / 2 - rect.height / 2
-);
-rect.scale.x = 0;
+    rect.position.set(
+      app.screen.width / 2 - rect.width / 2,
+      app.screen.height / 2 - rect.height / 2
+    );
+    rect.scale.x = 0;
 
-// Add the rectangle to the stage
-app.stage.addChild(rect);
+    // Add the rectangle to the stage
+    app.stage.addChild(rect);
 
-// Create the animation
-const dur = 5800; // 5.8 seconds
-const endScale = 1;
-const fps = 60;
-const frames = dur / 1000 * fps;
-let currentFrame = 0;
-let currentScale = 0;
+    // Create the animation
+    const dur = 5800; // 5.8 seconds
+    const endScale = 1;
+    const fps = 60;
+    const frames = (dur / 1000) * fps;
+    let currentFrame = 0;
+    let currentScale = 0;
 
-// Define the animation function
-function animate() {
-  currentFrame++;
-  if (currentFrame <= frames) {
-    currentScale = endScale - (endScale / frames) * currentFrame;
-    rect.scale.x = currentScale;
-  } else {
-    clearInterval(animationInterval);
-  }
-}
+    function animate() {
+      currentFrame++;
+      if (currentFrame <= frames) {
+        currentScale = endScale - (endScale / frames) * currentFrame;
+        rect.scale.x = currentScale;
+      } else {
+        clearInterval(animationInterval);
+      }
+    }
 
-// Start the animation interval
-const animationInterval = setInterval(animate, 10);
-
-    
-    // const rect = new PIXI.Graphics();
-    // rect.beginFill(0x00ced1);
-    // rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
-    // rect.endFill();
-
-    // rect.position.set(
-    //   app.screen.width / 2 - rect.width / 2,
-    //   app.screen.height / 2 - rect.height / 2
-    // );
-    // rect.scale.x = 0;
-
-    // // Add the rectangle to the stage
-    // app.stage.addChild(rect);
-
-    // // Create the animation
-    // const dur = 5800; // 5.8 seconds
-    // const endScale = 1;
-    // const fps = 60;
-    // const frames = dur / 1000 * fps;
-    // let currentFrame = 0;
-    // let currentScale = 0;
-
-    // // Define the animation function
-    // function animate(delta) {
-    //   currentFrame++;
-    //   if (currentFrame <= frames) {
-    //     currentScale = endScale - (endScale / frames) * currentFrame;
-    //     rect.scale.x = currentScale;
-    //   } else {
-    //     app.ticker.stop();
-    //   }
-    // }
-
-    // // Start the animation ticker
-    // app.ticker.add(animate);
+    const animationInterval = setInterval(animate, 10);
 
     gsap.to(blackRect, { duration: 0, delay: 4, alpha: 0 });
-
-    // const loadingText = new PIXI.Text("Loading...", {
-    //   fill: "white",
-    //   fontSize: 20,
-    // });
-    // loadingText.anchor.set(0.5);
-    // loadingText.position.set(app.view.width / 2, app.view.height / 2 - 65);
-    // app.stage.addChild(loadingText);
-    // gsap.to(loadingText, { duration: 0, delay: 6, alpha: 0 });
-
-    // let progress = 0;
-
-    // function updateLoadingProgress() {
-    //   progress += 0.01 / 3.2;
-
-    //   const angle = progress * Math.PI * 2;
-
-    //   loadingText.text = ` ${Math.floor(progress * 100)}%`;
-
-    //   if (progress >= 1) {
-    //     loadingText.text = "100%";
-    //     return;
-    //   }
-
-    //   requestAnimationFrame(updateLoadingProgress);
-    // }
-
-    // updateLoadingProgress();
-
-    // const emitter = new PIXI.utils.EventEmitter();
-    // let counter = 1;
-    // emitter.on("tick", () => {
-    //   if (counter <= 100) {
-    //     timerText.text = counter.toString() + '%';
-    //     counter++;
-    //   } else {
-    //     emitter.emit("complete");
-    //   }
-    // });
-    // emitter.on("complete", () => {
-    //   gsap.to(timerText, { duration: 0, delay: 1, alpha: 0 });
-    // });
-    // app.ticker.add(() => {
-    //   emitter.emit("tick");
-    // });
-
-    // const timerText = new PIXI.Text("1%", {
-    //   fontFamily: "Arial",
-    //   fontSize: 18,
-    //   fill: 0xffffff,
-    //   align: "center",
-    // });
-
-    // timerText.x = app.screen.width / 2.11;
-    // timerText.y = app.screen.height / 1.95;
-    // app.stage.addChild(timerText);
-
     const loadingText = new PIXI.Text("Loading...", {
       fontFamily: "Arial",
       fontSize: 16,
@@ -187,7 +90,7 @@ const animationInterval = setInterval(animate, 10);
     });
     gsap.to([loaderContainer, loadingText], {
       duration: 0,
-      delay: 5,
+      delay: 4.5,
       alpha: 0,
     });
 
@@ -327,7 +230,6 @@ const animationInterval = setInterval(animate, 10);
     num.alpha = 0;
     gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
 
-
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
@@ -396,5 +298,5 @@ function getCrashPoint() {
 }
 const point = getCrashPoint();
 console.log(point);
-const main  =  point + 0.01
+const main = point + 0.01;
 export { point };
