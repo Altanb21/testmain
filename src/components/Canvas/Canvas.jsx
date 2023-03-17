@@ -19,6 +19,17 @@ const Canvas = () => {
     appRef.current = app;
     document.body.appendChild(app.view);
 
+    const blackRect = new PIXI.Graphics();
+    blackRect.beginFill(0x00000);
+    blackRect.drawRoundedRect(0, 0, 250, 5, 1);
+    blackRect.endFill();
+    blackRect.position.set(
+      app.screen.width / 2 - blackRect.width / 2,
+      app.screen.height / 2 - blackRect.height / 2
+    );
+    app.stage.addChild(blackRect);
+
+
     const rect = new PIXI.Graphics();
 rect.beginFill(0x00ced1);
 rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
@@ -53,18 +64,9 @@ function animate() {
 }
 
 // Start the animation interval
-const animationInterval = setInterval(animate, 13);
+const animationInterval = setInterval(animate, 12);
 
-    // const blackRect = new PIXI.Graphics();
-    // blackRect.beginFill(0x00000);
-    // blackRect.drawRoundedRect(0, 0, 250, 5, 1);
-    // blackRect.endFill();
-    // blackRect.position.set(
-    //   app.screen.width / 2 - blackRect.width / 2,
-    //   app.screen.height / 2 - blackRect.height / 2
-    // );
-    // app.stage.addChild(blackRect);
-
+    
     // const rect = new PIXI.Graphics();
     // rect.beginFill(0x00ced1);
     // rect.drawRoundedRect(0, 0, 250, 5, 1); // Add a radius of 10 to create a rounded rectangle
@@ -167,11 +169,11 @@ const animationInterval = setInterval(animate, 13);
     });
 
     loadingText.x = app.screen.width / 2.17;
-    loadingText.y = app.screen.height / 2.15;
+    loadingText.y = app.screen.height / 3.2;
     app.stage.addChild(loadingText);
 
     const loaderContainer = new PIXI.Container();
-    loaderContainer.position.set(app.screen.width / 2, app.screen.height / 2);
+    loaderContainer.position.set(app.screen.width / 2, app.screen.height / 3);
     app.stage.addChild(loaderContainer);
 
     const loader = new PIXI.Graphics();
@@ -317,7 +319,7 @@ const animationInterval = setInterval(animate, 13);
         value += 0.01; // increment the timer by 0.01
         num.text = value.toFixed(2) + "x"; // update the text with the new timer value
 
-        if (value >= point) {
+        if (value >= main) {
           clearInterval(intervalId); // stop the interval when time reaches 1.09
         }
       }, 33.3); // run the interval every 100 milliseconds
@@ -394,4 +396,5 @@ function getCrashPoint() {
 }
 const point = getCrashPoint();
 console.log(point);
+const main  =  point + 0.01
 export { point };
