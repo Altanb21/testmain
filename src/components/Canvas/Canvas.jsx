@@ -31,22 +31,22 @@ const Canvas = () => {
     rect.beginFill(0x00ced1);
     rect.drawRoundedRect(0, 0, 250, 6, 3);
     rect.endFill();
-    
+
     rect.position.set(
       app.screen.width / 2 - rect.width / 2,
       app.screen.height / 2 - rect.height / 2
     );
     rect.scale.x = 0;
-    
+
     app.stage.addChild(rect);
-    
+
     const dur = 5800;
     const endScale = 1;
     const fps = 60;
     const frames = (dur / 1000) * fps;
     let currentFrame = 0;
     let currentScale = 0;
-    
+
     const animationInterval = setInterval(() => {
       currentFrame++;
       if (currentFrame <= frames) {
@@ -82,7 +82,7 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText,rect], {
+    gsap.to([loaderContainer, loadingText, rect], {
       duration: 0,
       delay: 4.3,
       alpha: 0,
@@ -175,41 +175,39 @@ const Canvas = () => {
       }
 
       // await new Promise((resolve) => setTimeout(resolve, 5000));
-      
-
-       app.ticker.add(() => {
-        setTimeout(() => {
-        update();
-      }, 5000);
-
+      const num = new PIXI.Text("1.00x", {
+        fontFamily: "Arial",
+        fontSize: 50,
+        fill: 0x00ced1,
       });
+
+      num.anchor.set(0.5);
+      num.position.set(110, 50);
+      app.stage.addChild(num);
+      let value = 1; // initialize the timer to 1.00
+      setTimeout(() => {
+        const intervalId = setInterval(() => {
+          value += 0.01; // increment the timer by 0.01
+          num.text = value.toFixed(2) + "x"; // update the text with the new timer value
+          
+          if (value >= main) {
+            clearInterval(intervalId); // stop the interval when time reaches 1.09
+          }
+        }, 33.3);
+        app.ticker.add(() => {
+          update();
+        });
+      }, 5000);
+      num.alpha = 0;
+      gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
     }
 
     animatePlane();
 
-    const num = new PIXI.Text("1.00x", {
-      fontFamily: "Arial",
-      fontSize: 50,
-      fill: 0x00ced1,
-    });
-
-    num.anchor.set(0.5);
-    num.position.set(110, 50);
-    app.stage.addChild(num);
-    let value = 1; // initialize the timer to 1.00
-
     setTimeout(() => {
-      const intervalId = setInterval(() => {
-        value += 0.01; // increment the timer by 0.01
-        num.text = value.toFixed(2) + "x"; // update the text with the new timer value
-
-        if (value >= main) {
-          clearInterval(intervalId); // stop the interval when time reaches 1.09
-        }
-      }, 33.3); // run the interval every 100 milliseconds
+      // run the interval every 100 milliseconds
     }, 5000);
-    num.alpha = 0;
-    gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
+
 
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
