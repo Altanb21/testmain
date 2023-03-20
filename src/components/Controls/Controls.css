@@ -314,11 +314,11 @@ input:checked + .slider-button .off {
   {
     padding-left: 0px;
   }
-  .toast {
+  /* .toast {
     --toastify-toast-width: 320px;
     --toastify-toast-min-height: 32px;
     --toastify-toast-max-height: 64px;
-  }
+  } */
 }
 
 
