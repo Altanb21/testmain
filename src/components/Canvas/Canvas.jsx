@@ -84,7 +84,7 @@ const Canvas = () => {
     });
     gsap.to([loaderContainer, loadingText, rect], {
       duration: 0,
-      delay: 4.3,
+      delay: 4.8,
       alpha: 0,
     });
 
@@ -204,11 +204,6 @@ const Canvas = () => {
     }
 
     animatePlane();
-
-    setTimeout(() => {
-      // run the interval every 100 milliseconds
-    }, 5000);
-
 
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
