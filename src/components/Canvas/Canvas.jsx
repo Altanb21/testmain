@@ -278,4 +278,4 @@ function getCrashPoint() {
 const point = getCrashPoint();
 console.log(point);
 const main = point + 0.01;
-export { point };
+export { point,main };

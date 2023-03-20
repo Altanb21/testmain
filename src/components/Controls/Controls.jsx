@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { point } from "../Canvas/Canvas";
+import { point,main } from "../Canvas/Canvas";
 import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -38,7 +38,7 @@ const Controls = (props) => {
       const intervalId = setInterval(() => {
         setNumber((prevNumber) => {
           const newNumber = prevNumber + 0.01;
-          if (newNumber >= point) {
+          if (newNumber >= main) {
             clearInterval(intervalId);
             return point;
           }
@@ -57,7 +57,7 @@ const Controls = (props) => {
       const intervalId2 = setInterval(() => {
         setNumber2((prevNumber2) => {
           const newNumber2 = prevNumber2 + 0.01;
-          if (newNumber2 >= point) {
+          if (newNumber2 >= main) {
             clearInterval(intervalId2);
             return point;
           }
@@ -200,7 +200,7 @@ const Controls = (props) => {
                   </div>
                 </button>
               </div>
-              <ToastContainer />
+              <ToastContainer className="toast" />
               </form>
               <div className="buttons">
                 <div className="wrapper">
@@ -284,7 +284,7 @@ const Controls = (props) => {
                   </div>
                 </button>
               </div>
-              <ToastContainer />
+              <ToastContainer className="toast" />
               </form>
               <div className="buttons">
                 <div className="wrapper">

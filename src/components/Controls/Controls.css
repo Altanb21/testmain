@@ -1,6 +1,6 @@
 .cont {
   position: absolute;
-  margin: 30em 1em;
+  margin: 30em 0.5em;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   max-width: 850px;
@@ -18,6 +18,12 @@
   border-radius: 5px;
   margin: 10px 7px;
 }
+.toast {
+  --toastify-toast-width: 320px;
+  --toastify-toast-min-height: 32px;
+  --toastify-toast-max-height: 64px;
+}
+
 .toggle-container {
   width: 410px;
   height: 40px;
@@ -273,6 +279,14 @@ input:checked + .slider-button .off {
      margin: auto;
    }
 }
+@media screen and (max-width: 1360px) {
+  .cont{
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 30em auto;
+  }
+}
 @media screen and (max-width: 480px) {
   .cont{
     margin: 13em auto;
@@ -289,11 +303,21 @@ input:checked + .slider-button .off {
     height: 6em;
     border: none;
   }
+  .toast {
+    --toastify-toast-width: 220px;
+    --toastify-toast-min-height: 20px;
+    --toastify-toast-max-height: 50px;
+  }
 }
 @media screen and (max-width: 375px) {
   .betx
   {
     padding-left: 0px;
+  }
+  .toast {
+    --toastify-toast-width: 320px;
+    --toastify-toast-min-height: 32px;
+    --toastify-toast-max-height: 64px;
   }
 }
 
