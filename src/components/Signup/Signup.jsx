@@ -6,6 +6,18 @@ import "./Signup.css";
 import { auth } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBCard,
+  MDBCardBody,
+  MDBCardImage,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
+import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -42,7 +54,7 @@ const Signup = () => {
   return (
     <div>
       <Navbar />
-      <div className="container">
+      {/* <div className="container">
         <div className="cover">
           <h1 className="log">Signup</h1>
           <div className="ui divider"></div>
@@ -102,7 +114,67 @@ const Signup = () => {
           </div>
         </div>
         <ToastContainer />
-      </div>
+      </div> */}
+          <MDBContainer
+        fluid
+        className="d-flex align-items-center justify-content-center bg-image"
+      >
+        <div className="mask gradient-custom-3"></div>
+        <MDBCard className="m-5" style={{ maxWidth: "600px" }}>
+          <MDBCardBody className="px-5">
+            <h2 className="text-uppercase text-center mb-5">Sign in</h2>
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Username"
+              size="lg"
+              id="form2"
+              type="text"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, name: event.target.value }))
+              }
+            />
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Email"
+              size="lg"
+              id="form2"
+              type="email"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, email: event.target.value }))
+              }
+            />
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Password"
+              size="lg"
+              id="form3"
+              type="password"
+              onChange={(event) =>
+                setValues((prev) => ({ ...prev, pass: event.target.value }))
+              }
+            />
+            <div className="err">
+              <b>{errorMsg}</b>
+            </div>
+            <MDBBtn
+              disabled={submitButtonDisabled}
+              onClick={handleSubmit}
+              className="mb-4 w-100 gradient-custom-4"
+              size="lg"
+            >
+              sign in
+            </MDBBtn>
+            <div className="forget">
+              <p>
+                Already have an account?{" "}
+                <span>
+                  <Link to="/">Sign up</Link>
+                </span>
+              </p>
+            </div>
+          </MDBCardBody>
+        </MDBCard>
+      </MDBContainer>
     </div>
   );
 };

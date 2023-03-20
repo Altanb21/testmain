@@ -11,11 +11,7 @@ import {
   MDBContainer,
   MDBCard,
   MDBCardBody,
-  MDBCardImage,
-  MDBRow,
-  MDBCol,
   MDBInput,
-  MDBCheckbox,
 } from "mdb-react-ui-kit";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
