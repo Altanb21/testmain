@@ -36,11 +36,23 @@
   width: 200px;
   height: 30px;
 }
-.card{
-  width: 400px!important;
-  height: 400px!important;
-  background-color: #161b22!important;
-
+@media screen and (max-width: 480px) {
+  .field input{
+    width: 90%;
+  }
+  .ui.form input:not([type]), .ui.form input[type=date], .ui.form input[type=datetime-local], .ui.form input[type=email], .ui.form input[type=file], .ui.form input[type=number], .ui.form input[type=password], .ui.form input[type=search], .ui.form input[type=tel], .ui.form input[type=text], .ui.form input[type=time], .ui.form input[type=url] {
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    margin: 0;
+    outline: 0;
+    -webkit-appearance: none;
+    background: #fff;
+    color: rgba(0,0,0,.87);
+    border-radius: .28571429rem;
+    -webkit-box-shadow: 0 0 0 0 transparent inset;
+    box-shadow: 0 0 0 0 transparent inset;
+    -webkit-transition: none;
+    transition: none
+}
 }
 
 
