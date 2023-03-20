@@ -8,17 +8,12 @@
     width: 100%;
     margin: auto;
   }
-  .container > .cover {
+    .cover {
     width: 70%;
     border: 1px solid #dfdfdf;
     padding: 20px;
     border-radius: 5px;
     background-color: #161b22;
-  }
-  pre {
-    width: 70%;
-    color: #fff;
-    font-size: larger;
   }
   
   button {
