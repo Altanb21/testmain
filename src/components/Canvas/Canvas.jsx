@@ -90,6 +90,7 @@ const Canvas = () => {
 
     async function animatePlane() {
       const image = await Assets.load(gifImage);
+      console.log("Loaded image:", image); // add this line to check if the image is loaded
       app.stage.addChild(image);
       image.width = 90;
       image.height = 90;

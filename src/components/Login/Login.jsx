@@ -26,7 +26,7 @@ const Login = (props) => {
     signInWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
         setSubmitButtonDisabled(false);
-        navigate("/");
+        navigate("/play");
         toast("Login successfull!");
       })
       .catch((err) => {
