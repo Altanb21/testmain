@@ -1,0 +1,14 @@
+.poster{
+    display: block;
+    width: 1300px;
+    max-width: 100%;
+    margin: 1em auto;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+}
+@media screen and (max-width: 1200px) {
+    .poster{
+        max-width: 90%;
+    }
+}

@@ -22,14 +22,8 @@ const Navbar = (props) => {
         <li>
           <Link to="/">Home</Link>
         </li>
-      <li>
-          <Link to="/play">Play</Link>
-        </li>
         <li>
-          <Link to="/results">All Bets</Link>
-        </li>
-        <li>
-          <Link onClick={handleRefresh} to="/play">Refresh</Link>
+          <Link to="/signup">Signup</Link>
         </li>
         {!props.name ? (
           <li>
@@ -40,6 +34,16 @@ const Navbar = (props) => {
             <Link onClick={props.handleSignOut}>Logout</Link>
           </li>
         )}
+      <li>
+          <Link to="/play">Play</Link>
+        </li>
+        <li>
+          <Link to="/results">All Bets</Link>
+        </li>
+        <li>
+          <Link onClick={handleRefresh} to="/play">Refresh</Link>
+        </li>
+        
       </ul>
       <div className="hamburger" onClick={handleClick}>
         {click ? (

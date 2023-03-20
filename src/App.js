@@ -9,6 +9,7 @@ import Sidetable from "./components/Sidetable/Sidetable";
 import { Routes, Route } from "react-router-dom";
 import { auth } from "./firebase"
 import { useEffect, useState } from "react";
+import Home from "./components/Home/Home";
 function App() {
   const [username,setUsername] = useState("")
   useEffect(()=>{
@@ -27,7 +28,8 @@ function App() {
   return (
     <>
     <Routes>
-      <Route path="/" element={<Signup />} />
+    <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login name={username} />} />
       <Route path="/results" element={<Results />} />
       <Route
