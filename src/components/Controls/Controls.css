@@ -303,11 +303,11 @@ input:checked + .slider-button .off {
     height: 6em;
     border: none;
   }
-  .toast {
+  /* .toast {
     --toastify-toast-width: 220px;
     --toastify-toast-min-height: 20px;
     --toastify-toast-max-height: 50px;
-  }
+  } */
 }
 @media screen and (max-width: 375px) {
   .betx
