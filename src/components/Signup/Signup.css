@@ -21,3 +21,6 @@ p:first-child {
 button:disabled{
     background-color: gray!important;
 }
+.required{
+    color: red;
+}

@@ -25,7 +25,7 @@ const Signup = () => {
     setSubmitButtonDisabled(true);
     createUserWithEmailAndPassword(auth, values.email, values.pass)
       .then(async(res) => {
-        toast("Signup Successful")
+        toast("Signup Successfull")
         setSubmitButtonDisabled(false);
         const user = res.user
         console.log(user)
@@ -48,7 +48,7 @@ const Signup = () => {
           <div className="ui divider"></div>
           <div className="ui form">
             <div className="field">
-              <label>Email</label>
+              <label>Email<span className="required"> *</span></label>
               <input
                 type="text"
                 name="email"
@@ -59,7 +59,7 @@ const Signup = () => {
               />
             </div>
             <div className="field">
-              <label>Username</label>
+              <label>Username<span className="required"> *</span></label>
               <input
                 type="text"
                 name="username"
@@ -70,7 +70,7 @@ const Signup = () => {
               />
             </div>
             <div className="field">
-              <label>Password</label>
+              <label>Password<span className="required"> *</span></label>
               <input
                 type="password"
                 name="password"
@@ -94,7 +94,7 @@ const Signup = () => {
               <p>
                 Already have an account?{" "}
                 <span>
-                  <Link to="/login">Sign up</Link>
+                  <Link to="/login">Login</Link>
                 </span>
               </p>
             </div>
