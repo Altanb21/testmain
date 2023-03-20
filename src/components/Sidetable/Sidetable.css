@@ -1,16 +1,18 @@
-.table{
-    max-height: 620px;
-    color: #00ced1;
-    box-shadow: 0px 0px 2px 2px #00ced1;
-    border-radius: 5px; 
-    position: absolute;
+.table {
+  max-height: 620px;
+  color: #00ced1;
+  box-shadow: 0px 0px 2px 2px #00ced1;
+  border-radius: 5px;
+  position: absolute;
   top: 5em;
   right: 1em;
   width: 480px; /* adjust as needed */
   height: 100%;
 }
+
+
 @media screen and (max-width: 1360px) {
-    .table{
-        visibility: hidden;
-    }
+  .table {
+    visibility: hidden;
+  }
 }

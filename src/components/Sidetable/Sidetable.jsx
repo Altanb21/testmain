@@ -1,11 +1,17 @@
-import React from 'react'
-import './Sidetable.css'
+import React, { useState } from "react";
+import "./Sidetable.css";
 const Sidetable = () => {
-  return (
-    <div className='table'>
-      hey this is rahul sharma and the width should be 480px which 
-    </div>
-  )
-}
+  const [selectedButton, setSelectedButton] = useState("off");
 
-export default Sidetable
+  function handleButtonSelection(buttonName) {
+    setSelectedButton(buttonName);
+  }
+
+  return (
+    <div className="table">
+
+    </div>
+  );
+};
+
+export default Sidetable;

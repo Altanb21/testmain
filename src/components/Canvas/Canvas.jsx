@@ -205,6 +205,7 @@ const Canvas = () => {
 
     animatePlane();
 
+  
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
