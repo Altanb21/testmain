@@ -27,6 +27,7 @@ const Login = (props) => {
       .then(async (res) => {
         setSubmitButtonDisabled(false);
         navigate("/play");
+        // toast("Login successful!");
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
@@ -71,6 +72,7 @@ const Login = (props) => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     </div>
   );
