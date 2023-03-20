@@ -36,5 +36,13 @@
   width: 200px;
   height: 30px;
 }
+.card{
+  width: 400px!important;
+  height: 400px!important;
+  background-color: #161b22!important;
+
+}
+
+
 
 
