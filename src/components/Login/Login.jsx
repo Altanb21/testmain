@@ -47,13 +47,13 @@ const Login = (props) => {
           </div>
           <div className="ui form">
             <div className="field">
-              <label>Email</label>
+              <label>Email<span className="required"> *</span></label>
               <input type="text" name="email" placeholder="Email" onChange={(event) =>
             setValues((prev) => ({ ...prev, email: event.target.value }))
           } />
             </div>
             <div className="field">
-              <label>Password</label>
+              <label>Password<span className="required"> *</span></label>
               <input type="password" name="password" placeholder="Password"  onChange={(event) =>
             setValues((prev) => ({ ...prev, pass: event.target.value }))
           } />
