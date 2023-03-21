@@ -9,8 +9,16 @@
   width: 480px; /* adjust as needed */
   height: 100%;
 }
-
-
+.Tog{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+}
+.css-d9c359-MuiButtonBase-root-MuiToggleButton-root.Mui-selected {
+  color: #00ced1!important;
+  background-color: #282828!important
+}
 @media screen and (max-width: 1360px) {
   .table {
     visibility: hidden;
