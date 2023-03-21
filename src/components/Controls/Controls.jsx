@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { point,main } from "../Canvas/Canvas";
 import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { auth } from "../../firebase"
+
 import {
   collection,
   addDoc,
@@ -32,6 +34,20 @@ const Controls = (props) => {
   const [count2, setCount2] = useState(0);
   const cash = number.toFixed(2);
   const cash2 = number2.toFixed(2);
+  const [username,setUsername] = useState("")
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+        setUsername(user.displayName)
+      }else setUsername("")
+    })
+  },[])
+
+  const handleSignOut = (e) => {
+    e.preventDefault();
+    auth.signOut();
+    setUsername("");
+  };
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -133,7 +149,7 @@ const Controls = (props) => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      const data = { name:props.name,value, value2, point, cash, cash2 };
+      const data = { username,value, value2, point, cash, cash2 };
       console.log(data)
 
       try {

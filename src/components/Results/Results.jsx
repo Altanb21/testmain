@@ -32,7 +32,7 @@ const Results = (props) => {
   }, []);
   const columns = [
     {
-      field: "name",
+      field: "username",
       headerName: "Username",
       width: 250,
     },
