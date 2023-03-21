@@ -154,7 +154,7 @@ const Canvas = () => {
             txt2.anchor.set(0.5);
             app.stage.addChild(txt2);
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
-            //window.location.reload()
+            resetGame();
           }, 2500);
         }
         curve.clear();
@@ -194,6 +194,11 @@ const Canvas = () => {
       num.alpha = 0;
       gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
     }
+    function resetGame() {
+      // reload the page to restart the game
+      window.location.reload();
+    }
+    
 
     animatePlane();
 
