@@ -154,7 +154,7 @@ const Canvas = () => {
             txt2.anchor.set(0.5);
             app.stage.addChild(txt2);
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
-            window.location.reload()
+            //window.location.reload()
           }, 2500);
         }
         curve.clear();
