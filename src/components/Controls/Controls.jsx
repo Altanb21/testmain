@@ -176,8 +176,8 @@ const Controls = (props) => {
                   <div className="slider-label left">Off</div>
                   <input
                     type="checkbox"
-                    onClick={handleToggleChange}
                     checked={toggle}
+                    onChange={handleToggleChange}
                   />
                   <div className="slider-button" style={{borderRadius:'15px'}}>
                     <div className="slider-button-label on">Bet</div>
@@ -234,7 +234,7 @@ const Controls = (props) => {
                       </button>
                     </div>
 
-                    <div class="button-row">
+                    <div className="button-row">
                       <button
                         onClick={() => handleValueButton(5)}
                         className="dollar"
@@ -260,7 +260,7 @@ const Controls = (props) => {
                   <div className="slider-label left">Off</div>
                   <input
                     type="checkbox"
-                    onClick={handleToggleChange}
+                    onChange={handleToggleChange}
                     checked={toggle}
                   />
                   <div className="slider-button" style={{borderRadius:'15px'}}>
@@ -301,23 +301,23 @@ const Controls = (props) => {
                   />
                 </div>
                 <div className="money">
-                  <div class="button-container">
-                    <div class="button-row">
+                  <div className="button-container">
+                    <div className="button-row">
                       <button
                         onClick={() => handleValueButton2(1)}
-                        class="dollar"
+                        className="dollar"
                       >
                         1$
                       </button>
                       <button
                         onClick={() => handleValueButton2(2)}
-                        class="dollar"
+                        className="dollar"
                       >
                         2$
                       </button>
                     </div>
 
-                    <div class="button-row">
+                    <div className="button-row">
                       <button
                         onClick={() => handleValueButton2(5)}
                         className="dollar"
@@ -326,7 +326,7 @@ const Controls = (props) => {
                       </button>
                       <button
                         onClick={() => handleValueButton2(10)}
-                        class="dollar"
+                        className="dollar"
                       >
                         10$
                       </button>

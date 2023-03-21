@@ -88,7 +88,124 @@ const Canvas = () => {
       alpha: 0,
     });
 
-    async function animatePlane() {
+    // async function animatePlane() {
+    //   const image = await Assets.load(gifImage);
+    //   console.log("Loaded image:", image); // add this line to check if the image is loaded
+    //   app.stage.addChild(image);
+    //   image.width = 90;
+    //   image.height = 90;
+    //   image.x = 25;
+    //   image.y = 280;
+
+    //   const curve = new PIXI.Graphics();
+    //   curve.lineStyle(2, 0x0e0e0e);
+    //   curve.moveTo(0, 0);
+    //   curve.bezierCurveTo(10, 0, 11, 10, 13, 11);
+    //   app.stage.addChild(curve);
+
+    //   const area = new PIXI.Graphics();
+    //   area.beginFill(0x0e0e0e);
+    //   area.moveTo(0, 270);
+    //   area.quadraticCurveTo(0, 220, 5, image.y - 55);
+    //   area.lineTo(image.x, 100);
+    //   area.lineTo(0, 220);
+    //   area.lineTo(0, 220);
+    //   area.endFill();
+    //   app.stage.addChild(area);
+
+    //   let xVel = 1.9;
+    //   let angle = 0;
+    //   let amplitude = 80;
+    //   let frequency = 0.0069;
+
+    //   function update() {
+    //     image.x += xVel;
+    //     image.y = 195 + Math.cos(angle) * amplitude;
+    //     angle += frequency;
+
+    //     if (image.x >= 700) {
+    //       image.x -= xVel;
+    //       image.y = 195 + Math.cos(angle) * amplitude;
+    //       uiy.y += 0.7;
+    //       ui.x -= 0.7;
+    //     }
+
+    //     curve.clear();
+    //     curve.lineStyle(5, 0x00ced1);
+    //     curve.moveTo(25, 369);
+    //     curve.bezierCurveTo(
+    //       50,
+    //       370,
+    //       image.x,
+    //       image.y + 85,
+    //       image.x,
+    //       image.y + 85
+    //     );
+
+    //     area.clear();
+    //     area.beginFill(0x009092);
+    //     area.moveTo(25, 370);
+    //     area.quadraticCurveTo(50, 370, image.x, image.y + 85);
+    //     area.lineTo(image.x, 370);
+    //     area.lineTo(25, 370);
+    //     area.lineTo(25, 370);
+    //     area.endFill();
+
+    //     if (value >= main) {
+    //       image.x -= xVel;
+    //       angle -= frequency;
+
+    //       gsap.to([image, curve, area], { alpha: 0, delay: 2 });
+
+    //       setTimeout(() => {
+    //         const txt2 = new PIXI.Text("PLANE FLEW AWAY", {
+    //           fontFamily: "Arial",
+    //           fontSize: 30,
+    //           fill: 0x00ced1,
+    //           align: "center",
+    //         });
+
+    //         txt2.anchor.set(0.5);
+    //         app.stage.addChild(txt2);
+    //         txt2.position.set(app.screen.width / 2, app.screen.height / 2);
+    //         setTimeout(() => {
+    //           //  navigate('/')
+    //         }, 2000);
+    //       }, 3000);
+    //     }
+    //   }
+
+    //   // await new Promise((resolve) => setTimeout(resolve, 5000));
+    //   const num = new PIXI.Text("1.00x", {
+    //     fontFamily: "Arial",
+    //     fontSize: 50,
+    //     fill: 0x00ced1,
+    //   });
+
+    //   num.anchor.set(0.5);
+    //   num.position.set(110, 50);
+    //   app.stage.addChild(num);
+    //   let value = 1; // initialize the timer to 1.00
+    //   setTimeout(() => {
+    //     const intervalId = setInterval(() => {
+    //       value += 0.01; // increment the timer by 0.01
+    //       num.text = value.toFixed(2) + "x"; // update the text with the new timer value
+          
+    //       if (value >= main) {
+    //         clearInterval(intervalId); // stop the interval when time reaches 1.09
+    //       }
+    //     }, 33.3);
+    //     app.ticker.add(() => {
+    //       update();
+    //     });
+    //   }, 5000);
+    //   num.alpha = 0;
+    //   gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
+    // }
+
+    // animatePlane();
+
+        async function animatePlane() {
       const image = await Assets.load(gifImage);
       console.log("Loaded image:", image); // add this line to check if the image is loaded
       app.stage.addChild(image);
@@ -123,40 +240,16 @@ const Canvas = () => {
         image.y = 195 + Math.cos(angle) * amplitude;
         angle += frequency;
 
-        if (image.x >= 700) {
+        if (value <= main && image.x >= 700) {
           image.x -= xVel;
           image.y = 195 + Math.cos(angle) * amplitude;
           uiy.y += 0.7;
           ui.x -= 0.7;
-        }
-
-        curve.clear();
-        curve.lineStyle(5, 0x00ced1);
-        curve.moveTo(25, 369);
-        curve.bezierCurveTo(
-          50,
-          370,
-          image.x,
-          image.y + 85,
-          image.x,
-          image.y + 85
-        );
-
-        area.clear();
-        area.beginFill(0x009092);
-        area.moveTo(25, 370);
-        area.quadraticCurveTo(50, 370, image.x, image.y + 85);
-        area.lineTo(image.x, 370);
-        area.lineTo(25, 370);
-        area.lineTo(25, 370);
-        area.endFill();
-
-        if (value >= main) {
-          image.x -= xVel;
-          angle -= frequency;
-
-          gsap.to([image, curve, area], { alpha: 0, delay: 2 });
-
+        } else if (value >= main) {
+          image.x += 2;
+          image.y += 1;
+          angle += frequency;
+          gsap.to([curve, area], { alpha: 0, delay: 0 });
           setTimeout(() => {
             const txt2 = new PIXI.Text("PLANE FLEW AWAY", {
               fontFamily: "Arial",
@@ -168,20 +261,37 @@ const Canvas = () => {
             txt2.anchor.set(0.5);
             app.stage.addChild(txt2);
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
-            setTimeout(() => {
-              //  navigate('/')
-            }, 2000);
-          }, 3000);
+            window.location.reload()
+          }, 2500);
         }
+        else if(value === main){
+          image.x -= xVel;
+        }
+        curve.clear();
+        curve.lineStyle(5, 0x00ced1);
+        curve.moveTo(25, 369);
+        curve.bezierCurveTo(
+          50,
+          370,
+          image.x,
+          image.y + 85,
+          image.x,
+          image.y + 85
+        );
+        area.clear();
+        area.beginFill(0x009092);
+        area.moveTo(25, 370);
+        area.quadraticCurveTo(50, 370, image.x, image.y + 85);
+        area.lineTo(image.x, 370);
+        area.lineTo(25, 370);
+        area.lineTo(25, 370);
+        area.endFill();
       }
-
-      // await new Promise((resolve) => setTimeout(resolve, 5000));
       const num = new PIXI.Text("1.00x", {
         fontFamily: "Arial",
         fontSize: 50,
         fill: 0x00ced1,
       });
-
       num.anchor.set(0.5);
       num.position.set(110, 50);
       app.stage.addChild(num);
@@ -190,7 +300,7 @@ const Canvas = () => {
         const intervalId = setInterval(() => {
           value += 0.01; // increment the timer by 0.01
           num.text = value.toFixed(2) + "x"; // update the text with the new timer value
-          
+
           if (value >= main) {
             clearInterval(intervalId); // stop the interval when time reaches 1.09
           }
