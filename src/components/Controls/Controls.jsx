@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { point,main } from "../Canvas/Canvas";
+import { point, main } from "../Canvas/Canvas";
 import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { auth } from "../../firebase"
+import { auth } from "../../firebase";
 
 import {
   collection,
@@ -16,11 +16,11 @@ import {
   updateDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from '../../firebase'
+import { db } from "../../firebase";
 
 const Controls = (props) => {
-  const [value, setValue] = useState(1.0);
-  const [value2, setValue2] = useState(1.0);
+  const [amount, setAmount] = useState(1.10);
+  const [amount2, setAmount2] = useState(1.10);
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const [toggle2, setToggle2] = useState(false);
@@ -34,14 +34,17 @@ const Controls = (props) => {
   const [count2, setCount2] = useState(0);
   const cash = number.toFixed(2);
   const cash2 = number2.toFixed(2);
-  const [username,setUsername] = useState("")
-  useEffect(()=>{
-    auth.onAuthStateChanged((user)=>{
-      if(user){
-        setUsername(user.displayName)
-      }else setUsername("")
-    })
-  },[])
+  const [username, setUsername] = useState("");
+  const [multiplier, setMultiplier] = useState(1.0);
+  const [multiplier2, setMultiplier2] = useState(1.0);
+
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUsername(user.displayName);
+      } else setUsername("");
+    });
+  }, []);
 
   const handleSignOut = (e) => {
     e.preventDefault();
@@ -101,29 +104,37 @@ const Controls = (props) => {
   };
 
   const handleIncrement = () => {
-    setValue((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
+    setAmount((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
   };
 
   const handleDecrement = () => {
-    if (value > 1.0) {
-      setValue((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
+    if (amount > 1.0) {
+      setAmount((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
     }
   };
 
   const handleIncrement2 = () => {
-    setValue2((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
+    setAmount2((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
   };
 
   const handleDecrement2 = () => {
-    if (value2 > 1.0) {
-      setValue2((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
+    if (amount2 > 1.0) {
+      setAmount2((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
     }
   };
   const handleValueButton = (val) => {
-    setValue(val);
+    setMultiplier(val);
   };
-  const handleValueButton2 = (val) => {
-    setValue2(val);
+  const handleValueButton2 = (val2) => {
+    setMultiplier2(val2);
+  };
+
+  const handleChange = (event) => {
+    setAmount(event.target.value);
+  };
+
+  const handleChange2 = (event) => {
+    setAmount2(event.target.value);
   };
 
   const handleClick = () => {
@@ -147,62 +158,71 @@ const Controls = (props) => {
     setToggle2(!toggle2);
   };
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const data = { username,value, value2, point, cash, cash2 };
-      console.log(data)
-
-      try {
-        const postsRef = collection(db, "posts");
-        const q = query(
-          postsRef,
-          where("value", "==", value),
-          // where("value2", "==", value2),
-          where("point", "==", point)
-        );
-        const querySnapshot = await getDocs(q);
-
-        if (querySnapshot.docs.length > 0) {
-          const existingData = querySnapshot.docs[0];
-          await updateDoc(existingData.ref, {
-            cash,
-            cash2,
-            value2
-          });
-          console.log("Data updated successfully");
-        } else {
-          await addDoc(postsRef, {
-            ...data,
-            timestamp: serverTimestamp(),
-          });
-          console.log("Data saved successfully");
-        }
-      } catch (err) {
-        console.log(err.message);
-      }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      username,
+      amount,
+      multiplier,
+      cash,
+      amount2,
+      multiplier2,
+      cash2,
+      point,
     };
-  
+    console.log(data);
+
+    try {
+      const postsRef = collection(db, "posts");
+      const q = query(
+        postsRef,
+        where("amount", "==", amount),
+        // where("value2", "==", value2),
+        where("point", "==", point)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.docs.length > 0) {
+        const existingData = querySnapshot.docs[0];
+        await updateDoc(existingData.ref, {
+          cash,
+          cash2,
+          amount2,
+        });
+        console.log("Data updated successfully");
+      } else {
+        await addDoc(postsRef, {
+          ...data,
+          timestamp: serverTimestamp(),
+        });
+        console.log("Data saved successfully");
+      }
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
   return (
     <>
       <div className="cont">
         <div className="control">
-            <div className="toggle-container">
-              <div className="slider-container">
-                <label className="slider">
-                  <div className="slider-label left">Off</div>
-                  <input
-                    type="checkbox"
-                    checked={toggle}
-                    onChange={handleToggleChange}
-                  />
-                  <div className="slider-button" style={{borderRadius:'15px'}}>
-                    <div className="slider-button-label on">Bet</div>
-                    <div className="slider-button-label off">Auto</div>
-                  </div>
-                </label>
-              </div>
+          <div className="toggle-container">
+            <div className="slider-container">
+              <label className="slider">
+                <div className="slider-label left">Off</div>
+                <input
+                  type="checkbox"
+                  checked={toggle}
+                  onChange={handleToggleChange}
+                />
+                <div className="slider-button" style={{ borderRadius: "15px" }}>
+                  <div className="slider-button-label on">Bet</div>
+                  <div className="slider-button-label off">Auto</div>
+                </div>
+              </label>
             </div>
-            <div className="divide">
+          </div>
+          <div className="divide">
             <form onClick={handleSubmit}>
               <div className="betx">
                 <button
@@ -217,76 +237,83 @@ const Controls = (props) => {
                 </button>
               </div>
               <ToastContainer className="toast" />
-              </form>
-              <div className="buttons">
-                <div className="wrapper">
-                  <FontAwesomeIcon
-                    onClick={handleIncrement}
-                    className="inc"
-                    icon={faPlusCircle}
-                  />
-                  <div className="multiplier">{value.toFixed(2)}</div>
-                  <FontAwesomeIcon
-                    onClick={handleDecrement}
-                    className="inc"
-                    icon={faMinusCircle}
+            </form>
+            <div className="buttons">
+              <div className="wrapper">
+                <FontAwesomeIcon
+                  onClick={handleIncrement}
+                  className="inc"
+                  icon={faPlusCircle}
+                />
+                <div className="multiplier">
+                  <input
+                    className="number"
+                    type="text"
+                    value={amount}
+                    onChange={handleChange}
                   />
                 </div>
+                <FontAwesomeIcon
+                  onClick={handleDecrement}
+                  className="inc"
+                  icon={faMinusCircle}
+                />
+              </div>
 
-                <div className="money">
-                  <div className="button-container">
-                    <div className="button-row">
-                      <button
-                        onClick={() => handleValueButton(1)}
-                        className="dollar"
-                      >
-                        1$
-                      </button>
-                      <button
-                        onClick={() => handleValueButton(2)}
-                        className="dollar"
-                      >
-                        2$
-                      </button>
-                    </div>
+              <div className="money">
+                <div className="button-container">
+                  <div className="button-row">
+                    <button
+                      onClick={() => handleValueButton(1)}
+                      className="dollar"
+                    >
+                      1x
+                    </button>
+                    <button
+                      onClick={() => handleValueButton(2)}
+                      className="dollar"
+                    >
+                      2x
+                    </button>
+                  </div>
 
-                    <div className="button-row">
-                      <button
-                        onClick={() => handleValueButton(5)}
-                        className="dollar"
-                      >
-                        5$
-                      </button>
-                      <button
-                        onClick={() => handleValueButton(10)}
-                        className="dollar"
-                      >
-                        10$
-                      </button>
-                    </div>
+                  <div className="button-row">
+                    <button
+                      onClick={() => handleValueButton(5)}
+                      className="dollar"
+                    >
+                      5x
+                    </button>
+                    <button
+                      onClick={() => handleValueButton(10)}
+                      className="dollar"
+                    >
+                      10x
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
         <div className="control">
-            <div className="toggle-container">
-              <div className="slider-container">
-                <label className="slider">
-                  <div className="slider-label left">Off</div>
-                  <input
-                    type="checkbox"
-                    onChange={handleToggleChange}
-                    checked={toggle}
-                  />
-                  <div className="slider-button" style={{borderRadius:'15px'}}>
-                    <div className="slider-button-label on">Bet</div>
-                    <div className="slider-button-label off">Auto</div>
-                  </div>
-                </label>
-              </div>
+          <div className="toggle-container">
+            <div className="slider-container">
+              <label className="slider">
+                <div className="slider-label left">Off</div>
+                <input
+                  type="checkbox"
+                  onChange={handleToggleChange}
+                  checked={toggle}
+                />
+                <div className="slider-button" style={{ borderRadius: "15px" }}>
+                  <div className="slider-button-label on">Bet</div>
+                  <div className="slider-button-label off">Auto</div>
+                </div>
+              </label>
             </div>
-            <div className="divide">
+          </div>
+          <div className="divide">
             <form onClick={handleSubmit}>
               <div className="betx">
                 <button
@@ -301,56 +328,63 @@ const Controls = (props) => {
                 </button>
               </div>
               <ToastContainer className="toast" />
-              </form>
-              <div className="buttons">
-                <div className="wrapper">
-                  <FontAwesomeIcon
-                    onClick={handleIncrement2}
-                    className="inc"
-                    icon={faPlusCircle}
-                  />
-                  <div className="multiplier">{value2.toFixed(2)}</div>
-                  <FontAwesomeIcon
-                    onClick={handleDecrement2}
-                    className="inc"
-                    icon={faMinusCircle}
+            </form>
+            <div className="buttons">
+              <div className="wrapper">
+                <FontAwesomeIcon
+                  onClick={handleIncrement2}
+                  className="inc"
+                  icon={faPlusCircle}
+                />
+                <div className="multiplier">
+                  <input
+                    className="number"
+                    type="text"
+                    value={amount2}
+                    onChange={handleChange2}
                   />
                 </div>
-                <div className="money">
-                  <div className="button-container">
-                    <div className="button-row">
-                      <button
-                        onClick={() => handleValueButton2(1)}
-                        className="dollar"
-                      >
-                        1$
-                      </button>
-                      <button
-                        onClick={() => handleValueButton2(2)}
-                        className="dollar"
-                      >
-                        2$
-                      </button>
-                    </div>
+                <FontAwesomeIcon
+                  onClick={handleDecrement2}
+                  className="inc"
+                  icon={faMinusCircle}
+                />
+              </div>
+              <div className="money">
+                <div className="button-container">
+                  <div className="button-row">
+                    <button
+                      onClick={() => handleValueButton2(1)}
+                      className="dollar"
+                    >
+                      1x
+                    </button>
+                    <button
+                      onClick={() => handleValueButton2(2)}
+                      className="dollar"
+                    >
+                      2x
+                    </button>
+                  </div>
 
-                    <div className="button-row">
-                      <button
-                        onClick={() => handleValueButton2(5)}
-                        className="dollar"
-                      >
-                        5$
-                      </button>
-                      <button
-                        onClick={() => handleValueButton2(10)}
-                        className="dollar"
-                      >
-                        10$
-                      </button>
-                    </div>
+                  <div className="button-row">
+                    <button
+                      onClick={() => handleValueButton2(5)}
+                      className="dollar"
+                    >
+                      5x
+                    </button>
+                    <button
+                      onClick={() => handleValueButton2(10)}
+                      className="dollar"
+                    >
+                      10x
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
         </div>
       </div>
     </>

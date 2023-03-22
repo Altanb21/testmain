@@ -84,7 +84,7 @@ const Signup = () => {
             <div className="err">
               <b>{errorMsg}</b>
             </div>
-            <button
+            <button style={{backgroundColor:'#00ced1'}}
               onClick={handleSubmit}
               disabled={submitButtonDisabled}
               className="fluid ui button blue"

@@ -25,9 +25,9 @@ const Login = (props) => {
     setSubmitButtonDisabled(true);
     signInWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
+        toast("Login successfull!");
         setSubmitButtonDisabled(false);
         navigate("/play");
-        toast("Login successfull!");
       })
       .catch((err) => {
         setSubmitButtonDisabled(false);
@@ -61,7 +61,7 @@ const Login = (props) => {
             <div className="err">
               <b>{errorMsg}</b>
             </div>
-            <button disabled={submitButtonDisabled} onClick={handleSubmit} className="fluid ui button blue">Submit</button>
+            <button disabled={submitButtonDisabled} onClick={handleSubmit} className="fluid">Submit</button>
             <div className="forget">
               <p>
                 Already have an account?{" "}

@@ -16,9 +16,16 @@
     background-color: #161b22;
   }
   
-  button {
+  .fluid {
     margin-top: 20px !important;
-    background: #00ced1 !important
+    background: #00ced1;
+    max-width: 100%;
+    width: 310px;
+    height: 40px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    color: white;
+    
   }
   p {
     float: right;

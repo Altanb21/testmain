@@ -154,11 +154,12 @@ input:checked + .slider-button .off {
 
 .dollar {
   width: 60px;
+  margin-top: 20px !important;
   height: 25px;
   padding: 0;
   margin:  10px 5px 0px 5px;
   font-size: 14px;
-  background-color: #282621 !important;
+  background-color: #282621;
   color: grey;
   border: none;
   border-radius: 10px;
@@ -166,6 +167,10 @@ input:checked + .slider-button .off {
   align-items: center;
   justify-content: center;
 }
+.dollar:hover {
+  background-color: #000;
+}
+
 .divide{
   height: 150px;
   display: flex;
@@ -187,6 +192,7 @@ input:checked + .slider-button .off {
 }
 
 .flip-button {
+  margin-top: 20px !important;
   position: relative;
   width: 15em;
   height: 6em;
@@ -246,6 +252,18 @@ input:checked + .slider-button .off {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+.multiplier input{
+  overflow: hidden;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  background-color: #000;
+  border: none;
+  color: #fff;
+}
+.multiplier input:focus{
+  outline: none;
 }
 .inc {
   color: gray;
