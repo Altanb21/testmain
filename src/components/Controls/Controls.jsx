@@ -19,8 +19,8 @@ import {
 import { db } from "../../firebase";
 
 const Controls = (props) => {
-  const [amount, setAmount] = useState(1.10);
-  const [amount2, setAmount2] = useState(1.10);
+  const [amount, setAmount] = useState(1.1);
+  const [amount2, setAmount2] = useState(1.1);
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const [toggle2, setToggle2] = useState(false);
@@ -122,6 +122,15 @@ const Controls = (props) => {
       setAmount2((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
     }
   };
+  let result;
+  let prize
+  if (multiplier === point || multiplier2 === point) {
+     prize = amount * multiplier || amount2 * multiplier2  
+    result = "won";
+  } else {
+     prize = amount * 0
+    result = "lost";
+  }
   const handleValueButton = (val) => {
     setMultiplier(val);
   };
@@ -169,6 +178,8 @@ const Controls = (props) => {
       multiplier2,
       cash2,
       point,
+      result,
+      prize
     };
     console.log(data);
 
@@ -188,7 +199,7 @@ const Controls = (props) => {
           cash,
           cash2,
           amount2,
-          multiplier2
+          multiplier2,
         });
         console.log("Data updated successfully");
       } else {

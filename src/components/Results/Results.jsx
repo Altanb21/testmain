@@ -44,7 +44,7 @@ const Results = (props) => {
     { field: "cash2", headerName: "Cashout2", width: 120 },
     { field: "point", headerName: "Random multiplier", width: 120 },
     { field: "prize", headerName: "Prize", width: 120 },
-    { field: "status", headerName: "Status", width: 120 },
+    { field: "result", headerName: "Result", width: 120 },
 
   ];
   return (
