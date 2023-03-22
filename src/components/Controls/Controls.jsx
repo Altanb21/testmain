@@ -188,6 +188,7 @@ const Controls = (props) => {
           cash,
           cash2,
           amount2,
+          multiplier2
         });
         console.log("Data updated successfully");
       } else {
