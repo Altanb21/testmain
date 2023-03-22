@@ -11,19 +11,6 @@ const Sidetable = () => {
 
   return (
     <div className="table">
-      <div className ='Tog'>
-      <ToggleButtonGroup
-      color="primary"
-      value={alignment}
-      exclusive
-      onChange={handleChange}
-      aria-label="Platform"
-    >
-      <ToggleButton value="web">my bets</ToggleButton>
-      <ToggleButton value="android">top</ToggleButton>
-      <ToggleButton value="ios">All bets</ToggleButton>
-    </ToggleButtonGroup>
-    </div>
     </div>
   );
 };

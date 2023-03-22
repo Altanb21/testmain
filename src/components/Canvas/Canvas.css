@@ -24,3 +24,14 @@ canvas{
         width: 380px;
     }
 }
+@media (min-width: 1440px) and (max-width: 1920px) {
+    canvas{
+    width: 1300px;
+    height: 550px;
+}
+}
+@media (min-width: 1440px) and (max-width: 1820px) {
+    canvas{
+        margin: 0 auto;
+    }
+  }
