@@ -350,11 +350,11 @@ input:checked + .slider-button .off {
 @media (min-width: 1440px) and (max-width: 1920px) {
   .cont {
     margin: 40.5em 0.5em;
-    max-width: 1300px;
+    max-width: 1250px;
     height: 300px;
   }
   .control {
-    max-width: 635px;
+    max-width: 600px;
     height: 280px;
   }
   .toggle-container {
@@ -437,7 +437,7 @@ input:checked + .slider-button .off {
     font-size: 20px;
   }
 }
-@media (min-width: 1440px) and (max-width: 1820px) {
+@media (min-width: 1440px) and (max-width: 1800px) {
   .table{
     visibility: hidden;
   }
