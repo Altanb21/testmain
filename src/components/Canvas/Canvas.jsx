@@ -137,7 +137,7 @@ const Canvas = () => {
           image.y = 195 + Math.cos(angle) * amplitude;
           uiy.y += 0.7;
           ui.x -= 0.7;
-        } else if (value >= main) {
+        } else if (value >= point) {
           image.x += 2;
           image.y += 1;
           angle += frequency;
@@ -199,7 +199,7 @@ const Canvas = () => {
           value += 0.01; // increment the timer by 0.01
           num.text = value.toFixed(2) + "x"; // update the text with the new timer value
 
-          if (value >= main) {
+          if (value >= point) {
             clearInterval(intervalId); // stop the interval when time reaches 1.09
           }
         }, 33.3);
