@@ -347,19 +347,30 @@ input:checked + .slider-button .off {
     --toastify-toast-max-height: 64px;
   } */
 }
-@media (min-width: 1440px) and (max-width: 1920px) {
+@media (min-width: 1600px) and (max-width: 1920px) {
   .cont {
     margin: 40.5em 0.5em;
     max-width: 1250px;
     height: 300px;
   }
   .control {
-    max-width: 600px;
+    max-width: 610px;
     height: 280px;
   }
   .toggle-container {
     width: 650px;
-    height: 40px;
+    height: 50px;
+  }
+  .slider {
+    width: 300px;
+    height: 35px;
+  }
+  .slider-button:before {
+    height: 29px;
+    width: 150px;
+  }
+  input:checked + .slider-button:before {
+    transform: translateX(146px);
   }
   .divide {
     display: flex;
@@ -369,7 +380,6 @@ input:checked + .slider-button .off {
     max-width: 100%;
   }
 .buttons{
-  /* background-color: blue; */
   width: 300px;
   height: 220px;
   display: flex;
@@ -377,33 +387,37 @@ input:checked + .slider-button .off {
   position: relative;
   align-items: center;
   max-width: 100%;
-
 }
 .betx{
   width: 300px;
-  height: 220px;
+  height: 200px;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 .flip-button{
   width: 20em;
-  height: 10em;
+  height: 8em;
+}
+.flip-front{
+  font-size: 20px;
+}
+.flip-back{
+  font-size: 20px;
 }
 .wrapper{
-  width: 300px;
-  height: 60px;
+  width: 270px;
+  height: 45px;
+  margin-top: 10px;
 }
 .multiplier{
-  width: 220px;
+  width: 200px;
   font-size: 25px;
 }
 .inc{
-  font-size: 30px;
+  font-size: 25px;
 }
 .money{
-  /* background-color: green; */
-  margin-top: 30px;
+  margin-top: 20px;
   width: 290px;
   height: 170px;
   display: flex;
@@ -411,7 +425,6 @@ input:checked + .slider-button .off {
   align-items: center;
 }
 .button-container{
-  /* background-color: rebeccapurple; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -436,8 +449,9 @@ input:checked + .slider-button .off {
     border-radius: 15px;
     font-size: 20px;
   }
+
 }
-@media (min-width: 1440px) and (max-width: 1800px) {
+@media (min-width: 1600px) and (max-width: 1800px) {
   .table{
     visibility: hidden;
   }

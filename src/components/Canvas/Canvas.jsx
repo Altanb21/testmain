@@ -40,7 +40,7 @@ const Canvas = () => {
 
     app.stage.addChild(rect);
 
-    const dur = 5800;
+    const dur = 9000;
     const endScale = 1;
     const fps = 60;
     const frames = (dur / 1000) * fps;
@@ -57,7 +57,6 @@ const Canvas = () => {
       }
     }, 9);
 
-    gsap.to(blackRect, { duration: 0, delay: 4, alpha: 0 });
     const loadingText = new PIXI.Text("Loading...", {
       fontFamily: "Arial",
       fontSize: 16,
@@ -82,9 +81,9 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText, rect], {
+    gsap.to([loaderContainer, loadingText, rect,blackRect], {
       duration: 0,
-      delay: 4.5,
+      delay: 6,
       alpha: 0,
     });
 
@@ -190,9 +189,9 @@ const Canvas = () => {
         app.ticker.add(() => {
           update();
         });
-      }, 5000);
+      }, 6000);
       num.alpha = 0;
-      gsap.to(num, { duration: 0, alpha: 1, delay: 4 });
+      gsap.to(num, { duration: 0, alpha: 1, delay: 5 });
     }
     function resetGame() {
       // reload the page to restart the game
@@ -207,13 +206,13 @@ const Canvas = () => {
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
     xline.alpha = 0;
-    gsap.to(xline, { duration: 0, alpha: 1, delay: 4 });
+    gsap.to(xline, { duration: 0, alpha: 1, delay: 5 });
 
     const yline = new PIXI.Graphics();
     app.stage.addChild(yline);
     yline.lineStyle(1, 0xffffff).moveTo(25, 370).lineTo(25, 0);
     yline.alpha = 0;
-    gsap.to(yline, { duration: 0, alpha: 1, delay: 4 });
+    gsap.to(yline, { duration: 0, alpha: 1, delay: 5 });
 
     var graphics = new PIXI.Graphics().lineStyle(2, 0xffffff, 1);
 
@@ -230,7 +229,7 @@ const Canvas = () => {
       app.stage.addChild(ui);
     }
     ui.alpha = 0;
-    gsap.to(ui, { duration: 0, alpha: 1, delay: 4 });
+    gsap.to(ui, { duration: 0, alpha: 1, delay: 5 });
 
     var uiy = new PIXI.Graphics();
 
@@ -243,7 +242,7 @@ const Canvas = () => {
       app.stage.addChild(uiy);
     }
     uiy.alpha = 0;
-    gsap.to(uiy, { duration: 0, alpha: 1, delay: 4 });
+    gsap.to(uiy, { duration: 0, alpha: 1, delay: 5 });
     return () => {
       app.destroy(true);
     };

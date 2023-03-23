@@ -24,14 +24,15 @@ canvas{
         width: 380px;
     }
 }
-@media (min-width: 1440px) and (max-width: 1920px) {
+ @media (min-width: 1600px) and (max-width: 1920px) {
     canvas{
     width: 1250px;
     height: 550px;
 }
 }
+/*
 @media (min-width: 1440px) and (max-width: 1800px) {
     canvas{
         margin: 0 auto;
     }
-  }
+  } */

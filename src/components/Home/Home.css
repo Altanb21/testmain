@@ -10,7 +10,6 @@
 .inf {
   width: 1300px;
   max-width: 100%;
-
   display: block;
   margin: 2em auto;
   left: 0;
@@ -35,5 +34,13 @@ h3 {
   .inf,
   .aviator {
     max-width: 90%;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1920px) {
+  .poster {
+    width: 1700px;
+  }
+  .inf {
+    width: 1700px;
   }
 }

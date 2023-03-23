@@ -15,21 +15,20 @@
     visibility: hidden;
   }
 }
-@media (min-width: 1440px) and (max-width: 1720px) {
-  .table{
+@media (min-width: 1600px) and (max-width: 1720px) {
+  .table {
     width: 550px;
     max-height: 870px;
   }
-}@media screen and (max-width: 1800px) {
-  .table{
+}
+/* @media screen and (max-width: 1800px) {
+  .table {
     visibility: hidden;
   }
-}
-@media screen and (max-width: 1920px) {
-  .table{
+} */
+@media  (min-width: 1600px) and (max-width: 1920px) {
+  .table {
     min-height: 870px;
-    width: 500px;
-
+    width: 550px;
   }
 }
-

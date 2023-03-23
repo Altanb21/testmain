@@ -57,7 +57,7 @@ const Controls = (props) => {
       const intervalId = setInterval(() => {
         setNumber((prevNumber) => {
           const newNumber = prevNumber + 0.01;
-          if (newNumber >= main) {
+          if (newNumber >= point) {
             clearInterval(intervalId);
             return point;
           }
@@ -66,7 +66,7 @@ const Controls = (props) => {
       }, 33.3);
 
       return () => clearInterval(intervalId);
-    }, 5000);
+    }, 6000);
 
     return () => clearTimeout(timerId);
   }, []);
@@ -76,7 +76,7 @@ const Controls = (props) => {
       const intervalId2 = setInterval(() => {
         setNumber2((prevNumber2) => {
           const newNumber2 = prevNumber2 + 0.01;
-          if (newNumber2 >= main) {
+          if (newNumber2 >= point) {
             clearInterval(intervalId2);
             return point;
           }
@@ -85,7 +85,7 @@ const Controls = (props) => {
       }, 33.3);
 
       return () => clearInterval(intervalId2);
-    }, 5000);
+    }, 6000);
 
     return () => clearTimeout(timerId2);
   }, []);
@@ -196,7 +196,7 @@ const Controls = (props) => {
       if (querySnapshot.docs.length > 0) {
         const existingData = querySnapshot.docs[0];
         await updateDoc(existingData.ref, {
-          cash,
+          // cash,
           cash2,
           amount2,
           multiplier2,
