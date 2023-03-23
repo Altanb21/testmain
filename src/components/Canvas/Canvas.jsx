@@ -170,7 +170,7 @@ const Canvas = () => {
 
             setTimeout(() => {
               resetGame();
-            }, 10000);
+            }, 5000);
           }, 2500);
         }
         curve.clear();
@@ -285,5 +285,5 @@ function getCrashPoint() {
 }
 const point = getCrashPoint();
 console.log(point);
-const main = point + 0.01;
+const main = point + 0.02;
 export { point, main };

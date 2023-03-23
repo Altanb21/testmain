@@ -456,6 +456,9 @@ input:checked + .slider-button .off {
     visibility: hidden;
   }
   .cont{
+    position: absolute;
+    right: 0;
+    left: 0;
     margin: 40.5em auto;
   }
 }
