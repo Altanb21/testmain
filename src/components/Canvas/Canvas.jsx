@@ -81,13 +81,13 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText, rect,blackRect], {
+    gsap.to([loaderContainer, loadingText, rect, blackRect], {
       duration: 0,
       delay: 5.5,
       alpha: 0,
     });
 
-        async function animatePlane() {
+    async function animatePlane() {
       let image = await Assets.load(gifImage);
       console.log("Loaded image:", image); // add this line to check if the image is loaded
       app.stage.addChild(image);
@@ -142,6 +142,19 @@ const Canvas = () => {
           image.y += 1;
           angle += frequency;
           gsap.to([curve, area], { alpha: 0, delay: 0 });
+          // setTimeout(() => {
+          //   let txt2 = new PIXI.Text("PLANE FLEW AWAY", {
+          //     fontFamily: "Arial",
+          //     fontSize: 30,
+          //     fill: 0x00ced1,
+          //     align: "center",
+          //   });
+
+          //   txt2.anchor.set(0.5);
+          //   app.stage.addChild(txt2);
+          //   txt2.position.set(app.screen.width / 2, app.screen.height / 2);
+          //   //resetGame();
+          // }, 2500);
           setTimeout(() => {
             let txt2 = new PIXI.Text("PLANE FLEW AWAY", {
               fontFamily: "Arial",
@@ -153,7 +166,11 @@ const Canvas = () => {
             txt2.anchor.set(0.5);
             app.stage.addChild(txt2);
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
-            //resetGame();
+            gsap.to(txt2, { alpha: 0, delay: 1 });
+
+            setTimeout(() => {
+              resetGame();
+            }, 10000);
           }, 2500);
         }
         curve.clear();
@@ -197,11 +214,9 @@ const Canvas = () => {
       // reload the page to restart the game
       window.location.reload();
     }
-    
 
     animatePlane();
 
-  
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
@@ -271,4 +286,4 @@ function getCrashPoint() {
 const point = getCrashPoint();
 console.log(point);
 const main = point + 0.01;
-export { point,main };
+export { point, main };
