@@ -196,7 +196,7 @@ const Controls = (props) => {
       if (querySnapshot.docs.length > 0) {
         const existingData = querySnapshot.docs[0];
         await updateDoc(existingData.ref, {
-          // cash,
+          cash,
           cash2,
           amount2,
           multiplier2,
