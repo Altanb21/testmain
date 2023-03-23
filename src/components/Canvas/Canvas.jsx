@@ -132,7 +132,7 @@ const Canvas = () => {
         image.y = 195 + Math.cos(angle) * amplitude;
         angle += frequency;
 
-        if (value <= main && image.x >= 700) {
+        if (value <= point && image.x >= 700) {
           image.x -= xVel;
           image.y = 195 + Math.cos(angle) * amplitude;
           uiy.y += 0.7;
