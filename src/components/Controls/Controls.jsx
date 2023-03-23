@@ -3,7 +3,7 @@ import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { point, main } from "../Canvas/Canvas";
-import { faPlusCircle, faMinusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faMinusCircle, faPlusSquare,faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
 
@@ -123,12 +123,12 @@ const Controls = (props) => {
     }
   };
   let result;
-  let prize
+  let prize;
   if (multiplier === point || multiplier2 === point) {
-     prize = amount * multiplier || amount2 * multiplier2  
+    prize = amount * multiplier || amount2 * multiplier2;
     result = "won";
   } else {
-     prize = amount * 0
+    prize = amount * 0;
     result = "lost";
   }
   const handleValueButton = (val) => {
@@ -179,7 +179,7 @@ const Controls = (props) => {
       cash2,
       point,
       result,
-      prize
+      prize,
     };
     console.log(data);
 
@@ -233,6 +233,11 @@ const Controls = (props) => {
                 </div>
               </label>
             </div>
+            <FontAwesomeIcon
+      className={show ? "minus" : "plus"}
+      onClick={() => setShow(!show)}
+      icon={show ? faMinusSquare : faPlusSquare}
+    />
           </div>
           <div className="divide">
             <form onClick={handleSubmit}>
@@ -253,10 +258,11 @@ const Controls = (props) => {
             <div className="buttons">
               <div className="wrapper">
                 <FontAwesomeIcon
-                  onClick={handleIncrement}
+                  onClick={handleDecrement}
                   className="inc"
-                  icon={faPlusCircle}
+                  icon={faMinusCircle}
                 />
+
                 <div className="multiplier">
                   <input
                     className="number"
@@ -266,9 +272,9 @@ const Controls = (props) => {
                   />
                 </div>
                 <FontAwesomeIcon
-                  onClick={handleDecrement}
+                  onClick={handleIncrement}
                   className="inc"
-                  icon={faMinusCircle}
+                  icon={faPlusCircle}
                 />
               </div>
 
@@ -308,6 +314,7 @@ const Controls = (props) => {
             </div>
           </div>
         </div>
+        {show && (
         <div className="control">
           <div className="toggle-container">
             <div className="slider-container">
@@ -344,10 +351,11 @@ const Controls = (props) => {
             <div className="buttons">
               <div className="wrapper">
                 <FontAwesomeIcon
-                  onClick={handleIncrement2}
+                  onClick={handleDecrement2}
                   className="inc"
-                  icon={faPlusCircle}
+                  icon={faMinusCircle}
                 />
+
                 <div className="multiplier">
                   <input
                     className="number"
@@ -357,9 +365,9 @@ const Controls = (props) => {
                   />
                 </div>
                 <FontAwesomeIcon
-                  onClick={handleDecrement2}
+                  onClick={handleIncrement2}
                   className="inc"
-                  icon={faMinusCircle}
+                  icon={faPlusCircle}
                 />
               </div>
               <div className="money">
@@ -398,6 +406,7 @@ const Controls = (props) => {
             </div>
           </div>
         </div>
+        )}
       </div>
     </>
   );

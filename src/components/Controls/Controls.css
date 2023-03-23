@@ -28,11 +28,17 @@
   width: 410px;
   height: 40px;
   display: flex; /* Set the display property to flex */
-  justify-content: center; /* Center horizontally */
+  justify-content: space-between; /* Center horizontally */
   align-items: center;
 }
+.plus,.minus{
+  margin-right: 10px;
+  font-size: 25px; /* adds some space between the icon and the edge of container */
+  cursor: pointer;
+}
+
 .slider-container {
-  margin-top: 0px;
+  margin: 0px auto;
   display: flex;
   align-items: center;
 }
