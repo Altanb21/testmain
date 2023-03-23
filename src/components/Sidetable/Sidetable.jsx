@@ -21,8 +21,9 @@ const Sidetable = () => {
                   onChange={handleToggleChange}
                 />
                 <div className="slid-button">
-                  <div className="slider-button-label onn">All Bet</div>
-                  <div className="slider-button-label offf">My Bet</div>
+                  <div className="slid-button-label onn">All Bet</div>
+                  <div className="slid-button-label offf">My Bet</div>
+                  <div className="slid-button-label med">Tops</div>
                 </div>
               </label>
             </div>
