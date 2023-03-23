@@ -321,6 +321,12 @@ input:checked + .slider-button .off {
     height: 6em;
     border: none;
   }
+  .Toastify__toast-theme--light {
+    background: #000!important;
+}
+.toast{
+  background: #000!important;
+}
   /* .toast {
     --toastify-toast-width: 220px;
     --toastify-toast-min-height: 20px;
