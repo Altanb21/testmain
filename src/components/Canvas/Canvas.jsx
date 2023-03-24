@@ -17,7 +17,7 @@ const Canvas = () => {
     });
     appRef.current = app;
     document.body.appendChild(app.view);
-    app.ticker.maxFPS = 120;
+    app.ticker.maxFPS = 200;
 
     const blackRect = new PIXI.Graphics();
     blackRect.beginFill(0x00000);
