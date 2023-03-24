@@ -6,7 +6,8 @@ import { auth } from "../../firebase";
 import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-const Sidetable = (pros) => {
+const Sidetable = (props) => {
+  const { counts } = props;
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
@@ -57,7 +58,7 @@ const Sidetable = (pros) => {
       <div className="totals">
         <div className="betss">
           <p>
-            Total Bets : <span>0</span>
+            Total Bets : <span className="count">{counts}</span>
           </p>
         </div>
         <div className="prev">

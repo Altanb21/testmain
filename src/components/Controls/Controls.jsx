@@ -6,6 +6,7 @@ import { point } from "../Canvas/Canvas";
 import { faPlusCircle, faMinusCircle, faPlusSquare,faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
+import Sidetable from "../Sidetable/Sidetable"
 
 import {
   collection,
@@ -37,6 +38,7 @@ const Controls = (props) => {
   const [username, setUsername] = useState("");
   const [multiplier, setMultiplier] = useState(1.0);
   const [multiplier2, setMultiplier2] = useState(1.0);
+  
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -102,6 +104,8 @@ const Controls = (props) => {
       toast("Cashout succesful");
     }
   };
+
+  const counts  = count1 + count2
 
   const handleIncrement = () => {
     setAmount((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
@@ -408,6 +412,7 @@ const Controls = (props) => {
         </div>
         )}
       </div>
+      <Sidetable counts={counts} />
     </>
   );
 };
