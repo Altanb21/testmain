@@ -77,7 +77,6 @@ const Canvas = () => {
     loader.drawRect(-40, -40, 80, 80);
     loaderContainer.addChild(loader);
 
-    // Animate the loader
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
