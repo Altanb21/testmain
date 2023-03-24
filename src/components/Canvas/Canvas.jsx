@@ -156,7 +156,7 @@ const Canvas = () => {
             gsap.to(txt2, { alpha: 0, delay: 1 });
 
             setTimeout(() => {
-              //resetGame();
+              resetGame();
             }, 5000);
           }, 2500);
         }
@@ -199,7 +199,7 @@ const Canvas = () => {
     }
     function resetGame() {
       // reload the page to restart the game
-      window.location.reload();
+     // window.location.reload();
     }
 
     animatePlane();
