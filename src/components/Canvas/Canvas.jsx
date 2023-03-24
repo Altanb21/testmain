@@ -17,7 +17,6 @@ const Canvas = () => {
     });
     appRef.current = app;
     document.body.appendChild(app.view);
-    app.ticker.maxFPS = 100;
 
     const blackRect = new PIXI.Graphics();
     blackRect.beginFill(0x00000);
@@ -189,7 +188,7 @@ const Canvas = () => {
           if (value >= point) {
             clearInterval(intervalId); // stop the interval when time reaches 1.09
           }
-        }, 33.5);
+        }, 33.3);
         app.ticker.add(() => {
           update();
         });
