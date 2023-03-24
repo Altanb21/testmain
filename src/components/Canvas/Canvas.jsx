@@ -169,7 +169,7 @@ const Canvas = () => {
             gsap.to(txt2, { alpha: 0, delay: 1 });
 
             setTimeout(() => {
-              //resetGame();
+              resetGame();
             }, 5000);
           }, 2500);
         }
