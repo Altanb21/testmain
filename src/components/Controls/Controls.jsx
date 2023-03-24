@@ -412,7 +412,7 @@ const Controls = (props) => {
         </div>
         )}
       </div>
-      {/* <Sidetable counts={counts} /> */}
+      <Sidetable counts={counts} />
     </>
   );
 };
