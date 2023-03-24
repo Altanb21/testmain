@@ -154,9 +154,9 @@ const Canvas = () => {
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
             gsap.to(txt2, { alpha: 0, delay: 1 });
 
-            setTimeout(() => {
-              resetGame();
-            }, 5000);
+            // setTimeout(() => {
+            //   resetGame();
+            // }, 5000);
           }, 2500);
         }
         curve.clear();
