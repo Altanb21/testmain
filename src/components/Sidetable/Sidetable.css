@@ -14,113 +14,11 @@
   height: 50px;
   border-radius: 5px;
 }
-.custom-slider-container {
-  margin: 5px auto;
+.head{
   display: flex;
   align-items: center;
-}
-
-.slid {
-  margin: 0 auto;
-  position: relative;
-  display: inline-block;
-  width: 350px;
-  height: 30px;
-  border: none;
-}
-
-.slid-label {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #282621;
-}
-
-.le {
-  left: 10px;
-}
-
-.onn {
-  position: absolute;
-  font-size: 13px;
-  top: 50%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-weight: bold;
-  transition: opacity 0.2s;
-}
-
-.offf {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 13px;
-  font-weight: bold;
-  color: #fff;
-  transition: opacity 0.4s;
-}
-.med {
-  position: absolute;
-  top: 50%;
-  left:80%;
-  transform: translate(-50%, -50%);
-  font-size: 13px;
-  font-weight: bold;
-  color: #fff;
-  transition: opacity 0.4s;
-}
-
-.slid input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slid-button {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #383838;
-  transition: 0.4s;
-  border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.slid-button:before {
-  position: absolute;
-  content: "";
-  height: 25px;
-  width: 118px;
-  left: 3px;
-  bottom: 2.5px;
-  background-color: #282828;
-  transition: 0.4s;
-  border-radius: 15px;
-}
-
-input:checked + .slid-button {
-  background-color: #383838;
-}
-
-input:checked + .slid-button:before {
-  transform: translateX(115px);
-  background-color: #282621;
-}
-
-
-input:checked + .slid-button .on {
-  opacity: 1;
-}
-
-input:checked + .slider-button .off {
-  opacity: 1;
+  justify-content: center;
+  padding-top: 10px;
 }
 @media screen and (max-width: 1360px) {
   .table {

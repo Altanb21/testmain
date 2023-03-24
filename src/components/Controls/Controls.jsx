@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { point, main } from "../Canvas/Canvas";
+import { point } from "../Canvas/Canvas";
 import { faPlusCircle, faMinusCircle, faPlusSquare,faMinusSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
