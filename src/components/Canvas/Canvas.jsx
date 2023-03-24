@@ -142,19 +142,6 @@ const Canvas = () => {
           image.y += 1;
           angle += frequency;
           gsap.to([curve, area], { alpha: 0, delay: 0 });
-          // setTimeout(() => {
-          //   let txt2 = new PIXI.Text("PLANE FLEW AWAY", {
-          //     fontFamily: "Arial",
-          //     fontSize: 30,
-          //     fill: 0x00ced1,
-          //     align: "center",
-          //   });
-
-          //   txt2.anchor.set(0.5);
-          //   app.stage.addChild(txt2);
-          //   txt2.position.set(app.screen.width / 2, app.screen.height / 2);
-          //   //resetGame();
-          // }, 2500);
           setTimeout(() => {
             let txt2 = new PIXI.Text("PLANE FLEW AWAY", {
               fontFamily: "Arial",
@@ -169,7 +156,7 @@ const Canvas = () => {
             gsap.to(txt2, { alpha: 0, delay: 1 });
 
             setTimeout(() => {
-              resetGame();
+              //resetGame();
             }, 5000);
           }, 2500);
         }
