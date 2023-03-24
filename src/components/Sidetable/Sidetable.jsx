@@ -75,13 +75,15 @@ const Sidetable = (pros) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-              {/* <td>{row.id}</td>
-              <td>{row.name}</td>
-              <td>{row.email}</td> */}
-            </tr>
-        
-        </tbody>
+    {data.map((row, index) => (
+      <tr key={index}>
+        <td>{row.username}</td>
+        <td>{row.amount}</td>
+        <td>{row.multiplier}</td>
+        <td>{row.cash}</td>
+      </tr>
+    ))}
+  </tbody>
       </table>
     </div>
   );
