@@ -75,7 +75,7 @@ const Sidetable = (pros) => {
           </tr>
         </thead>
         <tbody>
-    {data.map((row, index) => (
+    {data.slice().reverse().map((row, index) => (
       <tr key={index}>
         <td>{row.username}</td>
         <td>{row.amount}</td>
