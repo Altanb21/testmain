@@ -463,17 +463,14 @@ input:checked + .slider-button .off {
   }
 
 }
-@media (min-width: 1600px) and (max-width: 1800px) {
-  .table{
-    visibility: hidden;
-  }
+@media (min-width: 1650px) and (max-width: 1850px) {
   .cont{
-    position: absolute;
-    right: 0;
-    left: 0;
+        left: 0;
+        right: 0;
     margin: 40.5em auto;
   }
 }
+
 
 
 
