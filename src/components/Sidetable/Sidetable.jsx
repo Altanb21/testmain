@@ -7,7 +7,7 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 const Sidetable = (props) => {
-  const { counts } = props;
+  // const { counts } = props;
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
@@ -58,7 +58,7 @@ const Sidetable = (props) => {
       <div className="totals">
         <div className="betss">
           <p>
-            Total Bets : <span className="count">{counts}</span>
+            Total Bets : <span className="count">0</span>
           </p>
         </div>
         <div className="prev">
