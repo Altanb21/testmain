@@ -52,6 +52,29 @@
   font-size: 12px;
   color: gray!important;
 }
+.tab {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+
+.tab td {
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab th {
+  /* background-color: #f2f2f2; */
+  color: #333;
+  border-bottom: 1px solid gray;
+  padding: 5px;
+}
+
+.tab tr:hover {
+  background-color: #181818;
+}
 
 @media screen and (max-width: 1360px) {
   .table {
