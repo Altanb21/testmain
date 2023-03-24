@@ -36,7 +36,7 @@ h3 {
     max-width: 90%;
   }
 }
-@media (min-width: 1600px) and (max-width: 1920px) {
+@media (min-width: 1650px) and (max-width: 1920px) {
   .poster {
     width: 1700px;
   }
