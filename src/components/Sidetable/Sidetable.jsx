@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Sidetable.css";
+import { faClock, faPlusCircle, } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 const Sidetable = () => {
   const [toggle, setToggle] = useState(false);
@@ -27,6 +29,15 @@ const Sidetable = () => {
       </ul>
       
     </div>
+      </div>
+      <div className="totals">
+        <div className="betss"><p>Total Bets : <span>0</span></p></div>
+      <div className="prev">
+      <FontAwesomeIcon className="clock"
+                  icon={faClock}
+                />
+        <p className="hand">Previous Hand</p>
+      </div>
       </div>
     </div>
   );
