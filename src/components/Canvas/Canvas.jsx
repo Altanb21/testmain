@@ -198,7 +198,7 @@ const Canvas = () => {
     }
     function resetGame() {
       // reload the page to restart the game
-     // window.location.reload();
+      window.location.reload();
     }
 
     animatePlane();
