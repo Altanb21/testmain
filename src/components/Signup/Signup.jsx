@@ -50,7 +50,7 @@ const Signup = () => {
             <div className="field">
               <label>Email<span className="required"> *</span></label>
               <input
-              class="form-control"
+              className="form-control"
                 type="text"
                 name="email"
                 placeholder="Email"
