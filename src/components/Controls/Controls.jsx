@@ -3,10 +3,15 @@ import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { point } from "../Canvas/Canvas";
-import { faPlusCircle, faMinusCircle, faPlusSquare,faMinusSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlusCircle,
+  faMinusCircle,
+  faPlusSquare,
+  faMinusSquare,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
-import Sidetable from "../Sidetable/Sidetable"
+import Sidetable from "../Sidetable/Sidetable";
 
 import {
   collection,
@@ -38,7 +43,6 @@ const Controls = (props) => {
   const [username, setUsername] = useState("");
   const [multiplier, setMultiplier] = useState(1.0);
   const [multiplier2, setMultiplier2] = useState(1.0);
-  
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -105,7 +109,7 @@ const Controls = (props) => {
     }
   };
 
-  const counts  = count1 + count2
+  const counts = count1 + count2;
 
   const handleIncrement = () => {
     setAmount((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
@@ -238,15 +242,16 @@ const Controls = (props) => {
               </label>
             </div>
             <FontAwesomeIcon
-      className={show ? "minus" : "plus"}
-      onClick={() => setShow(!show)}
-      icon={show ? faMinusSquare : faPlusSquare}
-    />
+              className={show ? "minus" : "plus"}
+              onClick={() => setShow(!show)}
+              icon={show ? faMinusSquare : faPlusSquare}
+            />
           </div>
           <div className="divide">
             <form onClick={handleSubmit}>
               <div className="betx">
                 <button
+                  style={{ borderRadius: "15px" }}
                   className={`flip-button ${flipped ? "flipped" : ""}`}
                   onClick={handleClick}
                 >
@@ -319,97 +324,101 @@ const Controls = (props) => {
           </div>
         </div>
         {show && (
-        <div className="control">
-          <div className="toggle-container">
-            <div className="slider-container">
-              <label className="slider">
-                <div className="slider-label left">Off</div>
-                <input
-                  type="checkbox"
-                  onChange={handleToggleChange}
-                  checked={toggle}
-                />
-                <div className="slider-button" style={{ borderRadius: "15px" }}>
-                  <div className="slider-button-label on">Bet</div>
-                  <div className="slider-button-label off">Auto</div>
-                </div>
-              </label>
-            </div>
-          </div>
-          <div className="divide">
-            <form onClick={handleSubmit}>
-              <div className="betx">
-                <button
-                  className={`flip-button ${fliped ? "fliped" : ""}`}
-                  onClick={clicked}
-                >
-                  <div className="flip-front">Bet</div>
-                  <div className="flip-back">
-                    Cashout <br />
-                    {cash2 + "x"}
-                  </div>
-                </button>
-              </div>
-              <ToastContainer className="toast" />
-            </form>
-            <div className="buttons">
-              <div className="wrapper">
-                <FontAwesomeIcon
-                  onClick={handleDecrement2}
-                  className="inc"
-                  icon={faMinusCircle}
-                />
-
-                <div className="multiplier">
+          <div className="control">
+            <div className="toggle-container">
+              <div className="slider-container">
+                <label className="slider">
+                  <div className="slider-label left">Off</div>
                   <input
-                    className="number"
-                    type="text"
-                    value={amount2}
-                    onChange={handleChange2}
+                    type="checkbox"
+                    onChange={handleToggleChange}
+                    checked={toggle}
+                  />
+                  <div
+                    className="slider-button"
+                    style={{ borderRadius: "15px" }}
+                  >
+                    <div className="slider-button-label on">Bet</div>
+                    <div className="slider-button-label off">Auto</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <div className="divide">
+              <form onClick={handleSubmit}>
+                <div className="betx">
+                  <button
+                    style={{ borderRadius: "15px" }}
+                    className={`flip-button ${fliped ? "fliped" : ""}`}
+                    onClick={clicked}
+                  >
+                    <div className="flip-front">Bet</div>
+                    <div className="flip-back">
+                      Cashout <br />
+                      {cash2 + "x"}
+                    </div>
+                  </button>
+                </div>
+                <ToastContainer className="toast" />
+              </form>
+              <div className="buttons">
+                <div className="wrapper">
+                  <FontAwesomeIcon
+                    onClick={handleDecrement2}
+                    className="inc"
+                    icon={faMinusCircle}
+                  />
+
+                  <div className="multiplier">
+                    <input
+                      className="number"
+                      type="text"
+                      value={amount2}
+                      onChange={handleChange2}
+                    />
+                  </div>
+                  <FontAwesomeIcon
+                    onClick={handleIncrement2}
+                    className="inc"
+                    icon={faPlusCircle}
                   />
                 </div>
-                <FontAwesomeIcon
-                  onClick={handleIncrement2}
-                  className="inc"
-                  icon={faPlusCircle}
-                />
-              </div>
-              <div className="money">
-                <div className="button-container">
-                  <div className="button-row">
-                    <button
-                      onClick={() => handleValueButton2(1)}
-                      className="dollar"
-                    >
-                      1x
-                    </button>
-                    <button
-                      onClick={() => handleValueButton2(2)}
-                      className="dollar"
-                    >
-                      2x
-                    </button>
-                  </div>
+                <div className="money">
+                  <div className="button-container">
+                    <div className="button-row">
+                      <button
+                        onClick={() => handleValueButton2(1)}
+                        className="dollar"
+                      >
+                        1x
+                      </button>
+                      <button
+                        onClick={() => handleValueButton2(2)}
+                        className="dollar"
+                      >
+                        2x
+                      </button>
+                    </div>
 
-                  <div className="button-row">
-                    <button
-                      onClick={() => handleValueButton2(5)}
-                      className="dollar"
-                    >
-                      5x
-                    </button>
-                    <button
-                      onClick={() => handleValueButton2(10)}
-                      className="dollar"
-                    >
-                      10x
-                    </button>
+                    <div className="button-row">
+                      <button
+                        onClick={() => handleValueButton2(5)}
+                        className="dollar"
+                      >
+                        5x
+                      </button>
+                      <button
+                        onClick={() => handleValueButton2(10)}
+                        className="dollar"
+                      >
+                        10x
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         )}
       </div>
       <Sidetable counts={counts} />
