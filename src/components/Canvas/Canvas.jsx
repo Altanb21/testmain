@@ -203,7 +203,7 @@ const Canvas = () => {
         app.ticker.add(() => {
           update();
         });
-      }, 6000);
+      }, 5800);
     }
     function resetGame() {
       // reload the page to restart the game
