@@ -238,10 +238,12 @@ input:checked + .slider-button .off {
 
 .flipped .flip-front {
   transform: translateY(100%);
+  border-radius: 15px;
 }
 
 .flipped .flip-back {
   transform: translateY(0%);
+  border-radius: 15px;
 }
 
 .fliped .flip-front {
