@@ -141,15 +141,6 @@ animationInterval = app.ticker.add((delta) => {
       area.endFill();
       app.stage.addChild(area);
 
-      let num = new PIXI.Text("1.00x", {
-        fontFamily: "Arial",
-        fontSize: 50,
-        fill: 0x00ced1,
-      });
-      num.anchor.set(0.5);
-      num.position.set(110, 50);
-      app.stage.addChild(num);
-      let value = 1;
 
       let xVel = 1.9;
       let angle = 0;
@@ -211,20 +202,13 @@ animationInterval = app.ticker.add((delta) => {
       }
 
       setTimeout(() => {
-        let intervalId = setInterval(() => {
-          value += 0.01; // increment the timer by 0.01
-          num.text = value.toFixed(2) + "x"; // update the text with the new timer value
 
-          if (value >= point) {
-            clearInterval(intervalId); // stop the interval when time reaches 1.09
-          }
-        }, 33.3);
         app.ticker.add(() => {
           update();
         });
       }, 6000);
-      num.alpha = 0;
-      gsap.to(num, { duration: 0, alpha: 1, delay: 5 });
+
+      
     }
     function resetGame() {
       // reload the page to restart the game
@@ -232,6 +216,28 @@ animationInterval = app.ticker.add((delta) => {
     }
 
     animatePlane();
+
+    let num = new PIXI.Text("1.00x", {
+      fontFamily: "Arial",
+      fontSize: 50,
+      fill: 0x00ced1,
+    });
+    num.anchor.set(0.5);
+    num.position.set(110, 50);
+    app.stage.addChild(num);
+    let value = 1;
+    setTimeout(() => {
+      let intervalId = setInterval(() => {
+        value += 0.01; // increment the timer by 0.01
+        num.text = value.toFixed(2) + "x"; // update the text with the new timer value
+
+        if (value >= point) {
+          clearInterval(intervalId); // stop the interval when time reaches 1.09
+        }
+      }, 33.3);
+    }, 6000);
+    num.alpha = 0;
+    gsap.to(num, { duration: 0, alpha: 1, delay: 5 });
 
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
