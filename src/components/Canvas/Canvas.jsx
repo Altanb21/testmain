@@ -19,7 +19,6 @@ const Canvas = () => {
     document.body.appendChild(app.view);
     app.ticker.maxFPS = 60;
 
-
     const blackRect = new PIXI.Graphics();
     blackRect.beginFill(0x00000);
     blackRect.drawRoundedRect(0, 0, 250, 6, 3);
@@ -135,6 +134,8 @@ const Canvas = () => {
       num.position.set(110, 50);
       app.stage.addChild(num);
       let value = 1;
+      let lastTime = 0;
+      let deltaTime = 0;
 
       let curve = new PIXI.Graphics();
       curve.lineStyle(2, 0x0e0e0e);
@@ -210,16 +211,34 @@ const Canvas = () => {
         area.lineTo(25, 370);
         area.endFill();
       }
+      
+function time(delta) {
+  deltaTime += delta;
+
+  if (deltaTime >= 33.3) {
+    deltaTime -= 33.3;
+
+    value += 0.01;
+    num.text = value.toFixed(2) + "x";
+
+    if (value >= point) {
+      return;
+    }
+  }
+  requestAnimationFrame(time);
+
+}
 
       setTimeout(() => {
-        let intervalId = setInterval(() => {
-          value += 0.01; // increment the timer by 0.01
-          num.text = value.toFixed(2) + "x"; // update the text with the new timer value
+        requestAnimationFrame(time);
+        // let intervalId = setInterval(() => {
+        //   value += 0.01; // increment the timer by 0.01
+        //   num.text = value.toFixed(2) + "x"; // update the text with the new timer value
 
-          if (value >= point) {
-            clearInterval(intervalId); // stop the interval when time reaches 1.09
-          }
-        }, 33.3);
+        //   if (value >= point) {
+        //     clearInterval(intervalId); // stop the interval when time reaches 1.09
+        //   }
+        // }, 33.3);
         app.ticker.add(() => {
           update();
         });
