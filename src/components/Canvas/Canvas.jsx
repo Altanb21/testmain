@@ -161,8 +161,10 @@ const Canvas = () => {
         image.y = 195 + Math.cos(angle) * amplitude;
         angle += frequency;
 
-        if (value <= point && image.x >= 700) {
-          image.x -= xVel;
+        if (value < point) {
+          if (image.x > 700) { // If plane is already behind 700 units of x, do not update its x-coordinate
+            image.x -= xVel;
+          }
           image.y = 195 + Math.cos(angle) * amplitude;
           uiy.y += 0.7;
           ui.x -= 0.7;
@@ -178,12 +180,12 @@ const Canvas = () => {
               fill: 0x00ced1,
               align: "center",
             });
-
+        
             txt2.anchor.set(0.5);
             app.stage.addChild(txt2);
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
             gsap.to(txt2, { alpha: 0, delay: 1 });
-
+        
             // setTimeout(() => {
             //   resetGame();
             // }, 5000);
