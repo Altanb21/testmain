@@ -57,35 +57,34 @@ const Canvas = () => {
     //   }
     // }, 9);
     const rect = new PIXI.Graphics();
-rect.beginFill(0x00ced1);
-rect.drawRoundedRect(0, 0, 250, 6, 3);
-rect.endFill();
-rect.position.set(
-  app.screen.width / 2 - rect.width / 2,
-  app.screen.height / 2 - rect.height / 2
-);
-rect.scale.x = 0;
-app.stage.addChild(rect);
+    rect.beginFill(0x00ced1);
+    rect.drawRoundedRect(0, 0, 250, 6, 3);
+    rect.endFill();
+    rect.position.set(
+      app.screen.width / 2 - rect.width / 2,
+      app.screen.height / 2 - rect.height / 2
+    );
+    rect.scale.x = 0;
+    app.stage.addChild(rect);
 
-const dur = 5500;
-const endScale = 1;
-const fps = 60;
-const frames = (dur / 1000) * fps;
-let currentFrame = 0;
-let currentScale = 0;
+    const dur = 5500;
+    const endScale = 1;
+    const fps = 60;
+    const frames = (dur / 1000) * fps;
+    let currentFrame = 0;
+    let currentScale = 0;
 
-let animationInterval;
+    let animationInterval;
 
-animationInterval = app.ticker.add((delta) => {
-  currentFrame++;
-  if (currentFrame <= frames) {
-    currentScale = endScale - (endScale / frames) * currentFrame;
-    rect.scale.x = currentScale;
-  } else {
-    app.ticker.remove(animationInterval);
-  }
-});
-
+    animationInterval = app.ticker.add((delta) => {
+      currentFrame++;
+      if (currentFrame <= frames) {
+        currentScale = endScale - (endScale / frames) * currentFrame;
+        rect.scale.x = currentScale;
+      } else {
+        app.ticker.remove(animationInterval);
+      }
+    });
 
     const loadingText = new PIXI.Text("Loading...", {
       fontFamily: "Arial",
@@ -140,7 +139,6 @@ animationInterval = app.ticker.add((delta) => {
       area.lineTo(0, 220);
       area.endFill();
       app.stage.addChild(area);
-
 
       let xVel = 1.9;
       let angle = 0;
@@ -202,13 +200,10 @@ animationInterval = app.ticker.add((delta) => {
       }
 
       setTimeout(() => {
-
         app.ticker.add(() => {
           update();
         });
       }, 6000);
-
-      
     }
     function resetGame() {
       // reload the page to restart the game
