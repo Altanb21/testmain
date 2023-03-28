@@ -2,6 +2,7 @@ canvas{
     display: block;
     margin: 0 1em;
     z-index: 1;
+    border-radius: 15px;
 }
 @media screen and (max-width: 1360px) {
     canvas{
@@ -10,24 +11,28 @@ canvas{
         left: 0;
         right: 0;
         margin: 0 auto;
+        border-radius: 15px;
     }
 }
 
 @media screen and (max-width: 740px) {
     canvas{
         width: 600px;
+        border-radius: 15px;
     }
 }
 
 @media screen and (max-width: 480px) {
     canvas{
         width: 380px;
+        border-radius: 15px;
     }
 }
  @media (min-width: 1600px) and (max-width: 1920px) {
     canvas{
     width: 1250px;
     height: 550px;
+    border-radius: 15px;
 }
 }
 /*
@@ -42,5 +47,6 @@ canvas{
         left: 0;
         right: 0;
         margin: 0 auto;
+        border-radius: 15px;
       }
   }

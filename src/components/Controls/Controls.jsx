@@ -45,7 +45,6 @@ const Controls = (props) => {
   const [multiplier2, setMultiplier2] = useState(1.0);
   const [disabled, setDisabled] = useState(false);
 
-
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -98,7 +97,30 @@ const Controls = (props) => {
     return () => clearTimeout(timerId2);
   }, []);
 
+  const handleClick = () => {
+    if (disabled) {
+      setFlipped(!flipped);
+      toast(flipped ? "Bet placed successfully" : "Cashout successful");
+      return;
+    }
+    if (!isClicked) {
+      setCount1(count1 + 1);
+      setIsClicked(true);
+    }
+    setFlipped(!flipped);
+    if (!flipped) {
+      toast("Bet placed successfully");
+    } else {
+      toast("Cashout successful");
+    }
+  };
+
   const clicked = () => {
+    if (disabled) {
+      setFliped(!fliped);
+      toast(fliped ? "Bet placed successfully" : "Cashout successful");
+      return;
+    }
     if (!isClicked2) {
       setCount2(count2 + 1);
       setIsClicked2(true);
@@ -111,10 +133,17 @@ const Controls = (props) => {
     }
   };
 
-  setTimeout(() => {
-    setDisabled(true);
-  }, 15000);
+  useEffect(() => {
+    let timer;
 
+    if (!flipped) {
+      timer = setTimeout(() => {
+        setDisabled(true);
+      }, 15000);
+    }
+
+    return () => clearTimeout(timer);
+  }, [flipped]);
 
   const counts = count1 + count2;
 
@@ -159,19 +188,6 @@ const Controls = (props) => {
 
   const handleChange2 = (event) => {
     setAmount2(event.target.value);
-  };
-
-  const handleClick = () => {
-    if (!isClicked) {
-      setCount1(count1 + 1);
-      setIsClicked(true);
-    }
-    setFlipped(!flipped);
-    if (!flipped) {
-      toast("Bet placed successfully");
-    } else {
-      toast("Cashout succesful");
-    }
   };
 
   const handleToggleChange = () => {
