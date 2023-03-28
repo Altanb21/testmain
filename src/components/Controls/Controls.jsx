@@ -43,6 +43,8 @@ const Controls = (props) => {
   const [username, setUsername] = useState("");
   const [multiplier, setMultiplier] = useState(1.0);
   const [multiplier2, setMultiplier2] = useState(1.0);
+  const [disabled, setDisabled] = useState(false);
+
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -72,7 +74,7 @@ const Controls = (props) => {
       }, 33.3);
 
       return () => clearInterval(intervalId);
-    }, 6000);
+    }, 15000);
 
     return () => clearTimeout(timerId);
   }, []);
@@ -91,7 +93,7 @@ const Controls = (props) => {
       }, 33.3);
 
       return () => clearInterval(intervalId2);
-    }, 6000);
+    }, 15000);
 
     return () => clearTimeout(timerId2);
   }, []);
@@ -108,6 +110,11 @@ const Controls = (props) => {
       toast("Cashout succesful");
     }
   };
+
+  setTimeout(() => {
+    setDisabled(true);
+  }, 15000);
+
 
   const counts = count1 + count2;
 
@@ -254,6 +261,7 @@ const Controls = (props) => {
                   style={{ borderRadius: "15px" }}
                   className={`flip-button ${flipped ? "flipped" : ""}`}
                   onClick={handleClick}
+                  disabled={disabled}
                 >
                   <div className="flip-front">Bet</div>
                   <div className="flip-back">
@@ -351,6 +359,7 @@ const Controls = (props) => {
                     style={{ borderRadius: "15px" }}
                     className={`flip-button ${fliped ? "fliped" : ""}`}
                     onClick={clicked}
+                    disabled={disabled}
                   >
                     <div className="flip-front">Bet</div>
                     <div className="flip-back">
