@@ -143,7 +143,7 @@ app.stage.addChild(fun);
       let xVel = 1.9;
       let angle = 0;
       let amplitude = 85;
-      let frequency = 0.0099;
+      let frequency = 0.0089;
 
       function update() {
         image.x += xVel;

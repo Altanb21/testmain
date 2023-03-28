@@ -60,6 +60,20 @@
 .count{
   color: #00ced1;
 }
+.betting{
+  height: 30px;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 10px;
+  align-items: center;
+}
+.select{
+  width: 80px;
+  border-radius: 5px;
+  background-color: #181818;
+  color: gray;
+  outline: none;
+}
 
 .tab td {
   padding: 8px 5px;

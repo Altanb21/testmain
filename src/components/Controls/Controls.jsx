@@ -446,7 +446,7 @@ const Controls = (props) => {
           </div>
         )}
       </div>
-      <Sidetable counts={counts} />
+      <Sidetable multiplier={multiplier} setMultiplier={setMultiplier} counts={counts} />
     </>
   );
 };

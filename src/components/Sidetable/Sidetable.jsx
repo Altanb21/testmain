@@ -7,10 +7,13 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 const Sidetable = (props) => {
-  const { counts } = props;
+  const { counts, multiplier, setMultiplier } = props;
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
+  const [val, setVal] = useState(1.0);
+
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -38,6 +41,17 @@ const Sidetable = (props) => {
     setToggle(!toggle);
   };
 
+
+  const handleChange = (event) => {
+    setMultiplier(parseFloat(event.target.value));
+  };
+
+  const options = [];
+  for (let i = 1; i <= 99; i++) {
+    for (let j = 0; j <= 99; j += 1) {
+      options.push(parseFloat(i + "." + j.toString().padStart(2, "0")));
+    }
+  }
   return (
     <div className="table">
       <div className="custom-tog">
@@ -65,6 +79,16 @@ const Sidetable = (props) => {
           <FontAwesomeIcon className="clock" icon={faClock} />
           <p className="hand">Previous Hand</p>
         </div>
+      </div>
+      <div className="betting">
+      <select className="select" value={multiplier} onChange={handleChange}>
+      {options.map((option) => (
+        <option key={option} value={option}>
+          {option.toFixed(2)}
+
+        </option>
+      ))}
+    </select>
       </div>
       <table className="tab">
         <thead>
