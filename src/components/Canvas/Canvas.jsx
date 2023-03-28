@@ -190,7 +190,7 @@ const Canvas = () => {
         
              setTimeout(() => {
                resetGame();
-             }, 15000);
+             }, 3000);
           }, 2500);
         }
         if(image.x >= 400 ){
