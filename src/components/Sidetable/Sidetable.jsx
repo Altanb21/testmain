@@ -56,7 +56,7 @@ const Sidetable = (props) => {
     <div className="table">
       <div className="custom-tog">
         <div className="head">
-          <ul className="nav-menu">
+          <ul className="nav-menu-main">
             <li>
               <Link to="/signup">All Bets</Link>
             </li>
