@@ -18,6 +18,24 @@ const Canvas = () => {
     appRef.current = app;
     document.body.appendChild(app.view);
 
+    const fun = new PIXI.Graphics();
+
+fun.beginFill(0xffa500);
+fun.drawRoundedRect(0, 0, 850, 30, 0);
+fun.endFill();
+const mode = new PIXI.Text('FUN MODE', {
+  fill: 0xffffff,
+  fontSize: 15,
+  fontWeight: 'bold'
+});
+mode.anchor.set(0.5);
+mode.position.set(fun.width / 2, fun.height / 2);
+
+fun.addChild(mode);
+
+app.stage.addChild(fun);
+
+
     const blackRect = new PIXI.Graphics();
     blackRect.beginFill(0x00000);
     blackRect.drawRoundedRect(0, 0, 250, 6, 3);
@@ -27,35 +45,6 @@ const Canvas = () => {
       app.screen.height / 2 - blackRect.height / 2
     );
     app.stage.addChild(blackRect);
-    // const rect = new PIXI.Graphics();
-    // rect.beginFill(0x00ced1);
-    // rect.drawRoundedRect(0, 0, 250, 6, 3);
-    // rect.endFill();
-
-    // rect.position.set(
-    //   app.screen.width / 2 - rect.width / 2,
-    //   app.screen.height / 2 - rect.height / 2
-    // );
-    // rect.scale.x = 0;
-
-    // app.stage.addChild(rect);
-
-    // const dur = 9000;
-    // const endScale = 1;
-    // const fps = 60;
-    // const frames = (dur / 1000) * fps;
-    // let currentFrame = 0;
-    // let currentScale = 0;
-
-    // const animationInterval = setInterval(() => {
-    //   currentFrame++;
-    //   if (currentFrame <= frames) {
-    //     currentScale = endScale - (endScale / frames) * currentFrame;
-    //     rect.scale.x = currentScale;
-    //   } else {
-    //     clearInterval(animationInterval);
-    //   }
-    // }, 9);
     const rect = new PIXI.Graphics();
     rect.beginFill(0x00ced1);
     rect.drawRoundedRect(0, 0, 250, 6, 3);
@@ -130,7 +119,7 @@ const Canvas = () => {
         fill: 0x00ced1,
       });
       num.anchor.set(0.5);
-      num.position.set(110, 50);
+      num.position.set(110, 55);
       app.stage.addChild(num);
       let value = 1;
       let intervalId;
@@ -138,7 +127,7 @@ const Canvas = () => {
       let curve = new PIXI.Graphics();
       curve.lineStyle(2, 0x0e0e0e);
       curve.moveTo(0, 0);
-      curve.bezierCurveTo(10, 0, 11, 10, 13, 11);
+      curve.bezierCurveTo(0, 0, 0, 0, 0, 0);
       app.stage.addChild(curve);
 
       let area = new PIXI.Graphics();
