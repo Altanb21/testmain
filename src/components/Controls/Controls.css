@@ -307,7 +307,6 @@ input:checked + .slider-button .off {
 }
 @media screen and (max-width: 1360px) {
   .cont{
-    position: fixed;
     left: 0;
     right: 0;
     margin: 30em auto;
