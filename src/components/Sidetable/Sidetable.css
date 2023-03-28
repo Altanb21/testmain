@@ -104,7 +104,7 @@
 .tab tr:hover {
   background-color: #181818;
 }
-@media screen and (max-width:480px) {
+@media (min-width:480px) and (max-width:766px) {
   .table{
     max-width: 80%;
   }
@@ -121,7 +121,7 @@
   }
 
 }
-@media screen and (max-width:768px) {
+@media screen and (max-width:767px) {
   .table{
     margin: 42em auto;
     max-width: 90%;
@@ -133,7 +133,7 @@
 @media (min-width:768px) and (max-width: 1360px) {
   .table {
     visibility: visible;
-    margin: 60em auto;
+    margin: 47em auto;
     left: 0;
     right: 0;
     position: absolute;
@@ -143,8 +143,8 @@
   .custom-tog{
     width: 850px;
   }
-
 }
+
 @media (min-width: 1600px) and (max-width: 1720px) {
   .table {
     width: 550px;
