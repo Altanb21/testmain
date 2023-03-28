@@ -67,7 +67,7 @@ const Canvas = () => {
     rect.scale.x = 0;
     app.stage.addChild(rect);
 
-    const dur = 5500;
+    const dur = 15000;
     const endScale = 1;
     const fps = 60;
     const frames = (dur / 1000) * fps;
@@ -111,7 +111,7 @@ const Canvas = () => {
     });
     gsap.to([loaderContainer, loadingText, rect, blackRect], {
       duration: 0,
-      delay: 5.5,
+      delay: 15,
       alpha: 0,
     });
 
@@ -166,11 +166,13 @@ const Canvas = () => {
             image.x -= xVel;
           }
           image.y = 195 + Math.cos(angle) * amplitude;
-          uiy.y += 0.7;
-          ui.x -= 0.7;
+          uiy.y += 0;
+          ui.x -= 0;
         } else if (value >= point) {
           image.x += 2;
           image.y += 1;
+          uiy.y = 0;
+          ui.x = 0;
           angle += frequency;
           gsap.to([curve, area], { alpha: 0, delay: 0 });
           setTimeout(() => {
@@ -190,6 +192,10 @@ const Canvas = () => {
             //   resetGame();
             // }, 5000);
           }, 2500);
+        }
+        if(image.x >= 400 ){
+          uiy.y += 0.7;
+          ui.x -= 0.7;
         }
         curve.clear();
         curve.lineStyle(5, 0x00ced1);
@@ -223,7 +229,7 @@ const Canvas = () => {
               clearInterval(intervalId);
             }
           }, 33.3);
-        }, 6000);
+        }, 15000);
 
         return () => {
           clearTimeout(timerId);
@@ -234,16 +240,14 @@ const Canvas = () => {
       // start the timer
       const cleanup = startTimer();
 
-      // cleanup function to stop the timer
-      // return () => cleanup();
 
       setTimeout(() => {
         app.ticker.add(() => {
           update();
         });
-      }, 6000);
+      }, 15000);
       num.alpha = 0;
-      gsap.to(num, { duration: 0, alpha: 1, delay: 5 });
+      gsap.to(num, { duration: 0, alpha: 1, delay: 14 });
     }
     function resetGame() {
       // reload the page to restart the game
@@ -256,13 +260,13 @@ const Canvas = () => {
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
     xline.alpha = 0;
-    gsap.to(xline, { duration: 0, alpha: 1, delay: 5 });
+    gsap.to(xline, { duration: 0, alpha: 1, delay: 14 });
 
     const yline = new PIXI.Graphics();
     app.stage.addChild(yline);
     yline.lineStyle(1, 0xffffff).moveTo(25, 370).lineTo(25, 0);
     yline.alpha = 0;
-    gsap.to(yline, { duration: 0, alpha: 1, delay: 5 });
+    gsap.to(yline, { duration: 0, alpha: 1, delay: 14 });
 
     var graphics = new PIXI.Graphics().lineStyle(2, 0xffffff, 1);
 
@@ -279,7 +283,7 @@ const Canvas = () => {
       app.stage.addChild(ui);
     }
     ui.alpha = 0;
-    gsap.to(ui, { duration: 0, alpha: 1, delay: 5 });
+    gsap.to(ui, { duration: 0, alpha: 1, delay: 14 });
 
     var uiy = new PIXI.Graphics();
 
@@ -292,7 +296,7 @@ const Canvas = () => {
       app.stage.addChild(uiy);
     }
     uiy.alpha = 0;
-    gsap.to(uiy, { duration: 0, alpha: 1, delay: 5 });
+    gsap.to(uiy, { duration: 0, alpha: 1, delay:14 });
     return () => {
       app.destroy(true);
     };
