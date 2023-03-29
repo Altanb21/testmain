@@ -55,7 +55,7 @@ const Canvas = () => {
     rect.scale.x = 0;
     app.stage.addChild(rect);
 
-    const dur = 14700;
+    const dur = 14600;
     const endScale = 1;
     const fps = 60;
     const frames = (dur / 1000) * fps;
