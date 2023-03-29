@@ -11,7 +11,6 @@ const Sidetable = (props) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
-  const [val, setVal] = useState(1.0);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -39,17 +38,6 @@ const Sidetable = (props) => {
   const handleToggleChange = () => {
     setToggle(!toggle);
   };
-
-  const handleChange = (event) => {
-    setMultiplier(parseFloat(event.target.value));
-  };
-
-  const options = [];
-  for (let i = 1; i <= 99; i++) {
-    for (let j = 0; j <= 99; j += 1) {
-      options.push(parseFloat(i + "." + j.toString().padStart(2, "0")));
-    }
-  }
   return (
     <div className="table">
       <div className="custom-tog">
