@@ -20,21 +20,20 @@ const Canvas = () => {
 
     const fun = new PIXI.Graphics();
 
-fun.beginFill(0xffa500);
-fun.drawRoundedRect(0, 0, 850, 30, 0);
-fun.endFill();
-const mode = new PIXI.Text('FUN MODE', {
-  fill: 0xffffff,
-  fontSize: 15,
-  fontWeight: 'bold'
-});
-mode.anchor.set(0.5);
-mode.position.set(fun.width / 2, fun.height / 2);
+    fun.beginFill(0xffa500);
+    fun.drawRoundedRect(0, 0, 850, 30, 0);
+    fun.endFill();
+    const mode = new PIXI.Text("FUN MODE", {
+      fill: 0xffffff,
+      fontSize: 15,
+      fontWeight: "bold",
+    });
+    mode.anchor.set(0.5);
+    mode.position.set(fun.width / 2, fun.height / 2);
 
-fun.addChild(mode);
+    fun.addChild(mode);
 
-app.stage.addChild(fun);
-
+    app.stage.addChild(fun);
 
     const blackRect = new PIXI.Graphics();
     blackRect.beginFill(0x00000);
@@ -151,7 +150,8 @@ app.stage.addChild(fun);
         angle += frequency;
 
         if (value < point) {
-          if (image.x > 700) { // If plane is already behind 700 units of x, do not update its x-coordinate
+          if (image.x > 700) {
+            // If plane is already behind 700 units of x, do not update its x-coordinate
             image.x -= xVel;
           }
           image.y = 195 + Math.cos(angle) * amplitude;
@@ -171,18 +171,18 @@ app.stage.addChild(fun);
               fill: 0x00ced1,
               align: "center",
             });
-        
+
             txt2.anchor.set(0.5);
             app.stage.addChild(txt2);
             txt2.position.set(app.screen.width / 2, app.screen.height / 2);
             gsap.to(txt2, { alpha: 0, delay: 1 });
-        
-             setTimeout(() => {
-               resetGame();
-             }, 1500);
+
+            setTimeout(() => {
+              resetGame();
+            }, 1500);
           }, 2500);
         }
-        if(image.x >= 400 ){
+        if (image.x >= 400) {
           uiy.y += 0.7;
           ui.x -= 0.7;
         }
@@ -228,7 +228,6 @@ app.stage.addChild(fun);
 
       // start the timer
       const cleanup = startTimer();
-
 
       setTimeout(() => {
         app.ticker.add(() => {
@@ -285,7 +284,7 @@ app.stage.addChild(fun);
       app.stage.addChild(uiy);
     }
     uiy.alpha = 0;
-    gsap.to(uiy, { duration: 0, alpha: 1, delay:14 });
+    gsap.to(uiy, { duration: 0, alpha: 1, delay: 14 });
     return () => {
       app.destroy(true);
     };
