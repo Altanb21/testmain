@@ -75,13 +75,13 @@ const Sidetable = (props) => {
         </div>
         <div className="prev">
           <FontAwesomeIcon className="clock" icon={faClock} />
-          <select className="select" value={multiplier} onChange={handleChange}>
+          {/* <select className="select" value={multiplier} onChange={handleChange}>
             {options.map((option) => (
               <option key={option} value={option}>
                 {option.toFixed(2)}
               </option>
             ))}
-          </select>{" "}
+          </select>{" "} */}
         </div>
       </div>
       <div className="betting"></div>
