@@ -12,6 +12,10 @@ const Sidetable = (props) => {
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
 
+  const handleInputChange = (event) => {
+    setMultiplier(event.target.value);
+  };
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -63,13 +67,12 @@ const Sidetable = (props) => {
         </div>
         <div className="prev">
           <FontAwesomeIcon className="clock" icon={faClock} />
-          {/* <select className="select" value={multiplier} onChange={handleChange}>
-            {options.map((option) => (
-              <option key={option} value={option}>
-                {option.toFixed(2)}
-              </option>
-            ))}
-          </select>{" "} */}
+          <input
+            type="text"
+            id="input-field"
+            value={multiplier}
+            onChange={handleInputChange}
+          />
         </div>
       </div>
       <div className="betting"></div>

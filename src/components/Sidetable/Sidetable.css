@@ -76,15 +76,18 @@
   margin-left: 10px;
   align-items: center;
 }
-.select{
-  margin-left: 7px;
-  width: 90px;
-  height: 20px;
+.prev input{
+  width: 85px;
   border-radius: 15px;
-  background-color: #181818;
-  color: gray;
+  margin-left: 10px;
+  border: 1px solid white;
+  background-color: #000;
+  color: white;
+  justify-content: center;
+  display: flex;
+  align-items: center;
   outline: none;
-  cursor: pointer;
+  text-align: center;
 }
 
 .tab td {

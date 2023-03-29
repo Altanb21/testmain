@@ -100,7 +100,7 @@ app.stage.addChild(fun);
     });
     gsap.to([loaderContainer, loadingText, rect, blackRect], {
       duration: 0,
-      delay: 14.7,
+      delay: 14.6,
       alpha: 0,
     });
 
