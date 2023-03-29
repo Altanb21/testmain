@@ -13,7 +13,6 @@ const Sidetable = (props) => {
   const [username, setUsername] = useState("");
   const [val, setVal] = useState(1.0);
 
-
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -40,7 +39,6 @@ const Sidetable = (props) => {
   const handleToggleChange = () => {
     setToggle(!toggle);
   };
-
 
   const handleChange = (event) => {
     setMultiplier(parseFloat(event.target.value));
@@ -77,19 +75,16 @@ const Sidetable = (props) => {
         </div>
         <div className="prev">
           <FontAwesomeIcon className="clock" icon={faClock} />
-          <p className="hand">Previous Hand</p>
+          <select className="select" value={multiplier} onChange={handleChange}>
+            {options.map((option) => (
+              <option key={option} value={option}>
+                {option.toFixed(2)}
+              </option>
+            ))}
+          </select>{" "}
         </div>
       </div>
-      <div className="betting">
-      <select className="select" value={multiplier} onChange={handleChange}>
-      {options.map((option) => (
-        <option key={option} value={option}>
-          {option.toFixed(2)}
-
-        </option>
-      ))}
-    </select>
-      </div>
+      <div className="betting"></div>
       <table className="tab">
         <thead>
           <tr>
@@ -100,15 +95,18 @@ const Sidetable = (props) => {
           </tr>
         </thead>
         <tbody>
-    {data.slice().reverse().map((row, index) => (
-      <tr key={index}>
-        <td>{row.username}</td>
-        <td>{row.amount}</td>
-        <td>{row.multiplier}</td>
-        <td>{row.cash}</td>
-      </tr>
-    ))}
-  </tbody>
+          {data
+            .slice()
+            .reverse()
+            .map((row, index) => (
+              <tr key={index}>
+                <td>{row.username}</td>
+                <td>{row.amount}</td>
+                <td>{row.multiplier}</td>
+                <td>{row.cash}</td>
+              </tr>
+            ))}
+        </tbody>
       </table>
     </div>
   );
