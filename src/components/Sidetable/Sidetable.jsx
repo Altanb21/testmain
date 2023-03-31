@@ -67,12 +67,7 @@ const Sidetable = (props) => {
         </div>
         <div className="prev">
           <FontAwesomeIcon className="clock" icon={faClock} />
-          <input
-            type="text"
-            id="input-field"
-            value={multiplier}
-            onChange={handleInputChange}
-          />
+          <p className="betting">Previous hand</p>
         </div>
       </div>
       <div className="betting"></div>
@@ -80,7 +75,7 @@ const Sidetable = (props) => {
         <thead>
           <tr>
             <th>USER</th>
-            <th>BET</th>
+            <th>AMOUNT</th>
             <th>MULTIPLIER</th>
             <th>CASH OUT</th>
           </tr>

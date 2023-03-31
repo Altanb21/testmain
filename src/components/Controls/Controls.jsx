@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { point } from "../Canvas/Canvas";
+import { point, main } from "../Canvas/Canvas";
 import {
   faPlusCircle,
   faMinusCircle,
@@ -44,6 +44,7 @@ const Controls = (props) => {
   const [multiplier, setMultiplier] = useState(1.0);
   const [multiplier2, setMultiplier2] = useState(1.0);
   const [disabled, setDisabled] = useState(false);
+  const [disabled2, setDisabled2] = useState(false);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -68,6 +69,7 @@ const Controls = (props) => {
             clearInterval(intervalId);
             return point;
           }
+          console.log(newNumber);
           return newNumber;
         });
       }, 33.3);
@@ -97,53 +99,114 @@ const Controls = (props) => {
     return () => clearTimeout(timerId2);
   }, []);
 
+  // const handleClick = () => {
+  //   if (disabled) {
+  //     setFlipped(!flipped);
+  //     toast(flipped ? "Bet placed successfully" : "Cashout successful");
+  //     return;
+  //   }
+
+  //   if (!isClicked) {
+  //     setCount1(count1 + 1);
+  //     setIsClicked(true);
+  //   }
+
+  //   if (flipped) {
+  //     setDisabled(true); // Stop the timer when the button is flipped to its front side
+  //   }
+
+  //   setFlipped(!flipped);
+  //   if (!flipped) {
+  //     toast("Bet placed successfully");
+  //   } else {
+  //     toast("Cashout successful");
+  //   }
+  // };
+
   const handleClick = () => {
     if (disabled) {
       setFlipped(!flipped);
       toast(flipped ? "Bet placed successfully" : "Cashout successful");
       return;
     }
-    if (!isClicked) {
-      setCount1(count1 + 1);
-      setIsClicked(true);
-    }
-    setFlipped(!flipped);
-    if (!flipped) {
-      toast("Bet placed successfully");
-    } else {
-      toast("Cashout successful");
+
+    if ((!flipped && count1 === 0) || (flipped && count1 > 0)) {
+      if (!isClicked) {
+        setCount1(count1 + 1);
+        setIsClicked(true);
+      }
+      setFlipped(!flipped);
+      if (!flipped) {
+        toast("Bet placed successfully");
+      } else {
+        toast("Cashout successful");
+      }
+    } else if (flipped && count1 > 0) {
+      // If the button is on its back side and it has been 15 seconds or more, disable
+      // flipping to the front
+      return;
     }
   };
-
+  // const clicked = () => {
+  //   if (disabled) {
+  //     setFliped(!fliped);
+  //     toast(fliped ? "Bet placed successfully" : "Cashout successful");
+  //     return;
+  //   }
+  //   if (!isClicked2) {
+  //     setCount2(count2 + 1);
+  //     setIsClicked2(true);
+  //   }
+  //   setFliped(!fliped);
+  //   if (!fliped) {
+  //     toast("Bet placed successfully");
+  //   } else {
+  //     toast("Cashout succesful");
+  //   }
+  // };
   const clicked = () => {
-    if (disabled) {
+    if (disabled2) {
       setFliped(!fliped);
       toast(fliped ? "Bet placed successfully" : "Cashout successful");
       return;
     }
-    if (!isClicked2) {
-      setCount2(count2 + 1);
-      setIsClicked2(true);
-    }
-    setFliped(!fliped);
-    if (!fliped) {
-      toast("Bet placed successfully");
-    } else {
-      toast("Cashout succesful");
+    if ((!fliped && count2 === 0) || (fliped && count2 > 0)) {
+      if (!isClicked2) {
+        setCount2(count2 + 1);
+        setIsClicked2(true);
+      }
+      setFliped(!fliped);
+      if (!fliped) {
+        toast("Bet placed successfully");
+      } else {
+        toast("Cashout successful");
+      }
+    } else if (fliped && count2 > 0) {
+      // If the button is on its back side and it has been 15 seconds or more, disable
+      // flipping to the front
+      return;
     }
   };
 
   useEffect(() => {
     let timer;
-
     if (!flipped) {
       timer = setTimeout(() => {
         setDisabled(true);
       }, 15000);
     }
-
     return () => clearTimeout(timer);
   }, [flipped]);
+
+  useEffect(() => {
+    let timer;
+    if (!fliped) {
+      timer = setTimeout(() => {
+        setDisabled2(true);
+      }, 15000);
+    }
+    return () => clearTimeout(timer);
+  }, [fliped]);
 
   const counts = count1 + count2;
 
@@ -168,18 +231,35 @@ const Controls = (props) => {
   };
   let result;
   let prize;
-  if (multiplier === point || multiplier2 === point) {
-    prize = amount * multiplier || amount2 * multiplier2;
-    result = "won";
+  // if (multiplier === point || multiplier2 === point) {
+  //   prize = amount * multiplier || amount2 * multiplier2;
+  //   result = "won";
+  // } else {
+  //   prize = amount * 0;
+  //   result = "lost";
+  // }
+  // let prize;
+  // prize = amount * cash2;
+  // result = "Profit";
+  // if (point >= cash2) {
+  //   prize = 0;
+  //   result = "Loss";
+  // }
+  // prize = prize.toFixed(2);
+  if (cash <= point) {
+    prize = amount * cash;
+  } else if (cash2 <= point) {
+    prize = amount2 * cash2;
   } else {
-    prize = amount * 0;
-    result = "lost";
+    prize = 0;
   }
+  prize = prize.toFixed(2) + "$";
+
   const handleValueButton = (val) => {
-    setMultiplier(val);
+    setAmount(val);
   };
   const handleValueButton2 = (val2) => {
-    setMultiplier2(val2);
+    setAmount2(val2);
   };
 
   const handleChange = (event) => {
@@ -209,7 +289,7 @@ const Controls = (props) => {
       multiplier2,
       cash2,
       point,
-      result,
+      // result,
       prize,
     };
     console.log(data);
@@ -231,6 +311,7 @@ const Controls = (props) => {
           cash2,
           amount2,
           multiplier2,
+          prize,
         });
         console.log("Data updated successfully");
       } else {
@@ -318,13 +399,13 @@ const Controls = (props) => {
                       onClick={() => handleValueButton(1)}
                       className="dollar"
                     >
-                      1x
+                      1$
                     </button>
                     <button
                       onClick={() => handleValueButton(2)}
                       className="dollar"
                     >
-                      2x
+                      2$
                     </button>
                   </div>
 
@@ -333,13 +414,13 @@ const Controls = (props) => {
                       onClick={() => handleValueButton(5)}
                       className="dollar"
                     >
-                      5x
+                      5$
                     </button>
                     <button
                       onClick={() => handleValueButton(10)}
                       className="dollar"
                     >
-                      10x
+                      10$
                     </button>
                   </div>
                 </div>
@@ -415,13 +496,13 @@ const Controls = (props) => {
                         onClick={() => handleValueButton2(1)}
                         className="dollar"
                       >
-                        1x
+                        1$
                       </button>
                       <button
                         onClick={() => handleValueButton2(2)}
                         className="dollar"
                       >
-                        2x
+                        2$
                       </button>
                     </div>
 
@@ -430,13 +511,13 @@ const Controls = (props) => {
                         onClick={() => handleValueButton2(5)}
                         className="dollar"
                       >
-                        5x
+                        5$
                       </button>
                       <button
                         onClick={() => handleValueButton2(10)}
                         className="dollar"
                       >
-                        10x
+                        10$
                       </button>
                     </div>
                   </div>
@@ -446,7 +527,11 @@ const Controls = (props) => {
           </div>
         )}
       </div>
-      <Sidetable multiplier={multiplier} setMultiplier={setMultiplier} counts={counts} />
+      <Sidetable
+        multiplier={multiplier}
+        setMultiplier={setMultiplier}
+        counts={counts}
+      />
     </>
   );
 };
