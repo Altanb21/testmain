@@ -45,6 +45,11 @@ const Controls = (props) => {
   const [multiplier2, setMultiplier2] = useState(1.0);
   const [disabled, setDisabled] = useState(false);
   const [disabled2, setDisabled2] = useState(false);
+  const [intervalId, setIntervalId] = useState(null);
+  const [isTimerRunning, setIsTimerRunning] = useState(true);
+  const [intervalId2, setIntervalId2] = useState(null);
+  const [isTimerRunning2, setIsTimerRunning2] = useState(true);
+  
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -60,68 +65,95 @@ const Controls = (props) => {
     setUsername("");
   };
 
+  // useEffect(() => {
+  //   const timerId = setTimeout(() => {
+  //     const intervalId = setInterval(() => {
+  //       setNumber((prevNumber) => {
+  //         const newNumber = prevNumber + 0.01;
+  //         if (newNumber >= point) {
+  //           clearInterval(intervalId);
+  //           return point;
+  //         }
+  //         console.log(newNumber);
+  //         return newNumber;
+  //       });
+  //     }, 33.3);
+
+  //     return () => clearInterval(intervalId);
+  //   }, 15000);
+
+  //   return () => clearTimeout(timerId);
+  // }, []);
   useEffect(() => {
     const timerId = setTimeout(() => {
-      const intervalId = setInterval(() => {
-        setNumber((prevNumber) => {
-          const newNumber = prevNumber + 0.01;
-          if (newNumber >= point) {
-            clearInterval(intervalId);
-            return point;
-          }
-          console.log(newNumber);
-          return newNumber;
-        });
-      }, 33.3);
-
-      return () => clearInterval(intervalId);
+      if (isTimerRunning) {
+        setIntervalId(
+          setInterval(() => {
+            setNumber((prevNumber) => {
+              const newNumber = prevNumber + 0.01;
+              if (newNumber >= point) {
+                clearInterval(intervalId);
+                return point;
+              }
+              console.log(newNumber);
+              return newNumber;
+            });
+          }, 33.3)
+        );
+      }
     }, 15000);
 
-    return () => clearTimeout(timerId);
-  }, []);
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timerId);
+    };
+  }, [point, isTimerRunning]);
+
+
+
+  // useEffect(() => {
+  //   const timerId2 = setTimeout(() => {
+  //     const intervalId2 = setInterval(() => {
+  //       setNumber2((prevNumber2) => {
+  //         const newNumber2 = prevNumber2 + 0.01;
+  //         if (newNumber2 >= point) {
+  //           clearInterval(intervalId2);
+  //           return point;
+  //         }
+  //         return newNumber2;
+  //       });
+  //     }, 33.3);
+
+  //     return () => clearInterval(intervalId2);
+  //   }, 15000);
+
+  //   return () => clearTimeout(timerId2);
+  // }, []);
 
   useEffect(() => {
-    const timerId2 = setTimeout(() => {
-      const intervalId2 = setInterval(() => {
-        setNumber2((prevNumber2) => {
-          const newNumber2 = prevNumber2 + 0.01;
-          if (newNumber2 >= point) {
-            clearInterval(intervalId2);
-            return point;
-          }
-          return newNumber2;
-        });
-      }, 33.3);
-
-      return () => clearInterval(intervalId2);
+    const timerId = setTimeout(() => {
+      if (isTimerRunning2) {
+        setIntervalId2(
+          setInterval(() => {
+            setNumber2((prevNumber2) => {
+              const newNumber2 = prevNumber2 + 0.01;
+              if (newNumber2 >= point) {
+                clearInterval(intervalId2);
+                return point;
+              }
+              console.log(newNumber2);
+              return newNumber2;
+            });
+          }, 33.3)
+        );
+      }
     }, 15000);
 
-    return () => clearTimeout(timerId2);
-  }, []);
-
-  // const handleClick = () => {
-  //   if (disabled) {
-  //     setFlipped(!flipped);
-  //     toast(flipped ? "Bet placed successfully" : "Cashout successful");
-  //     return;
-  //   }
-
-  //   if (!isClicked) {
-  //     setCount1(count1 + 1);
-  //     setIsClicked(true);
-  //   }
-
-  //   if (flipped) {
-  //     setDisabled(true); // Stop the timer when the button is flipped to its front side
-  //   }
-
-  //   setFlipped(!flipped);
-  //   if (!flipped) {
-  //     toast("Bet placed successfully");
-  //   } else {
-  //     toast("Cashout successful");
-  //   }
-  // };
+    return () => {
+      clearInterval(intervalId2);
+      clearTimeout(timerId);
+    };
+  }, [point, isTimerRunning2]);
 
   const handleClick = () => {
     if (disabled) {
@@ -140,6 +172,9 @@ const Controls = (props) => {
         toast("Bet placed successfully");
       } else {
         toast("Cashout successful");
+        setIsTimerRunning(false);
+    clearInterval(intervalId);
+
       }
     } else if (flipped && count1 > 0) {
       // If the button is on its back side and it has been 15 seconds or more, disable
@@ -147,23 +182,7 @@ const Controls = (props) => {
       return;
     }
   };
-  // const clicked = () => {
-  //   if (disabled) {
-  //     setFliped(!fliped);
-  //     toast(fliped ? "Bet placed successfully" : "Cashout successful");
-  //     return;
-  //   }
-  //   if (!isClicked2) {
-  //     setCount2(count2 + 1);
-  //     setIsClicked2(true);
-  //   }
-  //   setFliped(!fliped);
-  //   if (!fliped) {
-  //     toast("Bet placed successfully");
-  //   } else {
-  //     toast("Cashout succesful");
-  //   }
-  // };
+
   const clicked = () => {
     if (disabled2) {
       setFliped(!fliped);
@@ -180,6 +199,8 @@ const Controls = (props) => {
         toast("Bet placed successfully");
       } else {
         toast("Cashout successful");
+        setIsTimerRunning2(false);
+    clearInterval(intervalId2);
       }
     } else if (fliped && count2 > 0) {
       // If the button is on its back side and it has been 15 seconds or more, disable
@@ -246,9 +267,9 @@ const Controls = (props) => {
   //   result = "Loss";
   // }
   // prize = prize.toFixed(2);
-  if (cash <= point) {
+  if (cash < point) {
     prize = amount * cash;
-  } else if (cash2 <= point) {
+  } else if (cash2 < point) {
     prize = amount2 * cash2;
   } else {
     prize = 0;
