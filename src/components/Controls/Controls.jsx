@@ -65,25 +65,6 @@ const Controls = (props) => {
     setUsername("");
   };
 
-  // useEffect(() => {
-  //   const timerId = setTimeout(() => {
-  //     const intervalId = setInterval(() => {
-  //       setNumber((prevNumber) => {
-  //         const newNumber = prevNumber + 0.01;
-  //         if (newNumber >= point) {
-  //           clearInterval(intervalId);
-  //           return point;
-  //         }
-  //         console.log(newNumber);
-  //         return newNumber;
-  //       });
-  //     }, 33.3);
-
-  //     return () => clearInterval(intervalId);
-  //   }, 15000);
-
-  //   return () => clearTimeout(timerId);
-  // }, []);
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (isTimerRunning) {
@@ -95,7 +76,6 @@ const Controls = (props) => {
                 clearInterval(intervalId);
                 return point;
               }
-              console.log(newNumber);
               return newNumber;
             });
           }, 33.3)
@@ -111,24 +91,6 @@ const Controls = (props) => {
 
 
 
-  // useEffect(() => {
-  //   const timerId2 = setTimeout(() => {
-  //     const intervalId2 = setInterval(() => {
-  //       setNumber2((prevNumber2) => {
-  //         const newNumber2 = prevNumber2 + 0.01;
-  //         if (newNumber2 >= point) {
-  //           clearInterval(intervalId2);
-  //           return point;
-  //         }
-  //         return newNumber2;
-  //       });
-  //     }, 33.3);
-
-  //     return () => clearInterval(intervalId2);
-  //   }, 15000);
-
-  //   return () => clearTimeout(timerId2);
-  // }, []);
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -252,21 +214,7 @@ const Controls = (props) => {
   };
   let result;
   let prize;
-  // if (multiplier === point || multiplier2 === point) {
-  //   prize = amount * multiplier || amount2 * multiplier2;
-  //   result = "won";
-  // } else {
-  //   prize = amount * 0;
-  //   result = "lost";
-  // }
-  // let prize;
-  // prize = amount * cash2;
-  // result = "Profit";
-  // if (point >= cash2) {
-  //   prize = 0;
-  //   result = "Loss";
-  // }
-  // prize = prize.toFixed(2);
+
   if (cash < point) {
     prize = amount * cash;
   } else if (cash2 < point) {
