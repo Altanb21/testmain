@@ -216,15 +216,22 @@ const Controls = (props) => {
   let prize;
   let result;
   
-  if (cash >= point || cash2 >= point) {
+  if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
-  } else {
+  } else if (cash === point) {
+    prize = 0;
+    result = "loss";
+  } else if (cash < point && cash2 < point) { // both cash and cash2 are less than point
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
     result = "win";
     prize = greaterCash * greaterAmount;
+  } else {
+    result = "loss";
+    prize = 0;
   }
+  
   
 
   prize = prize.toFixed(2) + "$";
