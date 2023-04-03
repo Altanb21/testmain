@@ -279,8 +279,8 @@ input:checked + .slider-button .off {
   width: 850px;
   height: 50px;
 }
-.toast{
-  z-index: -1!important;
+.toast {
+  z-index: -1 !important;
 }
 
 @media screen and (max-width: 768px) {
@@ -311,6 +311,14 @@ input:checked + .slider-button .off {
     margin: 30em auto;
   }
 }
+@media (min-width: 481px) and (max-width: 768px) {
+  .cont {
+    margin: 20em auto;
+    max-width: 80%;
+    display: block;
+    box-shadow: none;
+  }
+}
 @media screen and (max-width: 480px) {
   .cont {
     margin: 13em auto;
@@ -332,11 +340,6 @@ input:checked + .slider-button .off {
   .toast {
     background: #000 !important;
   }
-  /* .toast {
-    --toastify-toast-width: 220px;
-    --toastify-toast-min-height: 20px;
-    --toastify-toast-max-height: 50px;
-  } */
 }
 @media screen and (max-width: 375px) {
   .betx {
@@ -351,13 +354,8 @@ input:checked + .slider-button .off {
   .betx {
     padding-right: 2px;
   }
-  /* .toast {
-    --toastify-toast-width: 320px;
-    --toastify-toast-min-height: 32px;
-    --toastify-toast-max-height: 64px;
-  } */
 }
-@media (min-width: 1600px) and (max-width: 1920px) {
+@media (min-width: 1690px) and (max-width: 1920px) {
   .cont {
     margin: 40.5em 0.5em;
     max-width: 1250px;
@@ -460,10 +458,27 @@ input:checked + .slider-button .off {
     font-size: 20px;
   }
 }
-@media (min-width: 1650px) and (max-width: 1850px) {
+@media (min-width: 1690px) and (max-width: 1850px) {
   .cont {
-    left: 0;
-    right: 0;
-    margin: 40.5em auto;
+    margin: 40.5em 0.5em;
+    max-width: 1100px;
+  }
+  .control {
+    max-width: 535px;
+  }
+  .toggle-container {
+    width: 535px;
+  }
+  .flip-button {
+    width: 18.5em;
+    height: 8em;
+    margin: 5px 20px 0 0;
+  }
+  .wrapper {
+    width: 260px;
+    margin: 0 0 0 25px;
+  }
+  .button-container {
+    margin: -5px 0 0 15px;
   }
 }

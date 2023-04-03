@@ -204,7 +204,6 @@ const Controls = (props) => {
       setAmount2((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
     }
   };
-  let result;
   // let prize;
 
   // if (cash < point) {
@@ -215,14 +214,18 @@ const Controls = (props) => {
   //   prize = 0;
   // }
   let prize;
-
+  let result;
+  
   if (cash >= point || cash2 >= point) {
+    result = "loss";
     prize = 0;
   } else {
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
+    result = "win";
     prize = greaterCash * greaterAmount;
   }
+  
 
   prize = prize.toFixed(2) + "$";
 
@@ -258,7 +261,7 @@ const Controls = (props) => {
       amount2,
       cash2,
       point,
-      // result,
+      result,
       prize,
     };
     console.log(data);
