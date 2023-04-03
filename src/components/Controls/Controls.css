@@ -9,7 +9,7 @@
   left: 0;
   right: 0;
   background-color: #0e0e0e;
-  box-shadow: 0px 0px 5px 5px   #00ced1;
+  box-shadow: 0px 0px 5px 5px #00ced1;
 }
 .control {
   max-width: 410px;
@@ -17,11 +17,6 @@
   background-color: #181818;
   border-radius: 5px;
   margin: 10px 7px;
-}
-.toast {
-  --toastify-toast-width: 320px;
-  --toastify-toast-min-height: 32px;
-  --toastify-toast-max-height: 64px;
 }
 
 .toggle-container {
@@ -31,7 +26,8 @@
   justify-content: space-between; /* Center horizontally */
   align-items: center;
 }
-.plus,.minus{
+.plus,
+.minus {
   margin-right: 10px;
   font-size: 25px; /* adds some space between the icon and the edge of container */
   cursor: pointer;
@@ -153,7 +149,7 @@ input:checked + .slider-button .off {
   justify-content: center;
   margin-bottom: -10px;
 }
-.money{
+.money {
   position: absolute;
   margin: 30px 0px 0px 0px;
 }
@@ -163,7 +159,7 @@ input:checked + .slider-button .off {
   margin-top: 20px !important;
   height: 25px;
   padding: 0;
-  margin:  10px 5px 0px 5px;
+  margin: 10px 5px 0px 5px;
   font-size: 14px;
   background-color: #282621;
   color: grey;
@@ -177,7 +173,7 @@ input:checked + .slider-button .off {
   background-color: #000;
 }
 
-.divide{
+.divide {
   height: 150px;
   display: flex;
   flex-direction: row-reverse;
@@ -261,7 +257,7 @@ input:checked + .slider-button .off {
   justify-content: center;
   display: flex;
 }
-.multiplier input{
+.multiplier input {
   overflow: hidden;
   display: flex;
   text-align: center;
@@ -270,24 +266,18 @@ input:checked + .slider-button .off {
   border: none;
   color: #fff;
 }
-.multiplier input:focus{
+.multiplier input:focus {
   outline: none;
 }
 .inc {
   color: gray;
   font-size: 19px;
 }
-.info{
+.info {
   position: absolute;
-  margin: 39em 17em ;
+  margin: 39em 17em;
   width: 850px;
   height: 50px;
-}
-.Toastify__toast-theme--light {
-  background: #000!important;
-}
-.toast{
-background: #000!important;
 }
 
 @media screen and (max-width: 768px) {
@@ -298,35 +288,34 @@ background: #000!important;
     margin: 21em auto;
     grid-gap: 10px;
   }
-  .control{
+  .control {
     max-width: 100%;
     border: 1px solid #00ced1;
-     display: flex;
-     flex-direction: column;
-    } 
-   .toggle-container{
-     width: 100%;
-   }
-   .divide{
-     margin: auto;
-   }
+    display: flex;
+    flex-direction: column;
+  }
+  .toggle-container {
+    width: 100%;
+  }
+  .divide {
+    margin: auto;
+  }
 }
 @media screen and (max-width: 1360px) {
-  .cont{
+  .cont {
     left: 0;
     right: 0;
     margin: 30em auto;
   }
 }
 @media screen and (max-width: 480px) {
-  .cont{
+  .cont {
     margin: 13em auto;
     max-width: 100%;
     display: block;
     box-shadow: none;
-
   }
-  .divide{
+  .divide {
     max-width: 100%;
   }
   .flip-button {
@@ -335,11 +324,11 @@ background: #000!important;
     border: none;
   }
   .Toastify__toast-theme--light {
-    background: #000!important;
-}
-.toast{
-  background: #000!important;
-}
+    background: #000 !important;
+  }
+  .toast {
+    background: #000 !important;
+  }
   /* .toast {
     --toastify-toast-width: 220px;
     --toastify-toast-min-height: 20px;
@@ -347,17 +336,16 @@ background: #000!important;
   } */
 }
 @media screen and (max-width: 375px) {
-  .betx
-  {
+  .betx {
     padding-left: 0px;
   }
-  .buttons{
+  .buttons {
     max-width: 90%;
   }
-  .wrapper{
+  .wrapper {
     margin-right: 0px;
   }
-  .betx{
+  .betx {
     padding-right: 2px;
   }
   /* .toast {
@@ -398,63 +386,63 @@ background: #000!important;
     height: 250px;
     max-width: 100%;
   }
-.buttons{
-  width: 300px;
-  height: 220px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  align-items: center;
-  max-width: 100%;
-}
-.betx{
-  width: 300px;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-}
-.flip-button{
-  width: 20em;
-  height: 8em;
-}
-.flip-front{
-  font-size: 20px;
-}
-.flip-back{
-  font-size: 20px;
-}
-.wrapper{
-  width: 270px;
-  height: 45px;
-  margin-top: 10px;
-}
-.multiplier{
-  width: 200px;
-  font-size: 25px;
-}
-.inc{
-  font-size: 25px;
-}
-.money{
-  margin-top: 20px;
-  width: 290px;
-  height: 170px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.button-container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .buttons {
+    width: 300px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    max-width: 100%;
+  }
+  .betx {
+    width: 300px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+  }
+  .flip-button {
+    width: 20em;
+    height: 8em;
+  }
+  .flip-front {
+    font-size: 20px;
+  }
+  .flip-back {
+    font-size: 20px;
+  }
+  .wrapper {
+    width: 270px;
+    height: 45px;
+    margin-top: 10px;
+  }
+  .multiplier {
+    width: 200px;
+    font-size: 25px;
+  }
+  .inc {
+    font-size: 25px;
+  }
+  .money {
+    margin-top: 20px;
+    width: 290px;
+    height: 170px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .buttons {
     align-items: center;
-     max-width: 100%;
+    max-width: 100%;
   }
-  
-  .button-container{
+
+  .button-container {
     width: 300px;
     max-width: 100%;
     display: flex;
@@ -462,22 +450,17 @@ background: #000!important;
     align-items: center;
     height: 100px;
   }
-  .dollar{
+  .dollar {
     width: 100px;
     height: 40px;
     border-radius: 15px;
     font-size: 20px;
   }
-
 }
 @media (min-width: 1650px) and (max-width: 1850px) {
-  .cont{
-        left: 0;
-        right: 0;
+  .cont {
+    left: 0;
+    right: 0;
     margin: 40.5em auto;
   }
 }
-
-
-
-

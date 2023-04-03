@@ -41,15 +41,12 @@ const Controls = (props) => {
   const cash = number.toFixed(2);
   const cash2 = number2.toFixed(2);
   const [username, setUsername] = useState("");
-  const [multiplier, setMultiplier] = useState(1.0);
-  const [multiplier2, setMultiplier2] = useState(1.0);
   const [disabled, setDisabled] = useState(false);
   const [disabled2, setDisabled2] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [intervalId2, setIntervalId2] = useState(null);
   const [isTimerRunning2, setIsTimerRunning2] = useState(true);
-  
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -89,9 +86,6 @@ const Controls = (props) => {
     };
   }, [point, isTimerRunning]);
 
-
-
-
   useEffect(() => {
     const timerId = setTimeout(() => {
       if (isTimerRunning2) {
@@ -103,7 +97,6 @@ const Controls = (props) => {
                 clearInterval(intervalId2);
                 return point;
               }
-              console.log(newNumber2);
               return newNumber2;
             });
           }, 33.3)
@@ -135,8 +128,7 @@ const Controls = (props) => {
       } else {
         toast("Cashout successful");
         setIsTimerRunning(false);
-    clearInterval(intervalId);
-
+        clearInterval(intervalId);
       }
     } else if (flipped && count1 > 0) {
       // If the button is on its back side and it has been 15 seconds or more, disable
@@ -162,7 +154,7 @@ const Controls = (props) => {
       } else {
         toast("Cashout successful");
         setIsTimerRunning2(false);
-    clearInterval(intervalId2);
+        clearInterval(intervalId2);
       }
     } else if (fliped && count2 > 0) {
       // If the button is on its back side and it has been 15 seconds or more, disable
@@ -213,15 +205,25 @@ const Controls = (props) => {
     }
   };
   let result;
+  // let prize;
+
+  // if (cash < point) {
+  //   prize = amount * cash;
+  // } else if (cash2 < point) {
+  //   prize = amount2 * cash2;
+  // } else {
+  //   prize = 0;
+  // }
   let prize;
 
-  if (cash < point) {
-    prize = amount * cash;
-  } else if (cash2 < point) {
-    prize = amount2 * cash2;
-  } else {
+  if (cash >= point || cash2 >= point) {
     prize = 0;
+  } else {
+    const greaterCash = cash > cash2 ? cash : cash2;
+    const greaterAmount = amount > amount2 ? amount : amount2;
+    prize = greaterCash * greaterAmount;
   }
+
   prize = prize.toFixed(2) + "$";
 
   const handleValueButton = (val) => {
@@ -252,10 +254,8 @@ const Controls = (props) => {
     const data = {
       username,
       amount,
-      multiplier,
       cash,
       amount2,
-      multiplier2,
       cash2,
       point,
       // result,
@@ -279,7 +279,6 @@ const Controls = (props) => {
           cash,
           cash2,
           amount2,
-          multiplier2,
           prize,
         });
         console.log("Data updated successfully");
@@ -496,11 +495,7 @@ const Controls = (props) => {
           </div>
         )}
       </div>
-      <Sidetable
-        multiplier={multiplier}
-        setMultiplier={setMultiplier}
-        counts={counts}
-      />
+      <Sidetable counts={counts} />
     </>
   );
 };

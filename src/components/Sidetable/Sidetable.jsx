@@ -7,14 +7,10 @@ import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 const Sidetable = (props) => {
-  const { counts, multiplier, setMultiplier } = props;
+  const { counts } = props;
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
   const [username, setUsername] = useState("");
-
-  const handleInputChange = (event) => {
-    setMultiplier(event.target.value);
-  };
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -88,7 +84,7 @@ const Sidetable = (props) => {
               <tr key={index}>
                 <td>{row.username}</td>
                 <td>{row.amount}</td>
-                <td>{row.multiplier}</td>
+                <td>{row.point}</td>
                 <td>{row.cash}</td>
               </tr>
             ))}

@@ -35,44 +35,86 @@ const Canvas = () => {
 
     app.stage.addChild(fun);
 
-    const blackRect = new PIXI.Graphics();
-    blackRect.beginFill(0x00000);
-    blackRect.drawRoundedRect(0, 0, 250, 6, 3);
-    blackRect.endFill();
-    blackRect.position.set(
-      app.screen.width / 2 - blackRect.width / 2,
-      app.screen.height / 2 - blackRect.height / 2
-    );
-    app.stage.addChild(blackRect);
+    // const blackRect = new PIXI.Graphics();
+    // blackRect.beginFill(0x00000);
+    // blackRect.drawRoundedRect(0, 0, 250, 6, 3);
+    // blackRect.endFill();
+    // blackRect.position.set(
+    //   app.screen.width / 2 - blackRect.width / 2,
+    //   app.screen.height / 2 - blackRect.height / 2
+    // );
+    // app.stage.addChild(blackRect);
+    // const rect = new PIXI.Graphics();
+    // rect.beginFill(0x00ced1);
+    // rect.drawRoundedRect(0, 0, 250, 6, 3);
+    // rect.endFill();
+    // rect.position.set(
+    //   app.screen.width / 2 - rect.width / 2,
+    //   app.screen.height / 2 - rect.height / 2
+    // );
+    // rect.scale.x = 0;
+    // app.stage.addChild(rect);
+
+    // const dur = 14600;
+    // const endScale = 1;
+    // const fps = 60;
+    // const frames = (dur / 1000) * fps;
+    // let currentFrame = 0;
+    // let currentScale = 0;
+
+    // let animationInterval;
+
+    // animationInterval = app.ticker.add((delta) => {
+    //   currentFrame++;
+    //   if (currentFrame <= frames) {
+    //     currentScale = endScale - (endScale / frames) * currentFrame;
+    //     rect.scale.x = currentScale;
+    //   } else {
+    //     app.ticker.remove(animationInterval);
+    //   }
+    // });
     const rect = new PIXI.Graphics();
-    rect.beginFill(0x00ced1);
-    rect.drawRoundedRect(0, 0, 250, 6, 3);
+
+    rect.beginFill(0x000000);
+    rect.lineStyle(1, 0x00ced1);
+    
+    const width = 250;
+    const height = 10;
+    const rad = 10;
+    
+    rect.drawRoundedRect(0, 0, width, height, rad);
+    
     rect.endFill();
-    rect.position.set(
-      app.screen.width / 2 - rect.width / 2,
-      app.screen.height / 2 - rect.height / 2
-    );
-    rect.scale.x = 0;
+    rect.x = app.screen.width / 2 - rect.width / 2;
+    rect.y = app.screen.height / 2 - rect.height / 2;
+    
     app.stage.addChild(rect);
-
-    const dur = 14600;
-    const endScale = 1;
-    const fps = 60;
-    const frames = (dur / 1000) * fps;
-    let currentFrame = 0;
-    let currentScale = 0;
-
-    let animationInterval;
-
-    animationInterval = app.ticker.add((delta) => {
-      currentFrame++;
-      if (currentFrame <= frames) {
-        currentScale = endScale - (endScale / frames) * currentFrame;
-        rect.scale.x = currentScale;
-      } else {
-        app.ticker.remove(animationInterval);
+    
+    const circle = new PIXI.Graphics();
+    circle.beginFill(0x00ced1);
+    circle.drawCircle(0, 0, 3);
+    circle.endFill();
+    circle.x = rect.x + rect.width / 2;
+    circle.y = rect.y + rect.height / 2.12;
+    app.stage.addChild(circle);
+    
+    let direction = 1;
+    const speed = 2;
+    
+    app.ticker.add(() => {
+      circle.x += speed * direction;
+    
+      // Check if the circle has hit the edge of the rectangle
+      if (circle.x + circle.width / 2 > rect.x + rect.width) {
+        circle.x = rect.x + rect.width - circle.width / 2;
+        direction = -1;
+      } else if (circle.x - circle.width / 2 < rect.x) {
+        circle.x = rect.x + circle.width / 2;
+        direction = 1;
       }
     });
+    
+
 
     const loadingText = new PIXI.Text("Loading...", {
       fontFamily: "Arial",
@@ -97,7 +139,7 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText, rect, blackRect], {
+    gsap.to([loaderContainer, loadingText,circle,rect], {
       duration: 0,
       delay: 14.6,
       alpha: 0,
