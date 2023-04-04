@@ -28,7 +28,7 @@ const Canvas = () => {
     app.stage.addChild(start);
     start.position.set(app.screen.width / 3.7, app.screen.height / 1.9);
 
-    let remainingSeconds = 900; // 15 minutes * 60 seconds
+    let remainingSeconds = 870; // 15 minutes * 60 seconds
     let minutes, seconds;
 
     const countdownInterval = setInterval(() => {
@@ -60,11 +60,7 @@ const Canvas = () => {
         clearInterval(updateInterval);
       }
     }, 15);
-    gsap.to(start, {
-      duration: 0,
-      delay: 15,
-      alpha: 0,
-    });
+
 
     const fun = new PIXI.Graphics();
 
@@ -185,7 +181,7 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText, circle, rect], {
+    gsap.to([loaderContainer, loadingText, circle, rect,start], {
       duration: 0,
       delay: 14.6,
       alpha: 0,
