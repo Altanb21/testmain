@@ -204,35 +204,28 @@ const Controls = (props) => {
       setAmount2((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
     }
   };
-  // let prize;
 
-  // if (cash < point) {
-  //   prize = amount * cash;
-  // } else if (cash2 < point) {
-  //   prize = amount2 * cash2;
-  // } else {
-  //   prize = 0;
-  // }
   let prize;
   let result;
-  
+
   if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
   } else if (cash === point) {
     prize = 0;
     result = "loss";
-  } else if (cash < point && cash2 < point) { // both cash and cash2 are less than point
+  } else if (cash < point && cash2 < point) {
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
     result = "win";
     prize = greaterCash * greaterAmount;
+  } else if (cash === point || cash2 === point) {
+    result = "loss";
+    prize = 0;
   } else {
     result = "loss";
     prize = 0;
   }
-  
-  
 
   prize = prize.toFixed(2) + "$";
 
@@ -290,6 +283,7 @@ const Controls = (props) => {
           cash2,
           amount2,
           prize,
+          result
         });
         console.log("Data updated successfully");
       } else {

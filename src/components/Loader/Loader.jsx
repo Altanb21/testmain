@@ -4,18 +4,20 @@ import './Loader.css'
 
 
 const Loader = () => {
+  
   return (
-    <div className='loadermain'>
-      <Puff
-  height="80"
-  width="80"
-  radius="9"
-  color="aqua"
-  ariaLabel="loading"
-  wrapperStyle
-  wrapperClass
-/>
-    </div>
+    <div className="loadermain">
+    <Puff
+      height="80"
+      width="80"
+      radius="9"
+      color="aqua"
+      ariaLabel="loading"
+      wrapperStyle
+      wrapperClass
+    />
+  </div>
+  
   )
 }
 
