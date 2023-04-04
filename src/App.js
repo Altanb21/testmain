@@ -32,12 +32,14 @@ function App() {
     auth.signOut();
     setUsername("");
   };
-
   useEffect(() => {
-    window.onload = () => {
+    const timer = setTimeout(() => {
       setLoading(false);
-    };
+    }, 3000);
+
+    return () => clearTimeout(timer);
   }, []);
+
   return (
     <div>
       {loading ? (
@@ -66,5 +68,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
