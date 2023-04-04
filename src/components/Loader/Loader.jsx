@@ -1,12 +1,12 @@
 import React from 'react'
-import { Audio } from 'react-loader-spinner'
+import { Puff } from 'react-loader-spinner'
 import './Loader.css'
 
 
 const Loader = () => {
   return (
     <div className='loadermain'>
-      <Audio
+      <Puff
   height="80"
   width="80"
   radius="9"
