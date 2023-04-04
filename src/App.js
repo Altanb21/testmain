@@ -42,30 +42,51 @@ function App() {
 
   return (
     <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login name={username} />} />
+        <Route path="/results" element={<Results name={username} />} />
+        <Route
+          path="/play"
+          element={
+            <Suspense fallback={<Loader />}>
+              <Play
+                handleSignOut={handleSignOut}
+                name={username}
+              />
+            </Suspense>
+          }
+        />
+      </Routes>
+    </div>
+  );
+}
+
+function Play({ handleSignOut, name }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <Navbar handleSignOut={handleSignOut} name={name} />
       {loading ? (
         <Loader />
       ) : (
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login name={username} />} />
-          <Route path="/results" element={<Results name={username} />} />
-          <Route
-            path="/play"
-            element={
-              <>
-                <Navbar handleSignOut={handleSignOut} name={username} />
-                <Suspense fallback={<Loader />}>
-                  <Canvas />
-                  <Sidetable />
-                  <Controls name={username} />
-                </Suspense>
-              </>
-            }
-          />
-        </Routes>
+        <>
+          <Canvas />
+          <Sidetable />
+          <Controls name={name} />
+        </>
       )}
-    </div>
+    </>
   );
 }
 
