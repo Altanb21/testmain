@@ -18,6 +18,54 @@ const Canvas = () => {
     appRef.current = app;
     document.body.appendChild(app.view);
 
+    let start = new PIXI.Text("STARTING IN 15:00", {
+      fontFamily: "Times New Roman",
+      fontSize: 45,
+      fill: 0xffffff,
+      align: "center",
+    });
+
+    app.stage.addChild(start);
+    start.position.set(app.screen.width / 3.7, app.screen.height / 1.9);
+
+    let remainingSeconds = 900; // 15 minutes * 60 seconds
+    let minutes, seconds;
+
+    const countdownInterval = setInterval(() => {
+      minutes = Math.floor(remainingSeconds / 60);
+      seconds = remainingSeconds % 60;
+      const timeString = `STARTING IN ${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      start.text = timeString;
+
+      remainingSeconds--;
+      if (remainingSeconds < 0) {
+        clearInterval(countdownInterval);
+        clearInterval(updateInterval);
+      }
+    }, 1000);
+
+    const updateInterval = setInterval(() => {
+      minutes = Math.floor(remainingSeconds / 60);
+      seconds = remainingSeconds % 60;
+      const timeString = `STARTING IN ${minutes
+        .toString()
+        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+      start.text = timeString;
+
+      remainingSeconds--;
+      if (remainingSeconds < 0) {
+        clearInterval(countdownInterval);
+        clearInterval(updateInterval);
+      }
+    }, 15);
+    gsap.to(start, {
+      duration: 0,
+      delay: 15,
+      alpha: 0,
+    });
+
     const fun = new PIXI.Graphics();
 
     fun.beginFill(0xffa500);
@@ -77,19 +125,19 @@ const Canvas = () => {
 
     rect.beginFill(0x000000);
     rect.lineStyle(1, 0x00ced1);
-    
+
     const width = 250;
     const height = 10;
     const rad = 10;
-    
+
     rect.drawRoundedRect(0, 0, width, height, rad);
-    
+
     rect.endFill();
     rect.x = app.screen.width / 2 - rect.width / 2;
     rect.y = app.screen.height / 2 - rect.height / 2;
-    
+
     app.stage.addChild(rect);
-    
+
     const circle = new PIXI.Graphics();
     circle.beginFill(0x00ced1);
     circle.drawCircle(0, 0, 3);
@@ -97,13 +145,13 @@ const Canvas = () => {
     circle.x = rect.x + rect.width / 2;
     circle.y = rect.y + rect.height / 2.12;
     app.stage.addChild(circle);
-    
+
     let direction = 1;
     const speed = 2;
-    
+
     app.ticker.add(() => {
       circle.x += speed * direction;
-    
+
       // Check if the circle has hit the edge of the rectangle
       if (circle.x + circle.width / 2 > rect.x + rect.width) {
         circle.x = rect.x + rect.width - circle.width / 2;
@@ -113,8 +161,6 @@ const Canvas = () => {
         direction = 1;
       }
     });
-    
-
 
     const loadingText = new PIXI.Text("Loading...", {
       fontFamily: "Arial",
@@ -139,7 +185,7 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText,circle,rect], {
+    gsap.to([loaderContainer, loadingText, circle, rect], {
       duration: 0,
       delay: 14.6,
       alpha: 0,
