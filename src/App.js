@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense } from "react";
 import "./index.css";
 import Canvas from "./components/Canvas/Canvas";
 import Navbar from "./components/Navbar/Navbar";
@@ -7,10 +7,10 @@ import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Results from "./components/Results/Results";
 import Sidetable from "./components/Sidetable/Sidetable";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter, MemoryRouter } from "react-router-dom";
 import { auth } from "./firebase";
 import Home from "./components/Home/Home";
-import Loader from './components/Loader/Loader'
+import Loader from "./components/Loader/Loader";
 function App() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
@@ -45,10 +45,7 @@ function App() {
           path="/play"
           element={
             <Suspense fallback={<Loader />}>
-              <Play
-                handleSignOut={handleSignOut}
-                name={username}
-              />
+              <Play handleSignOut={handleSignOut} name={username} />
             </Suspense>
           }
         />
