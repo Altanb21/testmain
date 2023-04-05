@@ -3,20 +3,30 @@ import "./Sidetable.css";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { auth } from "../../firebase";
-import { faClock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import {
+  faUser,
+  faCoins,
+  faSackDollar,
+} from "@fortawesome/free-solid-svg-icons";
 const Sidetable = (props) => {
-  const { counts } = props;
+  const {  } = props;
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("")
+  const [loggedInCount, setLoggedInCount] = useState(0); // Initialize the count to 0
+  ;
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUsername(user.displayName);
-      } else setUsername("");
+        setLoggedInCount((count) => count + 1); // Increment the count when a user logs in
+      } else {
+        setUsername("");
+        setLoggedInCount(0); // Decrement the count when a user logs out
+      }
     });
   }, []);
 
@@ -44,29 +54,32 @@ const Sidetable = (props) => {
         <div className="head">
           <ul className="nav-menu-main">
             <li>
-              <Link to="/signup">All Bets</Link>
+              <Link to="/signup">Number of players</Link>
             </li>
             <li>
-              <Link to="/play">Tops</Link>
+              <Link to="/play">Total bets</Link>
             </li>
             <li>
-              <Link to="/results">My Bets</Link>
+              <Link to="/results">Total winnings</Link>
             </li>
           </ul>
         </div>
       </div>
-      <div className="totals">
-        <div className="betss">
-          <p>
-            Total Bets : <span className="count">{counts}</span>
-          </p>
+      <div className="back">
+        <div className="user">
+        <FontAwesomeIcon icon={faUser} />
+        {loggedInCount}
         </div>
-        <div className="prev">
-          <FontAwesomeIcon className="clock" icon={faClock} />
-          <p className="betting">Previous hand</p>
+        <div className="user">
+        <FontAwesomeIcon icon={faCoins}/>
+        </div>
+        <div className="user">
+        <FontAwesomeIcon icon={faSackDollar} />
         </div>
       </div>
-      <div className="betting"></div>
+      <div className="betting">
+        
+      </div>
       <table className="tab">
         <thead>
           <tr>

@@ -11,6 +11,7 @@ import { Routes, Route, BrowserRouter, MemoryRouter } from "react-router-dom";
 import { auth } from "./firebase";
 import Home from "./components/Home/Home";
 import Loader from "./components/Loader/Loader";
+
 function App() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
@@ -21,11 +22,14 @@ function App() {
       setLoading(false);
     }, 2000);
   }, []);
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
         setUsername(user.displayName);
-      } else setUsername("");
+      } else {
+        setUsername("");
+      }
     });
   }, []);
 
@@ -34,6 +38,7 @@ function App() {
     auth.signOut();
     setUsername("");
   };
+
   return (
     <div>
       <Routes>
@@ -45,39 +50,21 @@ function App() {
           path="/play"
           element={
             <Suspense fallback={<Loader />}>
-              <Play handleSignOut={handleSignOut} name={username} />
+              <Navbar handleSignOut={handleSignOut} name={username} />
+              {loading ? (
+                <Loader />
+              ) : (
+                <>
+                  <Canvas />
+                  <Sidetable />
+                  <Controls name={username} />
+                </>
+              )}
             </Suspense>
           }
         />
       </Routes>
     </div>
-  );
-}
-
-function Play({ handleSignOut, name }) {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return (
-    <>
-      <Navbar handleSignOut={handleSignOut} name={name} />
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Canvas />
-          <Sidetable />
-          <Controls name={name} />
-        </>
-      )}
-    </>
   );
 }
 

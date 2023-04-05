@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { point, main } from "../Canvas/Canvas";
+import Canvas, { point, main } from "../Canvas/Canvas";
 import {
   faPlusCircle,
   faMinusCircle,
@@ -11,7 +11,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
-import Sidetable from "../Sidetable/Sidetable";
 
 import {
   collection,
@@ -25,8 +24,8 @@ import {
 import { db } from "../../firebase";
 
 const Controls = (props) => {
-  const [amount, setAmount] = useState(1.1);
-  const [amount2, setAmount2] = useState(1.1);
+  const [amount, setAmount] = useState(10);
+  const [amount2, setAmount2] = useState(10);
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const [toggle2, setToggle2] = useState(false);
@@ -63,28 +62,31 @@ const Controls = (props) => {
   };
 
   useEffect(() => {
+    let intervalId;
     const timerId = setTimeout(() => {
       if (isTimerRunning) {
-        setIntervalId(
-          setInterval(() => {
-            setNumber((prevNumber) => {
-              const newNumber = prevNumber + 0.01;
-              if (newNumber >= point) {
-                clearInterval(intervalId);
-                return point;
-              }
-              return newNumber;
-            });
-          }, 33.3)
-        );
+        intervalId = setInterval(() => {
+          setNumber((prevNumber) => {
+            const newNumber = prevNumber + 0.01;
+            if (newNumber >= point) {
+              clearInterval(intervalId);
+              setIntervalId(null);
+              return point;
+            }
+            return newNumber;
+          });
+        }, 33.3);
+        setIntervalId(intervalId);
       }
     }, 15000);
-
+  
     return () => {
       clearInterval(intervalId);
       clearTimeout(timerId);
     };
   }, [point, isTimerRunning]);
+  
+
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -126,13 +128,12 @@ const Controls = (props) => {
       if (!flipped) {
         toast("Bet placed successfully");
       } else {
-        toast("Cashout successful");
+        toast(`You have won ${prize}`);
         setIsTimerRunning(false);
         clearInterval(intervalId);
       }
     } else if (flipped && count1 > 0) {
       // If the button is on its back side and it has been 15 seconds or more, disable
-      // flipping to the front
       return;
     }
   };
@@ -152,7 +153,7 @@ const Controls = (props) => {
       if (!fliped) {
         toast("Bet placed successfully");
       } else {
-        toast("Cashout successful");
+        toast(`You have won ${prize}`);
         setIsTimerRunning2(false);
         clearInterval(intervalId2);
       }
@@ -183,8 +184,6 @@ const Controls = (props) => {
     return () => clearTimeout(timer);
   }, [fliped]);
 
-  const counts = count1 + count2;
-
   const handleIncrement = () => {
     setAmount((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
   };
@@ -211,14 +210,22 @@ const Controls = (props) => {
   if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
+  } else if (cash < point) {
+    prize = cash * amount;
+    result = "won";
+  } else if (cash2 < point) {
+    prize = cash2 * amount;
+    result = "won";
   } else if (cash === point) {
     prize = 0;
     result = "loss";
   } else if (cash < point && cash2 < point) {
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
+    if (cash < point && cash2 < point) {
+      prize = cash * amount + cash2 * amount2;
+    }
     result = "win";
-    prize = greaterCash * greaterAmount;
   } else if (cash === point || cash2 === point) {
     result = "loss";
     prize = 0;
@@ -228,6 +235,9 @@ const Controls = (props) => {
   }
 
   prize = prize.toFixed(2) + "$";
+
+
+  
 
   const handleValueButton = (val) => {
     setAmount(val);
@@ -283,7 +293,7 @@ const Controls = (props) => {
           cash2,
           amount2,
           prize,
-          result
+          result,
         });
         console.log("Data updated successfully");
       } else {
@@ -368,31 +378,31 @@ const Controls = (props) => {
                 <div className="button-container">
                   <div className="button-row">
                     <button
-                      onClick={() => handleValueButton(1)}
+                      onClick={() => handleValueButton(10)}
                       className="dollar"
                     >
-                      1$
+                      10$
                     </button>
                     <button
-                      onClick={() => handleValueButton(2)}
+                      onClick={() => handleValueButton(20)}
                       className="dollar"
                     >
-                      2$
+                      20$
                     </button>
                   </div>
 
                   <div className="button-row">
                     <button
-                      onClick={() => handleValueButton(5)}
+                      onClick={() => handleValueButton(50)}
                       className="dollar"
                     >
-                      5$
+                      50$
                     </button>
                     <button
-                      onClick={() => handleValueButton(10)}
+                      onClick={() => handleValueButton(100)}
                       className="dollar"
                     >
-                      10$
+                      100$
                     </button>
                   </div>
                 </div>
@@ -465,31 +475,31 @@ const Controls = (props) => {
                   <div className="button-container">
                     <div className="button-row">
                       <button
-                        onClick={() => handleValueButton2(1)}
+                        onClick={() => handleValueButton2(10)}
                         className="dollar"
                       >
-                        1$
+                        10$
                       </button>
                       <button
-                        onClick={() => handleValueButton2(2)}
+                        onClick={() => handleValueButton2(20)}
                         className="dollar"
                       >
-                        2$
+                        20$
                       </button>
                     </div>
 
                     <div className="button-row">
                       <button
-                        onClick={() => handleValueButton2(5)}
+                        onClick={() => handleValueButton2(50)}
                         className="dollar"
                       >
-                        5$
+                        50$
                       </button>
                       <button
-                        onClick={() => handleValueButton2(10)}
+                        onClick={() => handleValueButton2(100)}
                         className="dollar"
                       >
-                        10$
+                        100$
                       </button>
                     </div>
                   </div>
@@ -499,7 +509,6 @@ const Controls = (props) => {
           </div>
         )}
       </div>
-      <Sidetable counts={counts} />
     </>
   );
 };

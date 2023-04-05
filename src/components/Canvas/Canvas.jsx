@@ -5,6 +5,8 @@ import { Assets } from "pixi.js";
 import { gsap } from "gsap";
 import "./Canvas.css";
 import gifImage from "../gifImage.gif";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Canvas = () => {
   const appRef = useRef(null);
