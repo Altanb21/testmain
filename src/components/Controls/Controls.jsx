@@ -79,14 +79,12 @@ const Controls = (props) => {
         setIntervalId(intervalId);
       }
     }, 15000);
-  
+
     return () => {
       clearInterval(intervalId);
       clearTimeout(timerId);
     };
   }, [point, isTimerRunning]);
-  
-
 
   useEffect(() => {
     const timerId = setTimeout(() => {
@@ -210,22 +208,20 @@ const Controls = (props) => {
   if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
-  } else if (cash < point) {
-    prize = cash * amount;
-    result = "won";
-  } else if (cash2 < point) {
-    prize = cash2 * amount;
-    result = "won";
   } else if (cash === point) {
     prize = 0;
     result = "loss";
   } else if (cash < point && cash2 < point) {
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
-    if (cash < point && cash2 < point) {
-      prize = cash * amount + cash2 * amount2;
-    }
+    prize = (cash * cash2)* (amount + amount2);
     result = "win";
+  }else if(cash < point && cash2 > point){
+    prize = cash * amount
+    result = "won"
+  }else if(cash2 < point && cash >point){
+    prize = cash2 * amount2
+    result="win"
   } else if (cash === point || cash2 === point) {
     result = "loss";
     prize = 0;
@@ -235,9 +231,6 @@ const Controls = (props) => {
   }
 
   prize = prize.toFixed(2) + "$";
-
-
-  
 
   const handleValueButton = (val) => {
     setAmount(val);
