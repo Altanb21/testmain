@@ -11,7 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
-import Sidetable from '../Sidetable/Sidetable'
+import Sidetable from "../Sidetable/Sidetable";
 
 import {
   collection,
@@ -114,33 +114,34 @@ const Controls = (props) => {
   }, [point, isTimerRunning]);
 
   useEffect(() => {
-    const timerId = setTimeout(() => {
+    let intervalId2;
+    const timerId2 = setTimeout(() => {
       if (isTimerRunning2) {
-        setIntervalId2(
-          setInterval(() => {
-            setNumber2((prevNumber2) => {
-              const newNumber2 = prevNumber2 + 0.01;
-              if (newNumber2 >= point) {
-                clearInterval(intervalId2);
-                return point;
-              }
-              return newNumber2;
-            });
-          }, 33.3)
-        );
+        intervalId2 = setInterval(() => {
+          setNumber2((prevNumber2) => {
+            const newNumber2 = prevNumber2 + 0.01;
+            if (newNumber2 >= point) {
+              clearInterval(intervalId2);
+              setIntervalId2(null);
+              return point;
+            }
+            return newNumber2;
+          });
+        }, 33.3);
+        setIntervalId2(intervalId2);
       }
     }, 15000);
 
     return () => {
       clearInterval(intervalId2);
-      clearTimeout(timerId);
+      clearTimeout(timerId2);
     };
   }, [point, isTimerRunning2]);
 
   const handleClick = () => {
     if (disabled) {
       setFlipped(!flipped);
-      toast(flipped ? "Bet placed successfully" : "Cashout successful");
+      toast(flipped ? "Bet placed successfully" : "Cashout successfull");
       return;
     }
 
@@ -151,7 +152,7 @@ const Controls = (props) => {
       }
       setFlipped(!flipped);
       if (!flipped) {
-        toast(`You have placed${amount}$`);
+        toast(`You have placed ${amount}$`);
       } else {
         toast(`You have won ${prize}`);
         setIsTimerRunning(false);
@@ -166,7 +167,7 @@ const Controls = (props) => {
   const clicked = () => {
     if (disabled2) {
       setFliped(!fliped);
-      toast(fliped ? "Bet placed successfully" : "Cashout successful");
+      toast(fliped ? "Bet placed successfully" : "Cashout successfull");
       return;
     }
     if ((!fliped && count2 === 0) || (fliped && count2 > 0)) {
@@ -176,7 +177,7 @@ const Controls = (props) => {
       }
       setFliped(!fliped);
       if (!fliped) {
-        toast(`You have placed${amount2}$`);
+        toast(`You have placed ${amount2}$`);
       } else {
         toast(`You have won ${prize}`);
         setIsTimerRunning2(false);
@@ -200,13 +201,13 @@ const Controls = (props) => {
   }, [flipped]);
 
   useEffect(() => {
-    let timer;
+    let timer2;
     if (!fliped) {
-      timer = setTimeout(() => {
+      timer2 = setTimeout(() => {
         setDisabled2(true);
       }, 15000);
     }
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer2);
   }, [fliped]);
 
   const handleIncrement = () => {
@@ -239,12 +240,12 @@ const Controls = (props) => {
   if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
-  }
-  else if (cash < point){
-    prize = amount * cash
-  }
-  else if(cash2 < point){
-    prize = amount2 * cash2
+  } else if (cash < point) {
+    prize = amount * cash;
+    result="won"
+  } else if (cash2 < point) {
+    prize = amount2 * cash2;
+    result="won"
   } else if (cash === point) {
     prize = 0;
     result = "loss";
@@ -267,12 +268,12 @@ const Controls = (props) => {
     prize = 0;
   }
 
-  localStorage.setItem('prize', prize);
+  localStorage.setItem("prize", prize);
 
-prize = prize + "$";
-console.log(prize)
+  prize = prize + "$";
+  console.log(prize);
 
-console.log(`Updated prize: ${prize}`);
+  console.log(`Updated prize: ${prize}`);
 
   const handleValueButton = (val) => {
     setAmount(val);
