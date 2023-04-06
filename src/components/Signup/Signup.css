@@ -1,6 +1,8 @@
-.forget{
+/* .forget{
     display: flex;
     margin-top: 5px 0;
+    justify-content: center;
+    align-items: center;
 }
 p:first-child {
     margin-top: 10px;
@@ -9,6 +11,13 @@ p:first-child {
 .forget a{
     color: #00ced1 !important;
 }
+
+button:disabled{
+    background-color: gray!important;
+}
+.required{
+    color: red;
+} */
 .err{
     display: flex;
     align-items: center;
@@ -17,10 +26,4 @@ p:first-child {
 .err b{
     color: red!important;
     font-weight: 500;
-}
-button:disabled{
-    background-color: gray!important;
-}
-.required{
-    color: red;
 }

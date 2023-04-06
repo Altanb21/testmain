@@ -56,7 +56,6 @@ function App() {
               ) : (
                 <>
                   <Canvas />
-                  <Sidetable />
                   <Controls name={username} />
                 </>
               )}

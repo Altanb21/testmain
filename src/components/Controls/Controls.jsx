@@ -11,6 +11,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { auth } from "../../firebase";
+import Sidetable from '../Sidetable/Sidetable'
 
 import {
   collection,
@@ -24,8 +25,16 @@ import {
 import { db } from "../../firebase";
 
 const Controls = (props) => {
-  const [amount, setAmount] = useState(10);
-  const [amount2, setAmount2] = useState(10);
+  const [amount, setAmount] = useState(
+    parseInt(localStorage.getItem("amount")) || 10
+  );
+  const [amount2, setAmount2] = useState(
+    parseInt(localStorage.getItem("amount2")) || 10
+  );
+  const [totalPrize, setTotalPrize] = useState(
+    parseFloat(localStorage.getItem("totalPrize")) || 0
+  );
+  const [totalbets, setTotalbets] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
   const [toggle2, setToggle2] = useState(false);
@@ -46,6 +55,24 @@ const Controls = (props) => {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [intervalId2, setIntervalId2] = useState(null);
   const [isTimerRunning2, setIsTimerRunning2] = useState(true);
+
+  useEffect(() => {
+    const storedTotalbets = parseInt(localStorage.getItem("totalbets")) || 0;
+    const newTotalbets = storedTotalbets + amount + amount2;
+    setTotalbets(newTotalbets);
+    localStorage.setItem("totalbets", newTotalbets);
+    // Reset amount and amount2 to 10 after a refresh
+    setAmount(10);
+    setAmount2(10);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("amount", amount);
+  }, [amount]);
+
+  useEffect(() => {
+    localStorage.setItem("amount2", amount2);
+  }, [amount2]);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -124,7 +151,7 @@ const Controls = (props) => {
       }
       setFlipped(!flipped);
       if (!flipped) {
-        toast("Bet placed successfully");
+        toast(`You have placed${amount}$`);
       } else {
         toast(`You have won ${prize}`);
         setIsTimerRunning(false);
@@ -149,7 +176,7 @@ const Controls = (props) => {
       }
       setFliped(!fliped);
       if (!fliped) {
-        toast("Bet placed successfully");
+        toast(`You have placed${amount2}$`);
       } else {
         toast(`You have won ${prize}`);
         setIsTimerRunning2(false);
@@ -204,24 +231,34 @@ const Controls = (props) => {
 
   let prize;
   let result;
+  const previousPrize = localStorage.getItem("prize");
+  if (previousPrize) {
+    prize = parseFloat(previousPrize);
+  }
 
   if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
+  }
+  else if (cash < point){
+    prize = amount * cash
+  }
+  else if(cash2 < point){
+    prize = amount2 * cash2
   } else if (cash === point) {
     prize = 0;
     result = "loss";
   } else if (cash < point && cash2 < point) {
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
-    prize = (cash * cash2)* (amount + amount2);
+    prize = cash + cash2 * (amount + amount2);
     result = "win";
-  }else if(cash < point && cash2 > point){
-    prize = cash * amount
-    result = "won"
-  }else if(cash2 < point && cash >point){
-    prize = cash2 * amount2
-    result="win"
+  } else if (cash < point && cash2 > point) {
+    prize = cash * amount;
+    result = "won";
+  } else if (cash2 < point && cash > point) {
+    prize = cash2 * amount2;
+    result = "win";
   } else if (cash === point || cash2 === point) {
     result = "loss";
     prize = 0;
@@ -230,7 +267,12 @@ const Controls = (props) => {
     prize = 0;
   }
 
-  prize = prize.toFixed(2) + "$";
+  localStorage.setItem('prize', prize);
+
+prize = prize + "$";
+console.log(prize)
+
+console.log(`Updated prize: ${prize}`);
 
   const handleValueButton = (val) => {
     setAmount(val);
@@ -266,6 +308,7 @@ const Controls = (props) => {
       point,
       result,
       prize,
+      totalbets,
     };
     console.log(data);
 
@@ -274,7 +317,6 @@ const Controls = (props) => {
       const q = query(
         postsRef,
         where("amount", "==", amount),
-        // where("value2", "==", value2),
         where("point", "==", point)
       );
       const querySnapshot = await getDocs(q);
@@ -342,7 +384,10 @@ const Controls = (props) => {
                   </div>
                 </button>
               </div>
-              <ToastContainer className="toast" />
+              <ToastContainer
+                position={toast.POSITION.TOP_LEFT}
+                className="toast"
+              />
             </form>
             <div className="buttons">
               <div className="wrapper">
@@ -440,7 +485,10 @@ const Controls = (props) => {
                     </div>
                   </button>
                 </div>
-                <ToastContainer className="toast" />
+                <ToastContainer
+                  position={toast.POSITION.TOP_LEFT}
+                  className="toast"
+                />
               </form>
               <div className="buttons">
                 <div className="wrapper">
@@ -502,6 +550,7 @@ const Controls = (props) => {
           </div>
         )}
       </div>
+      <Sidetable totalbets={totalbets} />
     </>
   );
 };

@@ -29,6 +29,9 @@ h3 {
   left: 0;
   right: 0;
 }
+.det{
+  color: white;
+}
 @media screen and (max-width: 1200px) {
   .poster,
   .inf,

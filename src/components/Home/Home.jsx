@@ -11,7 +11,7 @@ const Home = () => {
       <img className="poster" src={poster} alt="Image" />
       <div className="inf">
         <h3>What is Aviator Game?</h3>
-        <p>
+        <p className="det">
           The Aviator is a popular money entertainment produced by Spribe on
           numerous well-known websites. You may win big money with a coefficient
           of up to x100. In the game, players get the most enjoyment and have
@@ -23,7 +23,7 @@ const Home = () => {
         </p>
         <img className="aviator" src={aviator} alt="" />
         <h3>How to play aviator?</h3>
-        <p>
+        <p className="det">
           To play the game Aviator, you need to register at the casino.
           Different casinos host Aviator games. Find a casino you can trust and
           create an account with it. Once registered, make your first deposit

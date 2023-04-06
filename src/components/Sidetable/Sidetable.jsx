@@ -10,14 +10,11 @@ import {
   faCoins,
   faSackDollar,
 } from "@fortawesome/free-solid-svg-icons";
-const Sidetable = (props) => {
-  const {  } = props;
+const Sidetable = ({ totalbets }) => {
   const [toggle, setToggle] = useState(false);
   const [data, setData] = useState([]);
-  const [username, setUsername] = useState("")
+  const [username, setUsername] = useState("");
   const [loggedInCount, setLoggedInCount] = useState(0); // Initialize the count to 0
-  ;
-
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -51,35 +48,31 @@ const Sidetable = (props) => {
   return (
     <div className="table">
       <div className="custom-tog">
-        <div className="head">
-          <ul className="nav-menu-main">
-            <li>
-              <Link to="/signup">Number of players</Link>
-            </li>
-            <li>
-              <Link to="/play">Total bets</Link>
-            </li>
-            <li>
-              <Link to="/results">Total winnings</Link>
-            </li>
-          </ul>
-        </div>
+        <ul className="nav-menu-main">
+          <li className="cen">
+            <Link to="/signup">Number of players</Link>
+            <div className="won">
+              <FontAwesomeIcon icon={faUser} />
+              {loggedInCount}
+            </div>
+          </li>
+          <li className="cen">
+            <Link to="/play">Total bets</Link>
+            <div className="won">
+              <FontAwesomeIcon icon={faCoins} />
+              {totalbets}$
+            </div>
+          </li>
+          <li className="cen">
+            <Link to="/results">Total winnings</Link>
+            <div className="won">
+              <FontAwesomeIcon icon={faSackDollar} />-
+            </div>
+          </li>
+        </ul>
       </div>
-      <div className="back">
-        <div className="user">
-        <FontAwesomeIcon icon={faUser} />
-        {loggedInCount}
-        </div>
-        <div className="user">
-        <FontAwesomeIcon icon={faCoins}/>
-        </div>
-        <div className="user">
-        <FontAwesomeIcon icon={faSackDollar} />
-        </div>
-      </div>
-      <div className="betting">
-        
-      </div>
+      
+      <div className="betting"></div>
       <table className="tab">
         <thead>
           <tr>

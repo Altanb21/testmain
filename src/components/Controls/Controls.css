@@ -277,9 +277,10 @@ input:checked + .slider-button .off {
   width: 850px;
   height: 50px;
 }
-.toast {
-  z-index: -1 !important;
+.Toastify__toast-theme--light {
+  background: #000 !important;
 }
+
 
 @media screen and (max-width: 768px) {
   .cont {

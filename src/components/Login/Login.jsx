@@ -1,13 +1,99 @@
-import Navbar from "../Navbar/Navbar";
-import "./Login.css";
+// import Navbar from "../Navbar/Navbar";
+// import "./Login.css";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
+import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import Sheet from '@mui/joy/Sheet';
+import Typography from '@mui/joy/Typography';
+import FormControl from '@mui/joy/FormControl';
+import FormLabel from '@mui/joy/FormLabel';
+import Input from '@mui/joy/Input';
+import Button from '@mui/joy/Button';
+import Link from '@mui/joy/Link';
 
 
-const Login = (props) => {
+// const Login = (props) => {
+
+
+//   return (
+//     <div>
+//       <Navbar />
+//       <div className="container">
+//         <div className='cover'>
+//           <h1 className="log">Login</h1>
+//           <div className="uix">
+//           <h5></h5>
+
+//           </div>
+//           <div className="ui form">
+//             <div className="field">
+//               <label>Email<span className="required"> *</span></label>
+//               <input type="text" name="email" placeholder="Email" onChange={(event) =>
+//             setValues((prev) => ({ ...prev, email: event.target.value }))
+//           } />
+//             </div>
+//             <div className="field">
+//               <label>Password<span className="required"> *</span></label>
+//               <input type="password" name="password" placeholder="Password"  onChange={(event) =>
+//             setValues((prev) => ({ ...prev, pass: event.target.value }))
+//           } />
+//             </div>
+//             <div className="err">
+//               <b>{errorMsg}</b>
+//             </div>
+//             <button disabled={submitButtonDisabled} onClick={handleSubmit} className="fluid">Submit</button>
+//             <div className="forget">
+//               <p>
+//                 Already have an account?{" "}
+//                 <span>
+//                   <Link to="/signup">Sign up</Link>
+//                 </span>
+//               </p>
+//             </div>
+//           </div>
+//         </div>
+//         <ToastContainer />
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+
+// import * as React from 'react';
+
+
+function ModeToggle() {
+  const { mode, setMode } = useColorScheme();
+  const [mounted, setMounted] = React.useState(false);
+  
+
+  // necessary for server-side rendering
+  // because mode is undefined on the server
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <Button
+      variant="outlined"
+      onClick={() => {
+        setMode(mode === 'light' ? 'dark' : 'light');
+      }}
+    >
+      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+    </Button>
+  );
+}
+
+export default function Login() {
   const [values, setValues] = useState({
     email: "",
     pass: "",
@@ -34,48 +120,56 @@ const Login = (props) => {
         setErrorMsg(err.message);
       });
   }
-
   return (
-    <div>
-      <Navbar />
-      <div className="container">
-        <div className='cover'>
-          <h1 className="log">Login</h1>
-          <div className="uix">
-          <h5></h5>
-
+    <CssVarsProvider>
+      <main>
+        <ModeToggle />
+        <Sheet
+          sx={{
+            width: 300,
+            mx: 'auto', // margin left & right
+            my: 4, // margin top & botom
+            py: 3, // padding top & bottom
+            px: 2, // padding left & right
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 2,
+            borderRadius: 'sm',
+            boxShadow: 'md',
+          }}
+          variant="outlined"
+        >
+          <div>
+            <Typography level="h4" component="h1">
+              <b>Welcome!</b>
+            </Typography>
+            <Typography level="body2">Login to continue.</Typography>
           </div>
-          <div className="ui form">
-            <div className="field">
-              <label>Email<span className="required"> *</span></label>
-              <input type="text" name="email" placeholder="Email" onChange={(event) =>
-            setValues((prev) => ({ ...prev, email: event.target.value }))
+          <FormControl>
+            <FormLabel >Email</FormLabel>
+            <Input type="text" name="email" placeholder="Email" onChange={(event) =>
+             setValues((prev) => ({ ...prev, email: event.target.value }))
           } />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Password</FormLabel>
+            <Input type="password" name="password" placeholder="Password"  onChange={(event) =>
+             setValues((prev) => ({ ...prev, pass: event.target.value }))
+           } />
+          </FormControl>
+          <div className="err">
+               <b>{errorMsg}</b>
             </div>
-            <div className="field">
-              <label>Password<span className="required"> *</span></label>
-              <input type="password" name="password" placeholder="Password"  onChange={(event) =>
-            setValues((prev) => ({ ...prev, pass: event.target.value }))
-          } />
-            </div>
-            <div className="err">
-              <b>{errorMsg}</b>
-            </div>
-            <button disabled={submitButtonDisabled} onClick={handleSubmit} className="fluid">Submit</button>
-            <div className="forget">
-              <p>
-                Already have an account?{" "}
-                <span>
-                  <Link to="/signup">Sign up</Link>
-                </span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <ToastContainer />
-      </div>
-    </div>
+          <Button disabled={submitButtonDisabled} onClick={handleSubmit} sx={{ mt: 1 /* margin top */ }}>Log in</Button>
+          <Typography
+            endDecorator={<Link href="/signup">Sign up</Link>}
+            fontSize="sm"
+            sx={{ alignSelf: 'center' }}
+          >
+            Don&apos;t have an account?
+          </Typography>
+        </Sheet>
+      </main>
+    </CssVarsProvider>
   );
-};
-
-export default Login;
+}
