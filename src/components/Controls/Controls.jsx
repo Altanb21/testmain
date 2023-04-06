@@ -152,7 +152,7 @@ const Controls = (props) => {
       }
       setFlipped(!flipped);
       if (!flipped) {
-        toast(`You have placed ${amount}$`);
+        toast(`Bet placed ${amount}$`);
       } else {
         toast(`You have won ${prize}`);
         setIsTimerRunning(false);
@@ -177,7 +177,7 @@ const Controls = (props) => {
       }
       setFliped(!fliped);
       if (!fliped) {
-        toast(`You have placed ${amount2}$`);
+        toast(`Bet placed ${amount2}$`);
       } else {
         toast(`You have won ${prize}`);
         setIsTimerRunning2(false);
@@ -190,6 +190,14 @@ const Controls = (props) => {
     }
   };
 
+  // const handleClick = () =>{
+  //   setFlipped(!flipped);
+  // }
+  // const clicked = () =>{
+  //   setFliped(!fliped);
+  // }
+
+  // }
   useEffect(() => {
     let timer;
     if (!flipped) {
@@ -242,10 +250,10 @@ const Controls = (props) => {
     prize = 0;
   } else if (cash < point) {
     prize = amount * cash;
-    result="won"
+    result = "won";
   } else if (cash2 < point) {
     prize = amount2 * cash2;
-    result="won"
+    result = "won";
   } else if (cash === point) {
     prize = 0;
     result = "loss";
@@ -378,7 +386,7 @@ const Controls = (props) => {
                   onClick={handleClick}
                   disabled={disabled}
                 >
-                  <div className="flip-front">Bet</div>
+                  <div style={{borderRadius:'15px'}} className="flip-front">Bet</div>
                   <div className="flip-back">
                     Cashout <br />
                     {cash + "x"}
@@ -477,7 +485,7 @@ const Controls = (props) => {
                     style={{ borderRadius: "15px" }}
                     className={`flip-button ${fliped ? "fliped" : ""}`}
                     onClick={clicked}
-                    disabled={disabled}
+                    disabled={disabled2}
                   >
                     <div className="flip-front">Bet</div>
                     <div className="flip-back">
