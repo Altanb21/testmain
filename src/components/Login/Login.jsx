@@ -125,7 +125,7 @@ export default function Login() {
     <>
     <Navbar />
     <CssVarsProvider>
-      <main style={{marginTop:'5%'}}>
+      <main style={{marginTop:'10%'}}>
         <ModeToggle />
         <Sheet
           sx={{
