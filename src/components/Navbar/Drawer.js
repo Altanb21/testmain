@@ -10,7 +10,16 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Navbar from "./Navbar";
-const pages = ["Home","Play", "All bets","Signup","Login"];
+import { Link } from "react-router-dom";
+
+const pages = [
+  { name: "Home", link: "/" },
+  { name: "Play", link: "/play" },
+  { name: "All bets", link: "/results" },
+  { name: "Signup", link: "/signup" },
+  { name: "Login", link: "/login" },
+];
+
 const DrawerComp = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -23,11 +32,13 @@ const DrawerComp = () => {
       >
         <List>
           {pages.map((page, index) => (
-            <ListItemButton key={index}>
-              <ListItemIcon>
-                <ListItemText>{page}</ListItemText>
-              </ListItemIcon>
-            </ListItemButton>
+            <Link to={page.link} key={index}>
+              <ListItemButton onClick={() => setOpenDrawer(false)}>
+                <ListItemIcon>
+                  <ListItemText>{page.name}</ListItemText>
+                </ListItemIcon>
+              </ListItemButton>
+            </Link>
           ))}
         </List>
       </Drawer>
