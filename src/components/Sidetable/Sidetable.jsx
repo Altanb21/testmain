@@ -5,7 +5,7 @@ import { db } from "../../firebase";
 import { auth } from "../../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
-import {
+import { 
   faUser,
   faCoins,
   faSackDollar,
@@ -49,29 +49,28 @@ const Sidetable = ({ totalbets }) => {
     <div className="table">
       <div className="custom-tog">
         <ul className="nav-menu-main">
-          <li className="cen">
+          <l    i className="cen">
             <Link to="/signup">Number of players</Link>
             <div className="won">
-              <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon icon={faUser} />&nbsp;
               {loggedInCount}
             </div>
-          </li>
+          </l>
           <li className="cen">
             <Link to="/play">Total bets</Link>
             <div className="won">
-              <FontAwesomeIcon icon={faCoins} />
+              <FontAwesomeIcon icon={faCoins} />&nbsp;
               {totalbets}$
             </div>
           </li>
           <li className="cen">
             <Link to="/results">Total winnings</Link>
             <div className="won">
-              <FontAwesomeIcon icon={faSackDollar} />-
+              <FontAwesomeIcon icon={faSackDollar} />&nbsp;-
             </div>
           </li>
         </ul>
       </div>
-      
       <div className="betting"></div>
       <table className="tab">
         <thead>

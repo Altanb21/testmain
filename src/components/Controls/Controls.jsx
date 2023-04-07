@@ -25,15 +25,8 @@ import {
 import { db } from "../../firebase";
 
 const Controls = (props) => {
-  const [amount, setAmount] = useState(
-    parseInt(localStorage.getItem("amount")) || 10
-  );
-  const [amount2, setAmount2] = useState(
-    parseInt(localStorage.getItem("amount2")) || 10
-  );
-  const [totalPrize, setTotalPrize] = useState(
-    parseFloat(localStorage.getItem("totalPrize")) || 0
-  );
+  const [amount, setAmount] = useState(10);
+  const [amount2, setAmount2] = useState(10);
   const [totalbets, setTotalbets] = useState(0);
   const [toggle, setToggle] = useState(false);
   const [show, setShow] = useState(true);
@@ -55,24 +48,6 @@ const Controls = (props) => {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [intervalId2, setIntervalId2] = useState(null);
   const [isTimerRunning2, setIsTimerRunning2] = useState(true);
-
-  useEffect(() => {
-    const storedTotalbets = parseInt(localStorage.getItem("totalbets")) || 0;
-    const newTotalbets = storedTotalbets + amount + amount2;
-    setTotalbets(newTotalbets);
-    localStorage.setItem("totalbets", newTotalbets);
-    // Reset amount and amount2 to 10 after a refresh
-    setAmount(10);
-    setAmount2(10);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("amount", amount);
-  }, [amount]);
-
-  useEffect(() => {
-    localStorage.setItem("amount2", amount2);
-  }, [amount2]);
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -190,14 +165,6 @@ const Controls = (props) => {
     }
   };
 
-  // const handleClick = () =>{
-  //   setFlipped(!flipped);
-  // }
-  // const clicked = () =>{
-  //   setFliped(!fliped);
-  // }
-
-  // }
   useEffect(() => {
     let timer;
     if (!flipped) {
@@ -219,22 +186,22 @@ const Controls = (props) => {
   }, [fliped]);
 
   const handleIncrement = () => {
-    setAmount((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
+    setAmount((prevValue) => parseFloat((prevValue + 5).toFixed(2)));
   };
 
   const handleDecrement = () => {
     if (amount > 1.0) {
-      setAmount((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
+      setAmount((prevValue) => parseFloat((prevValue - 5).toFixed(2)));
     }
   };
 
   const handleIncrement2 = () => {
-    setAmount2((prevValue) => parseFloat((prevValue + 0.01).toFixed(2)));
+    setAmount2((prevValue) => parseFloat((prevValue + 5).toFixed(2)));
   };
 
   const handleDecrement2 = () => {
     if (amount2 > 1.0) {
-      setAmount2((prevValue) => parseFloat((prevValue - 0.01).toFixed(2)));
+      setAmount2((prevValue) => parseFloat((prevValue - 5).toFixed(2)));
     }
   };
 
@@ -278,16 +245,25 @@ const Controls = (props) => {
 
   localStorage.setItem("prize", prize);
 
-  prize = prize + "$";
+  prize = prize.toFixed(1) + "$";
   console.log(prize);
 
   console.log(`Updated prize: ${prize}`);
 
-  const handleValueButton = (val) => {
-    setAmount(val);
+  const handleValueButton = (value) => {
+    setAmount((prevValue) => {
+      const currentValue = parseFloat(prevValue);
+      const newValue = parseFloat((currentValue + value).toFixed(2));
+      return newValue.toString();
+    });
   };
-  const handleValueButton2 = (val2) => {
-    setAmount2(val2);
+
+  const handleValueButton2 = (value2) => {
+    setAmount2((prevValue2) => {
+      const currentValue = parseFloat(prevValue2);
+      const newValue = parseFloat((currentValue + value2).toFixed(2));
+      return newValue.toString();
+    });
   };
 
   const handleChange = (event) => {
@@ -358,7 +334,8 @@ const Controls = (props) => {
         <div className="control">
           <div className="toggle-container">
             <div className="slider-container">
-              <label className="slider">
+              <span className="stake">STAKE SELECTOR</span>
+              {/* <label className="slider">
                 <div className="slider-label left">Off</div>
                 <input
                   type="checkbox"
@@ -369,7 +346,7 @@ const Controls = (props) => {
                   <div className="slider-button-label on">Bet</div>
                   <div className="slider-button-label off">Auto</div>
                 </div>
-              </label>
+              </label> */}
             </div>
             <FontAwesomeIcon
               className={show ? "minus" : "plus"}
@@ -378,26 +355,6 @@ const Controls = (props) => {
             />
           </div>
           <div className="divide">
-            <form onClick={handleSubmit}>
-              <div className="betx">
-                <button
-                  style={{ borderRadius: "15px" }}
-                  className={`flip-button ${flipped ? "flipped" : ""}`}
-                  onClick={handleClick}
-                  disabled={disabled}
-                >
-                  <div style={{borderRadius:'15px'}} className="flip-front">Bet</div>
-                  <div className="flip-back">
-                    Cashout <br />
-                    {cash + "x"}
-                  </div>
-                </button>
-              </div>
-              <ToastContainer
-                position={toast.POSITION.TOP_LEFT}
-                className="toast"
-              />
-            </form>
             <div className="buttons">
               <div className="wrapper">
                 <FontAwesomeIcon
@@ -420,48 +377,68 @@ const Controls = (props) => {
                   icon={faPlusCircle}
                 />
               </div>
+              <div className="button-container">
+                <div className="button-row">
+                  <button
+                    onClick={() => handleValueButton(10)}
+                    className="dollar"
+                  >
+                    10$
+                  </button>
+                  <button
+                    onClick={() => handleValueButton(20)}
+                    className="dollar"
+                  >
+                    20$
+                  </button>
+                </div>
 
-              <div className="money">
-                <div className="button-container">
-                  <div className="button-row">
-                    <button
-                      onClick={() => handleValueButton(10)}
-                      className="dollar"
-                    >
-                      10$
-                    </button>
-                    <button
-                      onClick={() => handleValueButton(20)}
-                      className="dollar"
-                    >
-                      20$
-                    </button>
-                  </div>
-
-                  <div className="button-row">
-                    <button
-                      onClick={() => handleValueButton(50)}
-                      className="dollar"
-                    >
-                      50$
-                    </button>
-                    <button
-                      onClick={() => handleValueButton(100)}
-                      className="dollar"
-                    >
-                      100$
-                    </button>
-                  </div>
+                <div className="button-row">
+                  <button
+                    onClick={() => handleValueButton(50)}
+                    className="dollar"
+                  >
+                    50$
+                  </button>
+                  <button
+                    onClick={() => handleValueButton(100)}
+                    className="dollar"
+                  >
+                    100$
+                  </button>
                 </div>
               </div>
             </div>
+            <form onClick={handleSubmit}>
+              <div className="betx">
+                <button
+                  style={{ borderRadius: "15px" }}
+                  className={`flip-button ${flipped ? "flipped" : ""}`}
+                  onClick={handleClick}
+                  disabled={disabled}
+                >
+                  <div style={{ borderRadius: "15px" }} className="flip-front">
+                    PLACE A BET
+                  </div>
+                  <div className="flip-back">
+                    TAKE WINNINGS <br />
+                    {cash + "x"}
+                  </div>
+                </button>
+              </div>
+              <ToastContainer
+                position={toast.POSITION.TOP_LEFT}
+                className="toast"
+              />
+            </form>
           </div>
         </div>
         {show && (
           <div className="control">
             <div className="toggle-container">
               <div className="slider-container">
-                <label className="slider">
+                <span className="stake">STAKE SELECTOR</span>
+                {/* <label className="slider">
                   <div className="slider-label left">Off</div>
                   <input
                     type="checkbox"
@@ -475,30 +452,10 @@ const Controls = (props) => {
                     <div className="slider-button-label on">Bet</div>
                     <div className="slider-button-label off">Auto</div>
                   </div>
-                </label>
+                </label> */}
               </div>
             </div>
             <div className="divide">
-              <form onClick={handleSubmit}>
-                <div className="betx">
-                  <button
-                    style={{ borderRadius: "15px" }}
-                    className={`flip-button ${fliped ? "fliped" : ""}`}
-                    onClick={clicked}
-                    disabled={disabled2}
-                  >
-                    <div className="flip-front">Bet</div>
-                    <div className="flip-back">
-                      Cashout <br />
-                      {cash2 + "x"}
-                    </div>
-                  </button>
-                </div>
-                <ToastContainer
-                  position={toast.POSITION.TOP_LEFT}
-                  className="toast"
-                />
-              </form>
               <div className="buttons">
                 <div className="wrapper">
                   <FontAwesomeIcon
@@ -555,6 +512,26 @@ const Controls = (props) => {
                   </div>
                 </div>
               </div>
+              <form onClick={handleSubmit}>
+                <div className="betx">
+                  <button
+                    style={{ borderRadius: "15px" }}
+                    className={`flip-button ${fliped ? "fliped" : ""}`}
+                    onClick={clicked}
+                    disabled={disabled2}
+                  >
+                    <div className="flip-front">PLACE A BET</div>
+                    <div className="flip-back">
+                      TAKE WINNINGS <br />
+                      {cash2 + "x"}
+                    </div>
+                  </button>
+                </div>
+                <ToastContainer
+                  position={toast.POSITION.TOP_LEFT}
+                  className="toast"
+                />
+              </form>
             </div>
           </div>
         )}

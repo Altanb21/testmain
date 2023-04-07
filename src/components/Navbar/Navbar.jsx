@@ -1,67 +1,13 @@
-// import React, { useState } from "react";
-// import "./Navbar.css";
-// import { Link } from "react-router-dom";
-// import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-// const Navbar = (props) => {
-//   const [click, setclick] = useState(false);
-//   const handleClick = () => setclick(!click);
-//   const handleRefresh = () => {
-//     window.Location.reload();
-//   };
-//   return (
-//     <div className="header">
-//       <Link to="/">
-//         <h1>Aviatorcrash</h1>
-//       </Link>
-//       <ul className={click ? "nav-menu active" : "nav-menu"}>
-//         <li>
-//           <Link>{props.name ? `${props.name}` : ""}</Link>
-//         </li>
-//         <li>
-//           <Link to="/">Home</Link>
-//         </li>
-//         <li>
-//           <Link to="/signup">Signup</Link>
-//         </li>
-//         {!props.name ? (
-//           <li>
-//             <Link to="/login">Login</Link>
-//           </li>
-//         ) : (
-//           <li>
-//             <Link onClick={props.handleSignOut}>Logout</Link>
-//           </li>
-//         )}
-//         <li>
-//           <Link to="/play">Play</Link>
-//         </li>
-//         <li>
-//           <Link to="/results">All Bets</Link>
-//         </li>
-//       </ul>
-//       <div className="hamburger" onClick={handleClick}>
-//         {click ? (
-//           <FontAwesomeIcon
-//             style={{ color: "#fff", fontSize: "20px" }}
-//             icon={faTimes}
-//           />
-//         ) : (
-//           <FontAwesomeIcon
-//             style={{ color: "#fff", fontSize: "20px" }}
-//             icon={faBars}
-//           />
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Navbar;
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../logo.png";
+import logo2 from "../logo2.jpeg";
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuItem from '@mui/material/MenuItem';
+import Menu from '@mui/material/Menu';
+import IconButton from '@mui/material/IconButton';
+
+
 import {
   AppBar,
   Button,
@@ -73,65 +19,77 @@ import {
   useTheme,
 } from "@mui/material";
 import DrawerComp from "./Drawer";
-import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
-const Header = () => {
+const Navbar = (props) => {
   const [value, setValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <React.Fragment>
       <AppBar sx={{ background: "#000000" }}>
         <Toolbar>
-          <FlightTakeoffIcon sx={{ transform: "scale(2)" }} />
+          <img
+            src={logo}
+            alt="AvaitorCrash logo"
+            height={25}
+            width={200}
+            sx={{ fontSize: "2rem", paddingLeft: "10%" }}
+          />{" "}
           {isMatch ? (
             <>
-              <Typography sx={{ fontSize: "2rem", paddingLeft: "10%" }}>
-                AviatorCrash
+              <Typography sx={{ fontSize: "2rem", paddingLeft: "5%" }}>
+                <img
+                  src={logo2}
+                  height={50}
+                  width={100}
+                  sx={{ transform: "scale(2)", marginLeft: "20%" }}
+                />
               </Typography>
               <DrawerComp />
             </>
           ) : (
-            // <>
-            //   <Tabs
-            //     sx={{ marginLeft: "auto" }}
-            //     indicatorColor="secondary"
-            //     textColor="inherit"
-            //     value={value}
-            //     onChange={(e, value) => setValue(value)}
-            //   >
-            //     <Tab href label="home" />
-            //     <Tab label="play" />
-            //     <Tab label="all bets" />
-            //     <Tab label="Contact" />
-            //   </Tabs>
-            //   <Button sx={{ marginLeft: "auto" }} variant="outlined">
-            //     Login
-            //   </Button>
-            //   <Button sx={{ marginLeft: "10px" }} variant="outlined">
-            //     SignUp
-            //   </Button>
-            // </>
             <>
-          <Tabs
-            sx={{ marginLeft: "auto" }}
-            indicatorColor="secondary"
-            textColor="inherit"
-            value={value}
-            onChange={(e, value) => setValue(value)}
-          >
-            <Tab component={Link} to="/" label="home" />
-            <Tab component={Link} to="/play" label="play" />
-            <Tab component={Link} to="/results" label="all bets" />
-          </Tabs>
-          <Button
-                component={Link}
-                to="/login"
+              <Tabs
                 sx={{ marginLeft: "auto" }}
-                variant="outlined"
+                indicatorColor="secondary"
+                textColor="inherit"
+                value={value}
+                onChange={(e, value) => setValue(value)}
               >
-                Login
-              </Button>
+                <Tab component={Link} to="/" label="home" />
+                <Tab component={Link} to="/play" label="play" />
+                <Tab component={Link} to="/results" label="all bets" />
+              </Tabs>
+              {!props.name ? (
+                <Button
+                  component={Link}
+                  to="/login"
+                  sx={{ marginLeft: "auto" }}
+                  variant="outlined"
+                >
+                  Login
+                </Button>
+              ) : (
+                <Button
+                onClick={props.handleSignOut}
+                  component={Link}
+                  to="/login"
+                  sx={{ marginLeft: "auto" }}
+                  variant="outlined"
+                >
+                  Logout
+                </Button>
+              )}
               <Button
                 component={Link}
                 to="/signup"
@@ -140,7 +98,39 @@ const Header = () => {
               >
                 SignUp
               </Button>
-        </>
+              {auth && (
+            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+              </Menu>
+            </div>
+          )}
+            </>
           )}
         </Toolbar>
       </AppBar>
@@ -148,4 +138,5 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;
+

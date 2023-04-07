@@ -2,13 +2,14 @@ import React from "react";
 import Navbar from "../Navbar/Navbar";
 import poster from "../poster.jpeg";
 import aviator from "../aviator.png";
+import av from '../av.jpeg'
 
 import "./Home.css";
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <img className="poster" src={poster} alt="Image" />
+      <img className="poster" src={av} alt="Image" />
       <div className="inf">
         <h3>What is Aviator Game?</h3>
         <p className="det">

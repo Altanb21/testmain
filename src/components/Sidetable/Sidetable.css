@@ -1,13 +1,13 @@
 .table {
-  max-height: 100%;
   box-shadow: 0px 0px 2px 2px #00ced1;
   border-radius: 15px;
   position: absolute;
-  top: 5em;
+  margin-top:  0.7vh!important;
   right: 1em;
-  width: 480px; /* adjust as needed */
   max-width: 100%;
-  height: 620px;
+  height: 89vh;
+  border-radius: 15px;
+  width: 30%;
 }
 
 .nav-menu-main {
@@ -92,7 +92,6 @@
 }
 
 .tab th {
-  /* background-color: #f2f2f2; */
   color: #333;
   border-bottom: 1px solid gray;
   padding: 5px;
@@ -104,60 +103,22 @@
 .tab tr:hover {
   background-color: #181818;
 }
-@media (min-width: 480px) and (max-width: 766px) {
-  .table {
-    max-width: 80%;
-  }
-}
 
-@media screen and (max-width: 1360px) {
-  .table {
-    /* margin: 47em auto;
-    left: 0;
-    right: 0;
-    position: absolute;
-    width: 850px; */
-    max-width: 90%;
-  }
-}
-/* @media screen and (max-width:767px) {
+@media screen and (max-width:1420px) {
   .table{
-    margin: 42em auto;
-    max-width: 90%;
-    box-shadow: 0px 0px 2px 2px #00ced1;
-
-  }
-} */
-
-@media (min-width: 768px) and (max-width: 1360px) {
-  .table {
-    visibility: visible;
-    margin: 47em auto;
-    left: 0;
-    right: 0;
-    position: absolute;
-    max-width: 90%;
-    box-shadow: 0px 0px 2px 2px #00ced1;
-  }
-  .custom-tog {
-    width: 850px;
+    width: 28%;
+    font-size: 11px;
   }
 }
+@media screen and (max-width:900px) {
+  .table{
+    font-size: 9px;
+  }
+}
+@media screen and (max-width: 500px) {
+.table{
+  visibility: hidden;
 
-@media (min-width: 1690px) and (max-width: 1850px) {
-  .table {
-    width: 550px;
-    max-height: 570px;
-  }
-}
-/* @media (min-width:1690px) and (max-width: 1850px) {
-  .table {
-    min-height : 500px;
-  }
-} */
-@media (min-width: 1690px) and (max-width: 1920px) {
-  .table {
-    min-height: 870px;
-    width: 550px;
-  }
-}
+}}
+
+

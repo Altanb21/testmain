@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Navbar from "./Navbar";
-const pages = ["Home","play", "All bets",];
+const pages = ["Home","Play", "All bets","Signup","Login"];
 const DrawerComp = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
 
