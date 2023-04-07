@@ -175,83 +175,87 @@ export default function Signup() {
       });
   };
   return (
-    <CssVarsProvider>
-      <main>
-        <ModeToggle />
-        <Sheet
-          sx={{
-            width: 300,
-            mx: "auto", // margin left & right
-            my: 4, // margin top & botom
-            py: 3, // padding top & bottom
-            px: 2, // padding left & right
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            borderRadius: "sm",
-            boxShadow: "md",
-          }}
-          variant="outlined"
-        >
-          <div>
-            <Typography level="h4" component="h1">
-              <b>Welcome!</b>
-            </Typography>
-            <Typography level="body2">Sign up to continue.</Typography>
-          </div>
+    <>
+      <Navbar />
 
-          <FormControl>
-            <FormLabel>Email</FormLabel>
-            <Input
-              type="text"
-              name="email"
-              placeholder="Email"
-              onChange={(event) =>
-                setValues((prev) => ({ ...prev, email: event.target.value }))
-              }
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Username</FormLabel>
-            <Input
-              type="text"
-              name="username"
-              placeholder="Username"
-              onChange={(event) =>
-                setValues((prev) => ({ ...prev, name: event.target.value }))
-              }
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Password</FormLabel>
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={(event) =>
-                setValues((prev) => ({ ...prev, pass: event.target.value }))
-              }
-            />
-          </FormControl>
-          <div className="err">
-            <b>{errorMsg}</b>
-          </div>
-          <Button
-            onClick={handleSubmit}
-            disabled={submitButtonDisabled}
-            sx={{ mt: 1 /* margin top */ }}
+      <CssVarsProvider>
+        <main>
+          <ModeToggle />
+          <Sheet
+            sx={{
+              width: 300,
+              mx: "auto", // margin left & right
+              my: 4, // margin top & botom
+              py: 3, // padding top & bottom
+              px: 2, // padding left & right
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              borderRadius: "sm",
+              boxShadow: "md",
+            }}
+            variant="outlined"
           >
-            Log in
-          </Button>
-          <Typography
-            endDecorator={<Link href="/login">Login</Link>}
-            fontSize="sm"
-            sx={{ alignSelf: "center" }}
-          >
-            Already have an account?
-          </Typography>
-        </Sheet>
-      </main>
-    </CssVarsProvider>
+            <div>
+              <Typography level="h4" component="h1">
+                <b>Welcome!</b>
+              </Typography>
+              <Typography level="body2">Sign up to continue.</Typography>
+            </div>
+
+            <FormControl>
+              <FormLabel>Email</FormLabel>
+              <Input
+                type="text"
+                name="email"
+                placeholder="Email"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, email: event.target.value }))
+                }
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Username</FormLabel>
+              <Input
+                type="text"
+                name="username"
+                placeholder="Username"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, name: event.target.value }))
+                }
+              />
+            </FormControl>
+            <FormControl>
+              <FormLabel>Password</FormLabel>
+              <Input
+                type="password"
+                name="password"
+                placeholder="Password"
+                onChange={(event) =>
+                  setValues((prev) => ({ ...prev, pass: event.target.value }))
+                }
+              />
+            </FormControl>
+            <div className="err">
+              <b>{errorMsg}</b>
+            </div>
+            <Button
+              onClick={handleSubmit}
+              disabled={submitButtonDisabled}
+              sx={{ mt: 1 /* margin top */ }}
+            >
+              Log in
+            </Button>
+            <Typography
+              endDecorator={<Link href="/login">Login</Link>}
+              fontSize="sm"
+              sx={{ alignSelf: "center" }}
+            >
+              Already have an account?
+            </Typography>
+          </Sheet>
+        </main>
+      </CssVarsProvider>
+    </>
   );
 }

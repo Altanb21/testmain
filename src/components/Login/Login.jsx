@@ -13,6 +13,7 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Button from '@mui/joy/Button';
 import Link from '@mui/joy/Link';
+import  Navbar from '../Navbar/Navbar'
 
 
 // const Login = (props) => {
@@ -121,6 +122,8 @@ export default function Login() {
       });
   }
   return (
+    <>
+    <Navbar />
     <CssVarsProvider>
       <main>
         <ModeToggle />
@@ -171,5 +174,6 @@ export default function Login() {
         </Sheet>
       </main>
     </CssVarsProvider>
+    </>
   );
 }
