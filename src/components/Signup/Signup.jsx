@@ -179,7 +179,7 @@ export default function Signup() {
       <Navbar />
 
       <CssVarsProvider>
-        <main>
+        <main style={{marginTop:'5%'}}>
           <ModeToggle />
           <Sheet
             sx={{
