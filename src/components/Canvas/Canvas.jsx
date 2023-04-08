@@ -19,6 +19,13 @@ const Canvas = () => {
     appRef.current = app;
     document.body.appendChild(app.view);
 
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        window.location.reload();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     let start = new PIXI.Text("STARTING IN 15:00", {
       fontFamily: "Times New Roman",
       fontSize: 45,
@@ -371,6 +378,7 @@ const Canvas = () => {
     uiy.alpha = 0;
     gsap.to(uiy, { duration: 0, alpha: 1, delay: 14 });
     return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
       app.destroy(true);
     };
   }, []);
