@@ -244,7 +244,7 @@ export default function Signup() {
               disabled={submitButtonDisabled}
               sx={{ mt: 1 /* margin top */ }}
             >
-              Log in
+              Register
             </Button>
             <Typography
               endDecorator={<Link href="/login">Login</Link>}
