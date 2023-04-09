@@ -329,28 +329,26 @@ input:checked + .slider-button .off {
     box-shadow: none;
   }
   .wrapper {
-    height: 3vh;
+    height: 4vh;
     width: 35vw;
   }
   .inc{
-    font-size: 17px!important;
+    font-size: 16px;
   }
   .multiplier {
-    width: 23vw;
+    width: 25vw;
   }
   .control {
     width: 97%;
   }
   .dollar{
     width: 13vw;
-    height: 2vh;
+    height: 3vh;
   }
-  .inc{
-    font-size: 14px;
-  }
+
   .flip-button{
     width: 40vw;
-    height: 6vh;
+    height: 9vh;
     font-size: 10px;
   }
   

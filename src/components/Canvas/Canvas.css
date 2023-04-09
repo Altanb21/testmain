@@ -15,5 +15,6 @@ canvas {
   canvas{
     max-width: 90%;
     margin: 5em auto;
+    border-radius: 5px;
   }
 }
