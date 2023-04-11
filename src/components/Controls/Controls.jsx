@@ -357,22 +357,26 @@ const Controls = (props) => {
   // prize = prize.toFixed(1) + "$";
   // console.log(prize);
 
-  if (cash > point ) {
+  if (cash > point) {
     result = "loss";
     prize = 0;
-  } else if (cash > 1.0 && cash2 > 1.0 && cash <= point && cash2 <= point) {
+  }
+  if (cash > 1.00 && cash2 > 1.00 && cash <= point && cash2 <= point) {
     prize = cash * amount + cash2 * amount2;
     result = "wonboth";
-  } else if (cash <= point && cash2 > point) {
+  }
+  if (cash <= point && cash2 > point) {
     prize = cash * amount;
     result = "won";
-  } else if (cash > point && cash2 <= point) {
+  }
+  if (cash > point && cash2 <= point) {
     prize = cash2 * amount2;
     result = "won";
-  } else if (cash < point) {
+  }
+  if (cash < point) {
     prize = cash * amount;
     result = "wincash1";
-  } 
+  }
   prize = prize.toFixed(1) + "$";
 
   // console.log(`Updated prize: ${prize}`);
