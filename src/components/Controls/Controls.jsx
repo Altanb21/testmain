@@ -431,7 +431,7 @@ const Controls = (props) => {
       const postsRef = collection(db, "posts");
       const q = query(
         postsRef,
-        where("amount", "==", amount),
+        // where("amount", "==", amount),
         where("point", "==", point)
       );
       const querySnapshot = await getDocs(q);
@@ -439,7 +439,7 @@ const Controls = (props) => {
       if (querySnapshot.docs.length > 0) {
         const existingData = querySnapshot.docs[0];
         await updateDoc(existingData.ref, {
-          // cash,
+          cash,
           cash2,
           amount2,
           prize,
