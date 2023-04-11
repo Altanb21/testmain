@@ -357,9 +357,9 @@ const Controls = (props) => {
   // prize = prize.toFixed(1) + "$";
   // console.log(prize);
 
-  if (cash < point ) {
-    result = "win";
-    prize = cash * amount;
+  if (cash > point ) {
+    result = "loss";
+    prize = 0;
   } else if (cash > 1.0 && cash2 > 1.0 && cash <= point && cash2 <= point) {
     prize = cash * amount + cash2 * amount2;
     result = "wonboth";
@@ -372,10 +372,7 @@ const Controls = (props) => {
   } else if (cash < point) {
     prize = cash * amount;
     result = "wincash1";
-  } else {
-    result = "loss";
-    prize = 0;
-  }
+  } 
   prize = prize.toFixed(1) + "$";
 
   // console.log(`Updated prize: ${prize}`);
