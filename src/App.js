@@ -6,7 +6,7 @@ import Controls from "./components/Controls/Controls";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Results from "./components/Results/Results";
-import { Routes, Route, BrowserRouter, MemoryRouter } from "react-router-dom";
+import { Routes, Route, useNavigate  } from "react-router-dom";
 import { auth } from "./firebase";
 import Home from "./components/Home/Home";
 import Loader from "./components/Loader/Loader";
@@ -14,6 +14,7 @@ import Loader from "./components/Loader/Loader";
 function App() {
   const [username, setUsername] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -33,9 +34,10 @@ function App() {
   }, []);
 
   const handleSignOut = (e) => {
-    e.preventDefault();
     auth.signOut();
     setUsername("");
+    navigate("/"); // use navigate instead of history.push
+    // e.preventDefault();
   };
 
   return (

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../logo.png";
 import logo2 from "../logo2.jpeg";
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
-import IconButton from '@mui/material/IconButton';
-
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import IconButton from "@mui/material/IconButton";
 
 import {
   AppBar,
@@ -20,6 +19,7 @@ import {
 } from "@mui/material";
 import DrawerComp from "./Drawer";
 const Navbar = (props) => {
+  const navigate = useNavigate();
   const [value, setValue] = useState();
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
@@ -34,6 +34,10 @@ const Navbar = (props) => {
     setAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    props.handleSignOut();
+    navigate("/");
+  };
   return (
     <React.Fragment>
       <AppBar sx={{ background: "#000000" }}>
@@ -70,7 +74,7 @@ const Navbar = (props) => {
                 <Tab component={Link} to="/play" label="play" />
                 <Tab component={Link} to="/results" label="all bets" />
               </Tabs>
-              {!props.name ? (
+              {/* {!props.name ? (
                 <Button
                   component={Link}
                   to="/login"
@@ -81,9 +85,7 @@ const Navbar = (props) => {
                 </Button>
               ) : (
                 <Button
-                onClick={props.handleSignOut}
-                  component={Link}
-                  to="/login"
+                onClick={handleSignOut}
                   sx={{ marginLeft: "auto" }}
                   variant="outlined"
                 >
@@ -97,39 +99,68 @@ const Navbar = (props) => {
                 variant="outlined"
               >
                 SignUp
-              </Button>
+              </Button> */}
+              {!props.name ? (
+                <>
+                  <Button
+                    component={Link}
+                    to="/login"
+                    sx={{ marginLeft: "auto" }}
+                    variant="outlined"
+                  >
+                    Login
+                  </Button>
+                  <Button
+                    component={Link}
+                    to="/signup"
+                    sx={{ marginLeft: "10px" }}
+                    variant="outlined"
+                  >
+                    SignUp
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  onClick={handleSignOut}
+                  sx={{ marginLeft: "auto" }}
+                  variant="outlined"
+                >
+                  Logout
+                </Button>
+              )}
+
               {auth && (
-            <div>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
+                <div>
+                  <IconButton
+                    size="large"
+                    aria-label="account of current user"
+                    aria-controls="menu-appbar"
+                    aria-haspopup="true"
+                    onClick={handleMenu}
+                    color="inherit"
+                  >
+                    <AccountCircle />
+                  </IconButton>
+                  <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                    <MenuItem onClick={handleClose}>My account</MenuItem>
+                  </Menu>
+                </div>
+              )}
             </>
           )}
         </Toolbar>
@@ -139,4 +170,3 @@ const Navbar = (props) => {
 };
 
 export default Navbar;
-

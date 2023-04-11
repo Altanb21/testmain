@@ -272,6 +272,11 @@ input:checked + .slider-button .off {
 .Toastify__toast-theme--light {
   background: #fff !important;
 }
+.Toastify__toast-container {
+  padding: 20px!important;
+  --toastify-toast-min-height: 48px!important;
+}
+
 
 @media screen and (max-width: 1420px) {
   .cont {

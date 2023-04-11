@@ -49,13 +49,13 @@ const Sidetable = ({ totalbets }) => {
     <div className="table">
       <div className="custom-tog">
         <ul className="nav-menu-main">
-          <l    i className="cen">
+          <li className="cen">
             <Link to="/signup">Number of players</Link>
             <div className="won">
               <FontAwesomeIcon icon={faUser} />&nbsp;
               {loggedInCount}
             </div>
-          </l>
+          </li>
           <li className="cen">
             <Link to="/play">Total bets</Link>
             <div className="won">

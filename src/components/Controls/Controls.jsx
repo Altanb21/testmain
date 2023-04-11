@@ -51,7 +51,6 @@ const Controls = (props) => {
   const [flipTime, setFlipTime] = useState(Date.now());
   const [flipTime2, setFlipTime2] = useState(Date.now());
 
-
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -66,6 +65,30 @@ const Controls = (props) => {
     setUsername("");
   };
 
+  // useEffect(() => {
+  //   let intervalId;
+  //   const timerId = setTimeout(() => {
+  //     if (isTimerRunning) {
+  //       intervalId = setInterval(() => {
+  //         setNumber((prevNumber) => {
+  //           const newNumber = prevNumber + 0.01;
+  //           if (newNumber >= point) {
+  //             clearInterval(intervalId);
+  //             setIntervalId(null);
+  //             return point;
+  //           }
+  //           return newNumber;
+  //         });
+  //       }, 33.3);
+  //       setIntervalId(intervalId);
+  //     }
+  //   }, 15000);
+
+  //   return () => {
+  //     clearInterval(intervalId);
+  //     clearTimeout(timerId);
+  //   };
+  // }, [point, isTimerRunning]);
   useEffect(() => {
     let intervalId;
     const timerId = setTimeout(() => {
@@ -73,11 +96,6 @@ const Controls = (props) => {
         intervalId = setInterval(() => {
           setNumber((prevNumber) => {
             const newNumber = prevNumber + 0.01;
-            if (newNumber >= point) {
-              clearInterval(intervalId);
-              setIntervalId(null);
-              return point;
-            }
             return newNumber;
           });
         }, 33.3);
@@ -91,6 +109,30 @@ const Controls = (props) => {
     };
   }, [point, isTimerRunning]);
 
+  // useEffect(() => {
+  //   let intervalId2;
+  //   const timerId2 = setTimeout(() => {
+  //     if (isTimerRunning2) {
+  //       intervalId2 = setInterval(() => {
+  //         setNumber2((prevNumber2) => {
+  //           const newNumber2 = prevNumber2 + 0.01;
+  //           if (newNumber2 >= point) {
+  //             clearInterval(intervalId2);
+  //             setIntervalId2(null);
+  //             return point;
+  //           }
+  //           return newNumber2;
+  //         });
+  //       }, 33.3);
+  //       setIntervalId2(intervalId2);
+  //     }
+  //   }, 15000);
+
+  //   return () => {
+  //     clearInterval(intervalId2);
+  //     clearTimeout(timerId2);
+  //   };
+  // }, [point, isTimerRunning2]);
   useEffect(() => {
     let intervalId2;
     const timerId2 = setTimeout(() => {
@@ -98,11 +140,6 @@ const Controls = (props) => {
         intervalId2 = setInterval(() => {
           setNumber2((prevNumber2) => {
             const newNumber2 = prevNumber2 + 0.01;
-            if (newNumber2 >= point) {
-              clearInterval(intervalId2);
-              setIntervalId2(null);
-              return point;
-            }
             return newNumber2;
           });
         }, 33.3);
@@ -146,12 +183,17 @@ const Controls = (props) => {
     if (disabled) {
       setFlipped(!flipped);
       const remainingTime = 15000 - Math.max(Date.now() - flipTime, 0);
-      const adjustedTime = Math.max(remainingTime - (flipTime !== null ? Math.max((Date.now() - flipTime - 15000), 0) : 0), 0);
+      const adjustedTime = Math.max(
+        remainingTime -
+          (flipTime !== null ? Math.max(Date.now() - flipTime - 15000, 0) : 0),
+        0
+      );
       toast(flipped ? "Bet placed successfully" : "Cashout successfull");
       return;
     }
 
-    if (!flipped && count1 === 0 && flipTime !== null) { // check if flipTime is not null
+    if (!flipped && count1 === 0 && flipTime !== null) {
+      // check if flipTime is not null
       if (!isClicked) {
         setCount1(count1 + 1);
         setIsClicked(true);
@@ -162,7 +204,7 @@ const Controls = (props) => {
       const elapsed = Date.now() - flipTime;
       const remainingTime = 15000 - elapsed;
       if (elapsed < 15000) {
-        toast(`Please wait ${Math.ceil(remainingTime / 1000)} seconds before flipping back`);
+        toast(`Cashout available after ${Math.ceil(remainingTime / 1000)}`);
       } else {
         setFlipped(false);
         setFlipTime(Date.now()); // set flipTime to current time
@@ -176,11 +218,18 @@ const Controls = (props) => {
     if (disabled2) {
       setFliped(!fliped);
       const remainingTime2 = 15000 - Math.max(Date.now() - flipTime2, 0);
-      const adjustedTime2 = Math.max(remainingTime2 - (flipTime2 !== null ? Math.max((Date.now() - flipTime2 - 15000), 0) : 0), 0);
+      const adjustedTime2 = Math.max(
+        remainingTime2 -
+          (flipTime2 !== null
+            ? Math.max(Date.now() - flipTime2 - 15000, 0)
+            : 0),
+        0
+      );
       toast(fliped ? "Bet placed successfully" : "Cashout successfull");
       return;
     }
-    if (!fliped && count2 === 0 && flipTime2 !== null) { // check if flipTime is not null
+    if (!fliped && count2 === 0 && flipTime2 !== null) {
+      // check if flipTime is not null
       if (!isClicked2) {
         setCount2(count2 + 1);
         setIsClicked2(true);
@@ -191,7 +240,7 @@ const Controls = (props) => {
       const elapsed = Date.now() - flipTime2;
       const remainingTime2 = 15000 - elapsed;
       if (elapsed < 15000) {
-        toast(`Please wait ${Math.ceil(remainingTime2 / 1000)} seconds before flipping back`);
+        toast(`Cashout available after ${Math.ceil(remainingTime2 / 1000)}`);
       } else {
         setFliped(false);
         setFlipTime2(Date.now()); // set flipTime to current time
@@ -201,7 +250,7 @@ const Controls = (props) => {
       }
     }
   };
-  
+
   // const clicked = () => {
   //   if (disabled2) {
   //     setFliped(!fliped);
@@ -229,7 +278,6 @@ const Controls = (props) => {
   //     return;
   //   }
   // };
-  
 
   useEffect(() => {
     let timer;
@@ -278,43 +326,59 @@ const Controls = (props) => {
     prize = parseFloat(previousPrize);
   }
 
-  if (cash > point || cash2 > point) {
-    result = "loss";
-    prize = 0;
-   } else if (cash < point) {
-    prize = amount * cash;
-    result = "won";
-  } else if (cash2 < point) {
-    prize = amount2 * cash2;
-    result = "won";
-  } else if (cash === point) {
-    prize = 0;
-    result = "loss";
-  } else if (cash < point && cash2 < point) {
-    const greaterCash = cash > cash2 ? cash : cash2;
-    const greaterAmount = amount > amount2 ? amount : amount2;
-    prize = (cash * amount) + (cash2 * amount2);
+  // if (cash > point || cash2 > point) {
+  //   result = "loss";
+  //   prize = 0;
+  // } else if (cash <= point) {
+  //   prize = amount * cash;
+  //   result = "woncash1";
+  // } else if (cash2 <= point) {
+  //   prize = amount2 * cash2;
+  //   result = "won";
+  // } else if (cash === point) {
+  //   prize = 0;
+  //   result = "loss";
+  // } else if ( cash === 1.00 && cash < point && cash2 > point) {
+  //   prize = cash2 * amount;
+  //   result = "woncash2";
+  // } else if (cash2 < point && cash > point) {
+  //   prize = cash2 * amount2;
+  //   result = "win";
+  // } else if (cash === point || cash2 === point) {
+  //   result = "loss";
+  //   prize = 0;
+  // } else {
+  //   result = "w";
+  //   prize = cash * amount + cash2 * amount2;
+  // }
+
+  localStorage.setItem("prize", prize);
+
+  // prize = prize.toFixed(1) + "$";
+  // console.log(prize);
+
+  if (cash < point ) {
     result = "win";
-  } else if (cash < point && cash2 > point) {
-    prize = cash2 * amount;
+    prize = cash * amount;
+  } else if (cash > 1.0 && cash2 > 1.0 && cash <= point && cash2 <= point) {
+    prize = cash * amount + cash2 * amount2;
+    result = "wonboth";
+  } else if (cash <= point && cash2 > point) {
+    prize = cash * amount;
     result = "won";
-  } else if (cash2 < point && cash > point) {
+  } else if (cash > point && cash2 <= point) {
     prize = cash2 * amount2;
-    result = "win";
-  } else if (cash === point || cash2 === point) {
-    result = "loss";
-    prize = 0;
+    result = "won";
+  } else if (cash < point) {
+    prize = cash * amount;
+    result = "wincash1";
   } else {
     result = "loss";
     prize = 0;
   }
-
-  localStorage.setItem("prize", prize);
-
   prize = prize.toFixed(1) + "$";
-  console.log(prize);
 
-  console.log(`Updated prize: ${prize}`);
+  // console.log(`Updated prize: ${prize}`);
 
   const handleValueButton = (value) => {
     setAmount((prevValue) => {
@@ -375,7 +439,7 @@ const Controls = (props) => {
       if (querySnapshot.docs.length > 0) {
         const existingData = querySnapshot.docs[0];
         await updateDoc(existingData.ref, {
-          cash,
+          // cash,
           cash2,
           amount2,
           prize,
@@ -493,6 +557,7 @@ const Controls = (props) => {
                 </button>
               </div>
               <ToastContainer
+                autoClose={1000}
                 position={toast.POSITION.TOP_LEFT}
                 className="toast"
               />
@@ -594,6 +659,7 @@ const Controls = (props) => {
                   </button>
                 </div>
                 <ToastContainer
+                  autoClose={1000}
                   position={toast.POSITION.TOP_LEFT}
                   className="toast"
                 />
