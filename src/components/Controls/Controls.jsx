@@ -48,6 +48,9 @@ const Controls = (props) => {
   const [isTimerRunning, setIsTimerRunning] = useState(true);
   const [intervalId2, setIntervalId2] = useState(null);
   const [isTimerRunning2, setIsTimerRunning2] = useState(true);
+  const [flipTime, setFlipTime] = useState(Date.now());
+  const [flipTime2, setFlipTime2] = useState(Date.now());
+
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -113,57 +116,120 @@ const Controls = (props) => {
     };
   }, [point, isTimerRunning2]);
 
+  // const handleClick = () => {
+  //   if (disabled) {
+  //     setFlipped(!flipped);
+  //     toast(flipped ? "Bet placed successfully" : "Cashout successfull");
+  //     return;
+  //   }
+
+  //   if ((!flipped && count1 === 0) || (flipped && count1 > 0)) {
+  //     if (!isClicked) {
+  //       setCount1(count1 + 1);
+  //       setIsClicked(true);
+  //     }
+  //     setFlipped(!flipped);
+  //     if (!flipped) {
+  //       toast(`Bet placed ${amount}$`);
+  //     } else {
+  //       toast(`You have won ${prize}`);
+  //       setIsTimerRunning(false);
+  //       clearInterval(intervalId);
+  //     }
+  //   } else if (flipped && count1 > 0) {
+  //     // If the button is on its back side and it has been 15 seconds or more, disable
+  //     return;
+  //   }
+  // };
+
   const handleClick = () => {
     if (disabled) {
       setFlipped(!flipped);
+      const remainingTime = 15000 - Math.max(Date.now() - flipTime, 0);
+      const adjustedTime = Math.max(remainingTime - (flipTime !== null ? Math.max((Date.now() - flipTime - 15000), 0) : 0), 0);
       toast(flipped ? "Bet placed successfully" : "Cashout successfull");
       return;
     }
 
-    if ((!flipped && count1 === 0) || (flipped && count1 > 0)) {
+    if (!flipped && count1 === 0 && flipTime !== null) { // check if flipTime is not null
       if (!isClicked) {
         setCount1(count1 + 1);
         setIsClicked(true);
       }
-      setFlipped(!flipped);
-      if (!flipped) {
-        toast(`Bet placed ${amount}$`);
+      setFlipped(true);
+      toast(`Bet placed ${amount}$`);
+    } else if (flipped && count1 > 0 && flipTime !== null) {
+      const elapsed = Date.now() - flipTime;
+      const remainingTime = 15000 - elapsed;
+      if (elapsed < 15000) {
+        toast(`Please wait ${Math.ceil(remainingTime / 1000)} seconds before flipping back`);
       } else {
+        setFlipped(false);
+        setFlipTime(Date.now()); // set flipTime to current time
         toast(`You have won ${prize}`);
         setIsTimerRunning(false);
         clearInterval(intervalId);
       }
-    } else if (flipped && count1 > 0) {
-      // If the button is on its back side and it has been 15 seconds or more, disable
-      return;
     }
   };
-
   const clicked = () => {
     if (disabled2) {
       setFliped(!fliped);
+      const remainingTime2 = 15000 - Math.max(Date.now() - flipTime2, 0);
+      const adjustedTime2 = Math.max(remainingTime2 - (flipTime2 !== null ? Math.max((Date.now() - flipTime2 - 15000), 0) : 0), 0);
       toast(fliped ? "Bet placed successfully" : "Cashout successfull");
       return;
     }
-    if ((!fliped && count2 === 0) || (fliped && count2 > 0)) {
+    if (!fliped && count2 === 0 && flipTime2 !== null) { // check if flipTime is not null
       if (!isClicked2) {
         setCount2(count2 + 1);
         setIsClicked2(true);
       }
-      setFliped(!fliped);
-      if (!fliped) {
-        toast(`Bet placed ${amount2}$`);
+      setFliped(true);
+      toast(`Bet placed ${amount2}$`);
+    } else if (fliped && count2 > 0 && flipTime2 !== null) {
+      const elapsed = Date.now() - flipTime2;
+      const remainingTime2 = 15000 - elapsed;
+      if (elapsed < 15000) {
+        toast(`Please wait ${Math.ceil(remainingTime2 / 1000)} seconds before flipping back`);
       } else {
+        setFliped(false);
+        setFlipTime2(Date.now()); // set flipTime to current time
         toast(`You have won ${prize}`);
         setIsTimerRunning2(false);
         clearInterval(intervalId2);
       }
-    } else if (fliped && count2 > 0) {
-      // If the button is on its back side and it has been 15 seconds or more, disable
-      // flipping to the front
-      return;
     }
   };
+  
+  // const clicked = () => {
+  //   if (disabled2) {
+  //     setFliped(!fliped);
+  //     const remainingTime = 15000 - Math.max(Date.now() - flipTime, 0);
+  //     const adjustedTime = Math.max(remainingTime - (flipTime !== null ? Math.max((Date.now() - flipTime - 15000), 0) : 0), 0);
+  //     toast(fliped ? "Bet placed successfully" : "Cashout successfull");
+  //     return;
+  //   }
+  //   if ((!fliped && count2 === 0) || (fliped && count2 > 0)) {
+  //     if (!isClicked2) {
+  //       setCount2(count2 + 1);
+  //       setIsClicked2(true);
+  //     }
+  //     setFliped(!fliped);
+  //     if (!fliped) {
+  //       toast(`Bet placed ${amount2}$`);
+  //     } else {
+  //       toast(`You have won ${prize}`);
+  //       setIsTimerRunning2(false);
+  //       clearInterval(intervalId2);
+  //     }
+  //   } else if (fliped && count2 > 0) {
+  //     // If the button is on its back side and it has been 15 seconds or more, disable
+  //     // flipping to the front
+  //     return;
+  //   }
+  // };
+  
 
   useEffect(() => {
     let timer;
@@ -215,7 +281,7 @@ const Controls = (props) => {
   if (cash > point || cash2 > point) {
     result = "loss";
     prize = 0;
-  } else if (cash < point) {
+   } else if (cash < point) {
     prize = amount * cash;
     result = "won";
   } else if (cash2 < point) {
@@ -227,10 +293,10 @@ const Controls = (props) => {
   } else if (cash < point && cash2 < point) {
     const greaterCash = cash > cash2 ? cash : cash2;
     const greaterAmount = amount > amount2 ? amount : amount2;
-    prize = cash + cash2 * (amount + amount2);
+    prize = (cash * amount) + (cash2 * amount2);
     result = "win";
   } else if (cash < point && cash2 > point) {
-    prize = cash * amount;
+    prize = cash2 * amount;
     result = "won";
   } else if (cash2 < point && cash > point) {
     prize = cash2 * amount2;
