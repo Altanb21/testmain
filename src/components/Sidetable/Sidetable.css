@@ -8,6 +8,7 @@
   height: 89%;
   border-radius: 15px;
   width: 30%;
+  overflow-y: auto; 
 }
 
 .nav-menu-main {

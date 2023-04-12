@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as PIXI from "pixi.js";
 import "@pixi/gif";
 import { Assets } from "pixi.js";
@@ -9,6 +9,24 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Canvas = () => {
   const appRef = useRef(null);
+  const [number, setNumber] = useState(1.0);
+
+  useEffect(() => {
+    let intervalId;
+    const timerId = setTimeout(() => {
+      intervalId = setInterval(() => {
+        setNumber((prevNumber) => {
+          const newNumber = prevNumber + 0.01;
+          return newNumber;
+        });
+      }, 33.3);
+    }, 15000);
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(timerId);
+    };
+  }, []);
 
   useEffect(() => {
     const app = new PIXI.Application({
@@ -19,12 +37,22 @@ const Canvas = () => {
     appRef.current = app;
     document.body.appendChild(app.view);
 
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        window.location.reload();
-      }
-    };
-    document.addEventListener("visibilitychange", handleVisibilityChange);
+    const rect = new PIXI.Graphics();
+
+    rect.beginFill(0x000000);
+    rect.lineStyle(1, 0x00ced1);
+
+    const width = 250;
+    const height = 10;
+    const rad = 10;
+
+    rect.drawRoundedRect(0, 0, width, height, rad);
+
+    rect.endFill();
+    rect.x = app.screen.width / 2 - rect.width / 2;
+    rect.y = app.screen.height / 2 - rect.height / 2;
+
+    app.stage.addChild(rect);
 
     let start = new PIXI.Text("STARTING IN 15:00", {
       fontFamily: "Times New Roman",
@@ -36,39 +64,63 @@ const Canvas = () => {
     app.stage.addChild(start);
     start.position.set(app.screen.width / 3.7, app.screen.height / 1.9);
 
-    let remainingSeconds = 870; // 15 minutes * 60 seconds
+    let remainingSeconds = 150; // 15 minutes * 60 seconds
     let minutes, seconds;
+    let requestID;
 
-    const countdownInterval = setInterval(() => {
-      minutes = Math.floor(remainingSeconds / 60);
-      seconds = remainingSeconds % 60;
+    function update(timestamp) {
+      if (!startTime) startTime = timestamp;
+      const elapsedTime = timestamp - startTime;
+      const timeRemaining = Math.max(
+        remainingSeconds - Math.floor(elapsedTime / 100),
+        0
+      );
+
+      minutes = Math.floor(timeRemaining / 60);
+      seconds = timeRemaining % 60;
       const timeString = `STARTING IN ${minutes
         .toString()
         .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
       start.text = timeString;
 
-      remainingSeconds--;
-      if (remainingSeconds < 0) {
-        clearInterval(countdownInterval);
-        clearInterval(updateInterval);
+      if (timeRemaining > 0) {
+        requestID = requestAnimationFrame(update);
+      } else {
+        // Remove timer from screen when it ends
+        app.stage.removeChild(start);
+        app.stage.removeChild(rect);
+        app.stage.removeChild(circle);
+        app.stage.removeChild(loader);
+        app.stage.removeChild(loaderContainer);
+        app.stage.removeChild(loadingText);
+        xline.visible = true;
+        yline.visible = true;
+        ui.visible = true;
+        uiy.visible = true;
+        num.visible = true;
       }
-    }, 1000);
+    }
 
-    const updateInterval = setInterval(() => {
-      minutes = Math.floor(remainingSeconds / 60);
-      seconds = remainingSeconds % 60;
-      const timeString = `STARTING IN ${minutes
-        .toString()
-        .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
-      start.text = timeString;
+    function startTimer() {
+      requestID = requestAnimationFrame(update);
+    }
 
-      remainingSeconds--;
-      if (remainingSeconds < 0) {
-        clearInterval(countdownInterval);
-        clearInterval(updateInterval);
+    function stopTimer() {
+      cancelAnimationFrame(requestID);
+    }
+
+    // Pause timer when page visibility changes
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "hidden") {
+        stopTimer();
+      } else {
+        startTimer();
       }
-    }, 15);
+    });
 
+    // Start timer initially
+    let startTime;
+    startTimer();
 
     const fun = new PIXI.Graphics();
 
@@ -86,61 +138,6 @@ const Canvas = () => {
     fun.addChild(mode);
 
     app.stage.addChild(fun);
-
-    // const blackRect = new PIXI.Graphics();
-    // blackRect.beginFill(0x00000);
-    // blackRect.drawRoundedRect(0, 0, 250, 6, 3);
-    // blackRect.endFill();
-    // blackRect.position.set(
-    //   app.screen.width / 2 - blackRect.width / 2,
-    //   app.screen.height / 2 - blackRect.height / 2
-    // );
-    // app.stage.addChild(blackRect);
-    // const rect = new PIXI.Graphics();
-    // rect.beginFill(0x00ced1);
-    // rect.drawRoundedRect(0, 0, 250, 6, 3);
-    // rect.endFill();
-    // rect.position.set(
-    //   app.screen.width / 2 - rect.width / 2,
-    //   app.screen.height / 2 - rect.height / 2
-    // );
-    // rect.scale.x = 0;
-    // app.stage.addChild(rect);
-
-    // const dur = 14600;
-    // const endScale = 1;
-    // const fps = 60;
-    // const frames = (dur / 1000) * fps;
-    // let currentFrame = 0;
-    // let currentScale = 0;
-
-    // let animationInterval;
-
-    // animationInterval = app.ticker.add((delta) => {
-    //   currentFrame++;
-    //   if (currentFrame <= frames) {
-    //     currentScale = endScale - (endScale / frames) * currentFrame;
-    //     rect.scale.x = currentScale;
-    //   } else {
-    //     app.ticker.remove(animationInterval);
-    //   }
-    // });
-    const rect = new PIXI.Graphics();
-
-    rect.beginFill(0x000000);
-    rect.lineStyle(1, 0x00ced1);
-
-    const width = 250;
-    const height = 10;
-    const rad = 10;
-
-    rect.drawRoundedRect(0, 0, width, height, rad);
-
-    rect.endFill();
-    rect.x = app.screen.width / 2 - rect.width / 2;
-    rect.y = app.screen.height / 2 - rect.height / 2;
-
-    app.stage.addChild(rect);
 
     const circle = new PIXI.Graphics();
     circle.beginFill(0x00ced1);
@@ -189,11 +186,16 @@ const Canvas = () => {
     app.ticker.add((delta) => {
       loader.rotation += 0.1 * delta;
     });
-    gsap.to([loaderContainer, loadingText, circle, rect,start], {
-      duration: 0,
-      delay: 14.6,
-      alpha: 0,
+
+    let num = new PIXI.Text("1.00x", {
+      fontFamily: "Arial",
+      fontSize: 50,
+      fill: 0x00ced1,
     });
+    num.anchor.set(0.5);
+    num.position.set(110, 55);
+    app.stage.addChild(num);
+    num.visible = false;
 
     async function animatePlane() {
       let image = await Assets.load(gifImage);
@@ -204,14 +206,6 @@ const Canvas = () => {
       image.x = 25;
       image.y = 280;
 
-      let num = new PIXI.Text("1.00x", {
-        fontFamily: "Arial",
-        fontSize: 50,
-        fill: 0x00ced1,
-      });
-      num.anchor.set(0.5);
-      num.position.set(110, 55);
-      app.stage.addChild(num);
       let value = 1;
       let intervalId;
 
@@ -230,11 +224,21 @@ const Canvas = () => {
       area.lineTo(0, 220);
       area.endFill();
       app.stage.addChild(area);
+      let startTime = performance.now();
 
       let xVel = 1.9;
       let angle = 0;
       let amplitude = 85;
       let frequency = 0.0089;
+
+      function startAnimation(currentTime) {
+        const elapsedTime = currentTime - startTime;
+        if (elapsedTime > 15000) {
+          app.ticker.add(update);
+        } else {
+          requestAnimationFrame(startAnimation);
+        }
+      }
 
       function update() {
         image.x += xVel;
@@ -321,13 +325,7 @@ const Canvas = () => {
       // start the timer
       const cleanup = startTimer();
 
-      setTimeout(() => {
-        app.ticker.add(() => {
-          update();
-        });
-      }, 15000);
-      num.alpha = 0;
-      gsap.to(num, { duration: 0, alpha: 1, delay: 14 });
+      requestAnimationFrame(startAnimation);
     }
     function resetGame() {
       // reload the page to restart the game
@@ -339,14 +337,12 @@ const Canvas = () => {
     const xline = new PIXI.Graphics();
     app.stage.addChild(xline);
     xline.lineStyle(1, 0xffffff).moveTo(850, 370).lineTo(24, 370);
-    xline.alpha = 0;
-    gsap.to(xline, { duration: 0, alpha: 1, delay: 14 });
+    xline.visible = false;
 
     const yline = new PIXI.Graphics();
     app.stage.addChild(yline);
     yline.lineStyle(1, 0xffffff).moveTo(25, 370).lineTo(25, 0);
-    yline.alpha = 0;
-    gsap.to(yline, { duration: 0, alpha: 1, delay: 14 });
+    yline.visible = false;
 
     var graphics = new PIXI.Graphics().lineStyle(2, 0xffffff, 1);
 
@@ -362,8 +358,7 @@ const Canvas = () => {
       ui.drawCircle(x, y, d);
       app.stage.addChild(ui);
     }
-    ui.alpha = 0;
-    gsap.to(ui, { duration: 0, alpha: 1, delay: 14 });
+    ui.visible = false;
 
     var uiy = new PIXI.Graphics();
 
@@ -375,10 +370,8 @@ const Canvas = () => {
       uiy.drawCircle(x, y, radius);
       app.stage.addChild(uiy);
     }
-    uiy.alpha = 0;
-    gsap.to(uiy, { duration: 0, alpha: 1, delay: 14 });
+    uiy.visible = false;
     return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
       app.destroy(true);
     };
   }, []);
