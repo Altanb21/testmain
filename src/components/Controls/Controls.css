@@ -325,9 +325,8 @@ input:checked + .slider-button .off {
 @media screen and (max-width: 500px) {
   .cont {
     max-width: 90%;
-    margin: 43.5% auto !important;
+    margin: 44% auto !important;
     display: block;
-    box-shadow: none;
   }
   .wrapper {
     height: 4.5vh;
