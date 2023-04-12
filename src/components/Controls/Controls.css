@@ -144,7 +144,7 @@ input:checked + .slider-button .off {
 
 .dollar {
   width: 5vw;
-  height: 4vh;
+  height: 3.5vh;
   padding: 0;
   margin: 8px 5px;
   font-size: 14px;
@@ -179,16 +179,15 @@ input:checked + .slider-button .off {
 }
 
 .flip-button {
-  margin-top: 10px !important;
+  margin-top: 15px ;
   position: relative;
   width: 15vw;
-  height: 12vh;
+  height: 11vh;
   border: none;
   border-radius: 15px;
   background-color: #282828;
   cursor: pointer;
   overflow: hidden;
-  font-size: 1rem;
 }
 
 .flip-front,
@@ -205,6 +204,7 @@ input:checked + .slider-button .off {
   align-items: center;
   color: #fff;
   border-radius: 15px;
+  font-size: 12px;
 }
 
 .flip-front {
@@ -293,11 +293,12 @@ input:checked + .slider-button .off {
 }
 
 @media screen and (max-width: 900px) {
-  .multiplier {
-    width: 7.5vw;
+
+  .multiplier input{
+    font-size: 14px;
   }
   .inc {
-    font-size: 16px;
+    font-size: 15px;
   }
   .dollar {
     font-size: 10px;
@@ -305,36 +306,31 @@ input:checked + .slider-button .off {
   .betx {
     padding: 2px 0px;
   }
+  .flip-front,
+.flip-back {
+
+  font-size: 9px;
 }
-@media screen and (max-width: 768px) {
-  .multiplier {
-    width: 6.5vw;
-  }
-  .multiplier input {
-    font-size: 13px;
-  }
-  .dollar {
-    height: 2vh;
-  }
-  .flip-button {
-    height: 5vh;
-  }
-  .wrapper {
-    height: 2.5vh;
-  }
-  .slider-container {
+
+}
+@media (min-width:500px) and (max-width: 768px) {
+
+  .stake,.dollar{
     font-size: 10px;
+  }
+    .multiplier input, .inc {
+    font-size: 13px;
   }
 }
 @media screen and (max-width: 500px) {
   .cont {
     max-width: 90%;
-    margin: 43% auto !important;
+    margin: 43.5% auto !important;
     display: block;
     box-shadow: none;
   }
   .wrapper {
-    height: 4vh;
+    height: 4.5vh;
     width: 35vw;
   }
   .inc{
@@ -348,7 +344,7 @@ input:checked + .slider-button .off {
   }
   .dollar{
     width: 13vw;
-    height: 3vh;
+    height: 3.5vh;
   }
 
   .flip-button{
@@ -356,5 +352,23 @@ input:checked + .slider-button .off {
     height: 9vh;
     font-size: 10px;
   }
-  
 }
+@media screen and (max-width: 324px) {
+  .cont {
+    max-width: 90%;
+    margin: 43.5% auto !important;
+    display: block;
+    box-shadow: none;
+  }
+  .multiplier input, .inc{
+    font-size: 12px;
+  }
+  .dollar{
+    font-size: 9px;
+  }
+  .flip-front,
+.flip-back {
+  font-size: 8px;
+}
+}
+

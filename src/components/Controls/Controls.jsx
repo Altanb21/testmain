@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Controls.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Canvas, { point, main } from "../Canvas/Canvas";
+import  { point } from "../Canvas/Canvas";
 import {
   faPlusCircle,
   faMinusCircle,
@@ -466,18 +466,6 @@ const Controls = (props) => {
           <div className="toggle-container">
             <div className="slider-container">
               <span className="stake">STAKE SELECTOR</span>
-              {/* <label className="slider">
-                <div className="slider-label left">Off</div>
-                <input
-                  type="checkbox"
-                  checked={toggle}
-                  onChange={handleToggleChange}
-                />
-                <div className="slider-button" style={{ borderRadius: "15px" }}>
-                  <div className="slider-button-label on">Bet</div>
-                  <div className="slider-button-label off">Auto</div>
-                </div>
-              </label> */}
             </div>
             <FontAwesomeIcon
               className={show ? "minus" : "plus"}
@@ -570,21 +558,6 @@ const Controls = (props) => {
             <div className="toggle-container">
               <div className="slider-container">
                 <span className="stake">STAKE SELECTOR</span>
-                {/* <label className="slider">
-                  <div className="slider-label left">Off</div>
-                  <input
-                    type="checkbox"
-                    onChange={handleToggleChange}
-                    checked={toggle}
-                  />
-                  <div
-                    className="slider-button"
-                    style={{ borderRadius: "15px" }}
-                  >
-                    <div className="slider-button-label on">Bet</div>
-                    <div className="slider-button-label off">Auto</div>
-                  </div>
-                </label> */}
               </div>
             </div>
             <div className="divide">
