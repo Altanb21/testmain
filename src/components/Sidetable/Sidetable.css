@@ -27,6 +27,9 @@
   align-items: center;
   color: white;
 }
+.cen a{
+  color: #00ced1!important;
+}
 .won {
   display: flex;
   flex-direction: row;
@@ -119,8 +122,20 @@
 }
 @media screen and (max-width: 500px) {
 .table{
-  visibility: hidden;
-
+  visibility: visible;
+ top: 72%!important;
+ width: 90%;
+ margin: 0 auto;
+ left: 0;
+ right: 0;
+ font-size: 12px;
 }}
+@media screen and (max-width: 390px) {
+  .table{
+    top: 85%!important;
+    font-size: 10px;
+  }
+}
+
 
 
