@@ -313,7 +313,7 @@ const Canvas = () => {
             if (value >= point) {
               clearInterval(intervalId);
             }
-          }, 33.3);
+          }, 50);
         }, 15000);
 
         return () => {

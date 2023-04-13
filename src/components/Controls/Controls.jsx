@@ -98,7 +98,7 @@ const Controls = (props) => {
             const newNumber = prevNumber + 0.01;
             return newNumber;
           });
-        }, 33.3);
+        }, 50);
         setIntervalId(intervalId);
       }
     }, 15000);
@@ -142,7 +142,7 @@ const Controls = (props) => {
             const newNumber2 = prevNumber2 + 0.01;
             return newNumber2;
           });
-        }, 33.3);
+        }, 50);
         setIntervalId2(intervalId2);
       }
     }, 15000);
