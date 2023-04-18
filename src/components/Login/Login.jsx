@@ -1,11 +1,9 @@
-// import Navbar from "../Navbar/Navbar";
-// import "./Login.css";
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { ToastContainer, toast } from "react-toastify";
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
+import { CssVarsProvider, useColorScheme} from "@mui/joy/styles"
 import Sheet from '@mui/joy/Sheet';
 import Typography from '@mui/joy/Typography';
 import FormControl from '@mui/joy/FormControl';

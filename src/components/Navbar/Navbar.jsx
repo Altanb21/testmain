@@ -4,7 +4,8 @@ import logo from "../logo.png";
 import logo2 from "../logo2.jpeg";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
+// import Menu from "@mui/material/Menu";
+import Menu from "@mui/material/Menu"
 import IconButton from "@mui/material/IconButton";
 
 import {
