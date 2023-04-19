@@ -4,6 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import { auth } from "../../firebase";
+import Navbar from "../Navbar/Navbar"
 
 const Results = (props) => {
   const [data, setData] = useState([]);
@@ -46,9 +47,11 @@ const Results = (props) => {
 
   ];
   return (
+    <>
+    <Navbar />
     <div className="results">
       <div className="card-body">
-        <div style={{ height: 700, width: "100%" }}>
+        <div style={{ height: 630, width: "100%",marginTop:'4.5%' }}>
           <DataGrid
             rows={data}
             columns={columns}
@@ -58,6 +61,7 @@ const Results = (props) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

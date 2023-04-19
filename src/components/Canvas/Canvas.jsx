@@ -314,7 +314,7 @@ const Canvas = () => {
               clearInterval(intervalId);
             }
           }, 50);
-        }, 15000);
+        }, 14800);
 
         return () => {
           clearTimeout(timerId);
