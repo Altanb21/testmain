@@ -327,6 +327,7 @@ input:checked + .slider-button .off {
     max-width: 90%;
     margin: 44% auto !important;
     display: block;
+    box-shadow: 0px 0px 2px 2px #00ced1;
   }
   .wrapper {
     height: 4.5vh;
