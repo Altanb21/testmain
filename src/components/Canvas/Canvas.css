@@ -18,3 +18,16 @@ canvas {
     border-radius: 5px;
   }
 }
+@media (min-width:1600px) and (max-width:1920px) {
+  canvas{
+    max-width: 100%;
+    width: 1250px;
+  }
+}
+@media (min-width:1600px) and (max-width:1880px) {
+  canvas{
+    max-width: 90%;
+  }
+}
+
+

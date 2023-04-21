@@ -38,99 +38,6 @@
   border-radius: 10px;
 }
 
-.slider {
-  margin: 0 auto;
-  position: relative;
-  display: inline-block;
-  width: 200px;
-  height: 25px;
-  border: none;
-  background-color: red;
-}
-
-.slider-label {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #282621;
-}
-
-.left {
-  left: 10px;
-}
-
-.on {
-  position: absolute;
-  font-size: 13px;
-  top: 50%;
-  left: 25%;
-  transform: translate(-50%, -50%);
-  color: #fff;
-  font-weight: bold;
-  transition: opacity 0.2s;
-}
-
-.off {
-  position: absolute;
-  top: 50%;
-  left: 75%;
-  transform: translate(-50%, -50%);
-  font-size: 13px;
-  font-weight: bold;
-  color: #fff;
-  transition: opacity 0.4s;
-}
-
-.slider input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider-button {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #000;
-  transition: 0.4s;
-  border-radius: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.slider-button:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 98px;
-  left: 3px;
-  bottom: 2.5px;
-  background-color: #282621;
-  transition: 0.4s;
-  border-radius: 15px;
-}
-
-input:checked + .slider-button {
-  background-color: #000;
-}
-
-input:checked + .slider-button:before {
-  transform: translateX(96px);
-  background-color: #282621;
-}
-
-input:checked + .slider-button .on {
-  opacity: 1;
-}
-
-input:checked + .slider-button .off {
-  opacity: 1;
-}
-
 .buttons {
   display: flex;
   flex-direction: column;
@@ -179,7 +86,7 @@ input:checked + .slider-button .off {
 }
 
 .flip-button {
-  margin-top: 15px ;
+  margin-top: 15px;
   position: relative;
   width: 15vw;
   height: 11vh;
@@ -234,7 +141,6 @@ input:checked + .slider-button .off {
   border-radius: 15px;
 }
 
-
 .fliped .flip-back {
   transform: translateY(0%);
   border-radius: 15px;
@@ -273,10 +179,9 @@ input:checked + .slider-button .off {
   background: #fff !important;
 }
 .Toastify__toast-container {
-  padding: 20px!important;
-  --toastify-toast-min-height: 48px!important;
+  padding: 20px !important;
+  --toastify-toast-min-height: 48px !important;
 }
-
 
 @media screen and (max-width: 1420px) {
   .cont {
@@ -293,8 +198,7 @@ input:checked + .slider-button .off {
 }
 
 @media screen and (max-width: 900px) {
-
-  .multiplier input{
+  .multiplier input {
     font-size: 14px;
   }
   .inc {
@@ -307,18 +211,17 @@ input:checked + .slider-button .off {
     padding: 2px 0px;
   }
   .flip-front,
-.flip-back {
-
-  font-size: 9px;
+  .flip-back {
+    font-size: 9px;
+  }
 }
-
-}
-@media (min-width:500px) and (max-width: 768px) {
-
-  .stake,.dollar{
+@media (min-width: 500px) and (max-width: 768px) {
+  .stake,
+  .dollar {
     font-size: 10px;
   }
-    .multiplier input, .inc {
+  .multiplier input,
+  .inc {
     font-size: 13px;
   }
 }
@@ -333,7 +236,7 @@ input:checked + .slider-button .off {
     height: 4.5vh;
     width: 35vw;
   }
-  .inc{
+  .inc {
     font-size: 16px;
   }
   .multiplier {
@@ -342,12 +245,12 @@ input:checked + .slider-button .off {
   .control {
     width: 97%;
   }
-  .dollar{
+  .dollar {
     width: 13vw;
     height: 3.5vh;
   }
 
-  .flip-button{
+  .flip-button {
     width: 40vw;
     height: 9vh;
     font-size: 10px;
@@ -360,15 +263,48 @@ input:checked + .slider-button .off {
     display: block;
     box-shadow: none;
   }
-  .multiplier input, .inc{
+  .multiplier input,
+  .inc {
     font-size: 12px;
   }
-  .dollar{
+  .dollar {
     font-size: 9px;
   }
   .flip-front,
-.flip-back {
-  font-size: 8px;
+  .flip-back {
+    font-size: 8px;
+  }
 }
+@media (min-width: 1600px) and (max-width: 1920px) {
+  .cont {
+    width: 1250px;
+    max-width: 100%;
+  }
+  .stake {
+    font-size: 18px;
+  }
+  .plus,
+  .minus {
+    font-size: 30px; /* adds some space between the icon and the edge of container */
+    cursor: pointer;
+  }
+  .dollar {
+    width: 5vw;
+    height: 2.5vh;
+    border-radius: 15px;
+  }
+  .wrapper {
+    height: 3.5vh;
+    width: 13vw;
+    border-radius: 15px;
+  }
+  .flip-button {
+    margin-top: 15px;
+    position: relative;
+    width: 16vw;
+    height: 7vh;
+  }
+  .multiplier {
+    width: 9.5vw;
+  }
 }
-

@@ -50,6 +50,8 @@ const Controls = (props) => {
   const [isTimerRunning2, setIsTimerRunning2] = useState(true);
   const [flipTime, setFlipTime] = useState(Date.now());
   const [flipTime2, setFlipTime2] = useState(Date.now());
+  const [data, setData] = useState([]);
+
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -65,30 +67,6 @@ const Controls = (props) => {
     setUsername("");
   };
 
-  // useEffect(() => {
-  //   let intervalId;
-  //   const timerId = setTimeout(() => {
-  //     if (isTimerRunning) {
-  //       intervalId = setInterval(() => {
-  //         setNumber((prevNumber) => {
-  //           const newNumber = prevNumber + 0.01;
-  //           if (newNumber >= point) {
-  //             clearInterval(intervalId);
-  //             setIntervalId(null);
-  //             return point;
-  //           }
-  //           return newNumber;
-  //         });
-  //       }, 33.3);
-  //       setIntervalId(intervalId);
-  //     }
-  //   }, 15000);
-
-  //   return () => {
-  //     clearInterval(intervalId);
-  //     clearTimeout(timerId);
-  //   };
-  // }, [point, isTimerRunning]);
   useEffect(() => {
     let intervalId;
     const timerId = setTimeout(() => {
@@ -109,30 +87,7 @@ const Controls = (props) => {
     };
   }, [point, isTimerRunning]);
 
-  // useEffect(() => {
-  //   let intervalId2;
-  //   const timerId2 = setTimeout(() => {
-  //     if (isTimerRunning2) {
-  //       intervalId2 = setInterval(() => {
-  //         setNumber2((prevNumber2) => {
-  //           const newNumber2 = prevNumber2 + 0.01;
-  //           if (newNumber2 >= point) {
-  //             clearInterval(intervalId2);
-  //             setIntervalId2(null);
-  //             return point;
-  //           }
-  //           return newNumber2;
-  //         });
-  //       }, 33.3);
-  //       setIntervalId2(intervalId2);
-  //     }
-  //   }, 15000);
 
-  //   return () => {
-  //     clearInterval(intervalId2);
-  //     clearTimeout(timerId2);
-  //   };
-  // }, [point, isTimerRunning2]);
   useEffect(() => {
     let intervalId2;
     const timerId2 = setTimeout(() => {
@@ -153,31 +108,7 @@ const Controls = (props) => {
     };
   }, [point, isTimerRunning2]);
 
-  // const handleClick = () => {
-  //   if (disabled) {
-  //     setFlipped(!flipped);
-  //     toast(flipped ? "Bet placed successfully" : "Cashout successfull");
-  //     return;
-  //   }
 
-  //   if ((!flipped && count1 === 0) || (flipped && count1 > 0)) {
-  //     if (!isClicked) {
-  //       setCount1(count1 + 1);
-  //       setIsClicked(true);
-  //     }
-  //     setFlipped(!flipped);
-  //     if (!flipped) {
-  //       toast(`Bet placed ${amount}$`);
-  //     } else {
-  //       toast(`You have won ${prize}`);
-  //       setIsTimerRunning(false);
-  //       clearInterval(intervalId);
-  //     }
-  //   } else if (flipped && count1 > 0) {
-  //     // If the button is on its back side and it has been 15 seconds or more, disable
-  //     return;
-  //   }
-  // };
 
   const handleClick = () => {
     if (disabled) {
@@ -251,34 +182,6 @@ const Controls = (props) => {
     }
   };
 
-  // const clicked = () => {
-  //   if (disabled2) {
-  //     setFliped(!fliped);
-  //     const remainingTime = 15000 - Math.max(Date.now() - flipTime, 0);
-  //     const adjustedTime = Math.max(remainingTime - (flipTime !== null ? Math.max((Date.now() - flipTime - 15000), 0) : 0), 0);
-  //     toast(fliped ? "Bet placed successfully" : "Cashout successfull");
-  //     return;
-  //   }
-  //   if ((!fliped && count2 === 0) || (fliped && count2 > 0)) {
-  //     if (!isClicked2) {
-  //       setCount2(count2 + 1);
-  //       setIsClicked2(true);
-  //     }
-  //     setFliped(!fliped);
-  //     if (!fliped) {
-  //       toast(`Bet placed ${amount2}$`);
-  //     } else {
-  //       toast(`You have won ${prize}`);
-  //       setIsTimerRunning2(false);
-  //       clearInterval(intervalId2);
-  //     }
-  //   } else if (fliped && count2 > 0) {
-  //     // If the button is on its back side and it has been 15 seconds or more, disable
-  //     // flipping to the front
-  //     return;
-  //   }
-  // };
-
   useEffect(() => {
     let timer;
     if (!flipped) {
@@ -326,36 +229,8 @@ const Controls = (props) => {
     prize = parseFloat(previousPrize);
   }
 
-  // if (cash > point || cash2 > point) {
-  //   result = "loss";
-  //   prize = 0;
-  // } else if (cash <= point) {
-  //   prize = amount * cash;
-  //   result = "woncash1";
-  // } else if (cash2 <= point) {
-  //   prize = amount2 * cash2;
-  //   result = "won";
-  // } else if (cash === point) {
-  //   prize = 0;
-  //   result = "loss";
-  // } else if ( cash === 1.00 && cash < point && cash2 > point) {
-  //   prize = cash2 * amount;
-  //   result = "woncash2";
-  // } else if (cash2 < point && cash > point) {
-  //   prize = cash2 * amount2;
-  //   result = "win";
-  // } else if (cash === point || cash2 === point) {
-  //   result = "loss";
-  //   prize = 0;
-  // } else {
-  //   result = "w";
-  //   prize = cash * amount + cash2 * amount2;
-  // }
-
   localStorage.setItem("prize", prize);
 
-  // prize = prize.toFixed(1) + "$";
-  // console.log(prize);
 
   if (cash > point) {
     result = "loss";
@@ -365,9 +240,9 @@ const Controls = (props) => {
     prize = cash * amount + cash2 * amount2;
     result = "wonboth";
   }
-  if (cash <= point && cash2 > point) {
+  if (cash <= point && cash > 1.00 && cash2 > point) {
     prize = cash * amount;
-    result = "won";
+    result = "woncash1";
   }
   if (cash > point && cash2 <= point) {
     prize = cash2 * amount2;
@@ -379,7 +254,6 @@ const Controls = (props) => {
   }
   prize = prize.toFixed(1) + "$";
 
-  // console.log(`Updated prize: ${prize}`);
 
   const handleValueButton = (value) => {
     setAmount((prevValue) => {
@@ -413,9 +287,55 @@ const Controls = (props) => {
     setToggle2(!toggle2);
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const data = {
+  //     username,
+  //     amount,
+  //     cash,
+  //     amount2,
+  //     cash2,
+  //     point,
+  //     result,
+  //     prize,
+  //     totalbets,
+  //   };
+  //   console.log(data);
+
+  //   try {
+  //     const postsRef = collection(db, "posts");
+  //     const q = query(
+  //       postsRef,
+  //       // where("amount", "==", amount),
+  //       where("point", "==", point)
+  //     );
+  //     const querySnapshot = await getDocs(q);
+
+  //     if (querySnapshot.docs.length > 0) {
+  //       const existingData = querySnapshot.docs[0];
+  //       await updateDoc(existingData.ref, {
+  //         cash,
+  //         cash2,
+  //         amount2,
+  //         prize,
+  //         result,
+  //       });
+  //       console.log("Data updated successfully");
+  //     } else {
+  //       await addDoc(postsRef, {
+  //         ...data,
+  //         timestamp: serverTimestamp(),
+  //       });
+  //       console.log("Data saved successfully");
+  //     }
+  //   } catch (err) {
+  //     console.log(err.message);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = {
+    const postData = {
       username,
       amount,
       cash,
@@ -426,15 +346,11 @@ const Controls = (props) => {
       prize,
       totalbets,
     };
-    console.log(data);
+    console.log(postData);
 
     try {
       const postsRef = collection(db, "posts");
-      const q = query(
-        postsRef,
-        // where("amount", "==", amount),
-        where("point", "==", point)
-      );
+      const q = query(postsRef, where("point", "==", point));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.docs.length > 0) {
@@ -447,12 +363,18 @@ const Controls = (props) => {
           result,
         });
         console.log("Data updated successfully");
+
+        // Update the state locally with the new data
+        setData([...data, postData]);
       } else {
         await addDoc(postsRef, {
-          ...data,
+          ...postData,
           timestamp: serverTimestamp(),
         });
         console.log("Data saved successfully");
+
+        // Update the state locally with the new data
+        setData([...data, { ...postData, timestamp: serverTimestamp() }]);
       }
     } catch (err) {
       console.log(err.message);

@@ -136,6 +136,21 @@
     font-size: 10px;
   }
 }
+@media (min-width:1600px) and (max-width:1920px) {
+  .table{
+    width: 30%;
+    height: 63%;
+    max-width: 100%;
+  }
+}
+@media (min-width:1600px) and (max-width:1880px) {
+.table{
+  width: 28%;
+  max-width: 90%;
+}
+}
+
+
 
 
 

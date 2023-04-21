@@ -52,7 +52,7 @@ const Navbar = (props) => {
           />{" "}
           {isMatch ? (
             <>
-              <Typography sx={{ fontSize: "2rem", paddingLeft: "5%" }}>
+              <Typography sx={{ fontSize: "2rem", paddingLeft: "0%" }}>
                 <img
                   src={logo2}
                   height={50}
@@ -75,32 +75,6 @@ const Navbar = (props) => {
                 <Tab component={Link} to="/play" label="play" />
                 <Tab component={Link} to="/results" label="all bets" />
               </Tabs>
-              {/* {!props.name ? (
-                <Button
-                  component={Link}
-                  to="/login"
-                  sx={{ marginLeft: "auto" }}
-                  variant="outlined"
-                >
-                  Login
-                </Button>
-              ) : (
-                <Button
-                onClick={handleSignOut}
-                  sx={{ marginLeft: "auto" }}
-                  variant="outlined"
-                >
-                  Logout
-                </Button>
-              )}
-              <Button
-                component={Link}
-                to="/signup"
-                sx={{ marginLeft: "10px" }}
-                variant="outlined"
-              >
-                SignUp
-              </Button> */}
               {!props.name ? (
                 <>
                   <Button

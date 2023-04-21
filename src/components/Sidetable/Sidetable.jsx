@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Sidetable.css";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase";
 import { auth } from "../../firebase";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,19 +27,33 @@ const Sidetable = ({ totalbets }) => {
     });
   }, []);
 
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const postsRef = collection(db, "posts");
+  //     const querySnapshot = await getDocs(postsRef);
+  //     const documents = querySnapshot.docs.map((doc) => {
+  //       const data = doc.data();
+  //       data.id = doc.id;
+  //       return data;
+  //     });
+  //     setData(documents);
+  //   };
+
+  //   fetchData();
+  // }, []);
   useEffect(() => {
-    const fetchData = async () => {
-      const postsRef = collection(db, "posts");
-      const querySnapshot = await getDocs(postsRef);
-      const documents = querySnapshot.docs.map((doc) => {
+    const unsubscribe = onSnapshot(collection(db, "posts"), (snapshot) => {
+      const documents = snapshot.docs.map((doc) => {
         const data = doc.data();
         data.id = doc.id;
         return data;
       });
       setData(documents);
-    };
+    });
 
-    fetchData();
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const handleToggleChange = () => {
